@@ -1,0 +1,24 @@
+input::placeholder {
+    font-size: 12px;
+    /* Sesuaikan ukuran font sesuai kebutuhan */
+    /* Properti lainnya jika diperlukan */
+}
+
+.vw-50 {
+    width: 30rem;
+}
+
+.vh-50 {
+    height: 18rem;
+}
+
+
+.hide-sidebar {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .sidebar {
+        display: none;
+    }
+}
