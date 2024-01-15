@@ -1,50 +1,237 @@
-@extends('layouts.main-view')
+@extends('layouts.app')
 @section('content')
-<div class="d-flex justify-content-between align-items-center">
-    <h1 class="mt-4">User Configuration</h1>
-    <div>
-        <a href="{{url('/create-user')}}" class="btn py-2 px-4 btn-primary">Buat User</a>
+<div class="container-fluid py-4">
+    <div class="col-md-12 mb-lg-0 mb-4">
+        <div class="row px-4">
+            <div class="col-6 d-flex align-items-center">
+                <h5 class="mb-0">User List</h5>
+            </div>
+            <div class="col-6 text-end">
+                <a class="btn bg-gradient-dark mb-0" href="{{url('/create-user')}}"><i
+                        class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New User</a>
+            </div>
+        </div>
+        <div class="card mt-3">
+            <div class="card-body p-3">
+                <div class="table-responsive p-0">
+                    <table class="table table-borderless table-hover border border-0 align-items-center mb-0"
+                        id="userTable">
+                        <thead>
+                            <tr>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Author</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    Function</th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Status</th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Employed</th>
+                                <th class="text-secondary opacity-7"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="d-flex px-2 py-1">
+                                        <div>
+                                            <img src="../assets/img/team-2.jpg"
+                                                class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                                        </div>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm">John Michael</h6>
+                                            <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">Manager</p>
+                                    <p class="text-xs text-secondary mb-0">Organization</p>
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    <span class="badge badge-sm bg-gradient-success">Online</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                                </td>
+                                <td class="align-middle">
+                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                        data-toggle="tooltip" data-original-title="Edit user">
+                                        Edit
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex px-2 py-1">
+                                        <div>
+                                            <img src="../assets/img/team-3.jpg"
+                                                class="avatar avatar-sm me-3 border-radius-lg" alt="user2">
+                                        </div>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
+                                            <p class="text-xs text-secondary mb-0">alexa@creative-tim.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">Programator</p>
+                                    <p class="text-xs text-secondary mb-0">Developer</p>
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    <span class="badge badge-sm bg-gradient-secondary">Offline</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">11/01/19</span>
+                                </td>
+                                <td class="align-middle">
+                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                        data-toggle="tooltip" data-original-title="Edit user">
+                                        Edit
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex px-2 py-1">
+                                        <div>
+                                            <img src="../assets/img/team-4.jpg"
+                                                class="avatar avatar-sm me-3 border-radius-lg" alt="user3">
+                                        </div>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm">Laurent Perrier</h6>
+                                            <p class="text-xs text-secondary mb-0">laurent@creative-tim.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">Executive</p>
+                                    <p class="text-xs text-secondary mb-0">Projects</p>
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    <span class="badge badge-sm bg-gradient-success">Online</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">19/09/17</span>
+                                </td>
+                                <td class="align-middle">
+                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                        data-toggle="tooltip" data-original-title="Edit user">
+                                        Edit
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex px-2 py-1">
+                                        <div>
+                                            <img src="../assets/img/team-3.jpg"
+                                                class="avatar avatar-sm me-3 border-radius-lg" alt="user4">
+                                        </div>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm">Michael Levi</h6>
+                                            <p class="text-xs text-secondary mb-0">michael@creative-tim.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">Programator</p>
+                                    <p class="text-xs text-secondary mb-0">Developer</p>
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    <span class="badge badge-sm bg-gradient-success">Online</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">24/12/08</span>
+                                </td>
+                                <td class="align-middle">
+                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                        data-toggle="tooltip" data-original-title="Edit user">
+                                        Edit
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex px-2 py-1">
+                                        <div>
+                                            <img src="../assets/img/team-2.jpg"
+                                                class="avatar avatar-sm me-3 border-radius-lg" alt="user5">
+                                        </div>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm">Richard Gran</h6>
+                                            <p class="text-xs text-secondary mb-0">richard@creative-tim.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">Manager</p>
+                                    <p class="text-xs text-secondary mb-0">Executive</p>
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    <span class="badge badge-sm bg-gradient-secondary">Offline</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">04/10/21</span>
+                                </td>
+                                <td class="align-middle">
+                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                        data-toggle="tooltip" data-original-title="Edit user">
+                                        Edit
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex px-2 py-1">
+                                        <div>
+                                            <img src="../assets/img/team-4.jpg"
+                                                class="avatar avatar-sm me-3 border-radius-lg" alt="user6">
+                                        </div>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm">Miriam Eric</h6>
+                                            <p class="text-xs text-secondary mb-0">miriam@creative-tim.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">Programator</p>
+                                    <p class="text-xs text-secondary mb-0">Developer</p>
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    <span class="badge badge-sm bg-gradient-secondary">Offline</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">14/09/20</span>
+                                </td>
+                                <td class="align-middle">
+                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                        data-toggle="tooltip" data-original-title="Edit user">
+                                        Edit
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="card border border-0 shadow-lg p-3 mt-4">
-    <div class="table-responsive">
-        <table class="table table-hover border border-0 table-borderless" id="myTable">
-            <thead>
-                <tr class="bg-dark text-white">
-                    <th>Nama User</th>
-                    <th>Email</th>
-                    <th>Level User</th>
-                    <th>Instansi</th>
-                    <th>status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($user as $item)
-                <tr>
-                    <td>{{$item->name}}</td>
-                    <td>{{$item->email}}</td>
-                    <td>{{$item->level}}</td>
-                    <td>{{ $item->instansi->name ?? 'tidak ada' }}</td>
-                    <td>
-                        <div class="rounded badge badge-success">
-                            online
-                        </div>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>
+
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const dataTables = document.getElementById("myTable");
-    const dataTable = new DataTable(dataTables, {
-        "pageLength": 5,
+$(document).ready(function() {
+    $('#userTable').DataTable({
+        "info": true,
+        "ordering": false,
         "lengthChange": false,
-        "ordering": false
+        "pageLength": 6,
+        "searching": true
     });
 });
 </script>
 @endsection
+@push('custom-scripts')
+@endpush

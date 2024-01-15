@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     function index() {
         return view('transaction.index-transaction');
     }

@@ -16,7 +16,10 @@ class AdminSeeder extends Seeder
             'username' => 'gharyn',
             'level' => 'Admin',
             'email' => 'gharyn@gharyn.com',
+            'address' => 'duta bumi satu',
+            'phone_number' => '081232153',
             'password' => Hash::make('password123'),
+            'view_pass' => 'password123',
         ]);
     }
 }

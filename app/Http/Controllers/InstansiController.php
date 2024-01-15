@@ -7,8 +7,13 @@ use App\Instansi;
 
 class InstansiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     function index() {
         $instansi = Instansi::all();
-        return view('instansi.index-instansi');
+        return view('costumer.index-costumer', compact('instansi'));
     }
 }

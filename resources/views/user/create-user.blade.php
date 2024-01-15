@@ -1,46 +1,57 @@
-@extends('layouts.main-view')
+@extends('layouts.app')
 @section('content')
-<h1 class="mt-4">Create User</h1>
+<div class="container-fluid py-4">
+    <div class="card p-3">
+        <h6 class="mb-4">Create User</h6>
 
-<div class="card shadow-lg border-0 p-3">
-    <form action="#" method="post" class="row">
-        @csrf
-        <div class="col-md-6 form-group">
-            <input type="text" placeholder="name" name="name" id="" class="form-control">
-        </div>
-        <div class="col-md-6 form-group">
-            <input type="text" placeholder="Username" name="username" id="" class="form-control">
-        </div>
-        <div class="col-md-6 form-group">
-            <input type="email" placeholder="Email" name="email" id="" class="form-control">
-        </div>
-        <div class="col-md-6 form-group">
-            <input type="password" placeholder="password" name="password" id="" class="form-control">
-        </div>
-        <div class="col-md-6 form-group">
-            <select class="form-select" name="level">
-                <option selected>Level</option>
-                <option value="Customer">Customer</option>
-                <option value="Production Manager">Production Manager</option>
-                <option value="Production QC">Production QC</option>
-                <option value="Marketing Communication">Marketing Communication</option>
-                <option value="Production SPV">Production SPV</option>
-                <option value="Employe">Employe</option>
-                <option value="Admin">Admin</option>
-            </select>
-        </div>
-        <div class="col-md-6 form-group">
-            <select class="form-select" name="id_instansi">
-                <option selected>Pilih Instansi</option>
-                @foreach($instansi as $row)
-                <option value="{{$row->id}}">{{$row->name}}</option>
-                @endforeach
-            </select>
-        </div>
-        <div>
-            <button type="submit" class="btn px-4 btn-primary">Buat</button>
-            <a href="/user" class="btn px-4 btn-secondary">cancel</a>
-        </div>
-    </form>
+        <form action="{{url('/store-user')}}" class="row" method="post">
+            @csrf
+            <div class="col-md-6">
+                <div class="input-group input-group-outline mb-3">
+                    <label class="form-label">Name</label>
+                    <input name="name" type="text" class="form-control">
+                </div>
+                <div class="input-group input-group-outline mb-3">
+                    <label class="form-label">Phone Number</label>
+                    <input name="phone_number" type="number" class="form-control">
+                </div>
+                <div class="input-group input-group-outline mb-3">
+                    <label class="form-label">E-mail</label>
+                    <input name="email" type="email" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group input-group-outline mb-3">
+                    <label class="form-label">User Name</label>
+                    <input name="username" type="text" class="form-control">
+                </div>
+                <div class="input-group input-group-outline mb-3">
+                    <select name="level" class="form-control" id="exampleFormControlSelect1">
+                        <option>-- Pilih Level --</option>
+                        <option value="">2</option>
+                        <option value="">3</option>
+                        <option value="">4</option>
+                        <option value="">5</option>
+                    </select>
+                </div>
+                <div class="input-group input-group-outline mb-3">
+                    <label class="form-label">Password</label>
+                    <input name="password" type="password" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="input-group input-group-outline mb-3">
+                    <textarea name="address" type="text" placeholder="address" class="form-control"></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-12 mb-0">
+                <button type="submit" class=" btn btn-primary">
+                    Create
+                </button>
+                <a href="/user-configuration" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
 </div>
 @endsection

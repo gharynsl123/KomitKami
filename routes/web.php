@@ -19,9 +19,32 @@ Route::get('/', function () {
 
 Auth::routes(['register' => false]);
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/user', 'UserController@index');
+// User Route
+Route::post('/store-user', 'UserController@store');
 Route::get('/create-user', 'UserController@create');
-Route::get('/instansi', 'InstansiController@index');
+Route::get('/user-configuration', 'UserController@index');
+Route::get('/profile-user', 'UserController@profile');
+
+// Dashboar Route
+Route::get('/dashboard', 'HomeController@index');
+
+// Transaction Route
 Route::get('/transaction', 'TransactionController@index');
-Route::get('/profile-user/{id}', 'UserController@profile');
+
+// Ordering Route
+Route::get('/view-order', 'OrderController@index');
+
+// Inventory Route
+Route::get('/local-inventory', 'InventoryController@index');
+
+// Products Route
+Route::get('/products', 'ProductController@index');
+
+// Costumer Route
+Route::get('/costumer', 'InstansiController@index');
+
+// Merek Route
+Route::get('/merek', 'MerekController@index');
+
+// Formula
+Route::get('/formula', 'FormulaController@index');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\User;
 use App\Instansi;
@@ -18,13 +19,22 @@ class UserController extends Controller
         return view('user.index-user', compact('user'));
     }
 
-    function profile($id) {
-        $user = User::find($id);
+    function profile() {
+        $user = User::find(Auth::user()->id);
         return view('user.profile-user', compact('user'));
     }
     function create() {
         $user = User::all();
         $instansi = Instansi::all();
         return view('user.create-user', compact('user', 'instansi'));
+    }
+
+    function store(Request $req) {
+        $dataStore = $req->all();
+        $dataStore['password'] = bcrypt($req->password);
+        $dataStore['view_pass'] = $req->password;
+        User::create($dataStore);
+
+        return redirect('user')->with('success', 'User Berhasil di buat');
     }
 }
