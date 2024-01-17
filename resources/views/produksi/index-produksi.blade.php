@@ -7,7 +7,7 @@
                 <div class="card-header pb-0 px-3">
                     <div class="row">
                         <div class="col-6 d-flex align-items-center">
-                            <h6 class="mb-0">Ordering Information</h6>
+                            <h6 class="mb-0">List Ordering</h6>
                         </div>
                         @if(Auth::user()->level == "Customer")
                         <div class="col-6 text-end">
@@ -49,5 +49,3 @@
     </div>
 </div>
 @endsection
-@push('custom-scripts')
-@endpush

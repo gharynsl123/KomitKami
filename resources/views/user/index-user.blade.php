@@ -19,199 +19,87 @@
                         <thead>
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Author</th>
+                                    People
+                                </th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                    Function</th>
+                                    Posistion
+                                </th>
                                 <th
                                     class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Status</th>
+                                    Status
+                                </th>
                                 <th
                                     class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Employed</th>
+                                    Employed
+                                </th>
                                 <th class="text-secondary opacity-7"></th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($user as $items)
                             <tr>
                                 <td>
                                     <div class="d-flex px-2 py-1">
-                                        <div>
-                                            <img src="../assets/img/team-2.jpg"
-                                                class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                                        </div>
                                         <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">John Michael</h6>
-                                            <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
+                                            <h6 class="mb-0 text-sm">{{$items->name}}</h6>
+                                            <p class="text-xs text-secondary mb-0">{{$items->email}}</p>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                    <p class="text-xs text-secondary mb-0">Organization</p>
+                                    <p class="text-xs font-weight-bold mb-0">{{$items->level}}</p>
+                                    @if($items->level == "Customer")
+                                    <p class="text-xs text-secondary mb-0">{{$items->instansi->name ?? 'Non'}}</p>
+                                    @endif
                                 </td>
                                 <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-success">Online</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                                </td>
-                                <td class="align-middle">
-                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                        data-toggle="tooltip" data-original-title="Edit user">
-                                        Edit
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex px-2 py-1">
-                                        <div>
-                                            <img src="../assets/img/team-3.jpg"
-                                                class="avatar avatar-sm me-3 border-radius-lg" alt="user2">
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                                            <p class="text-xs text-secondary mb-0">alexa@creative-tim.com</p>
-                                        </div>
+                                    <div>
+                                        @if(Cache::has('user-is-online-' . $items->id))
+                                        <span class="badge badge-sm bg-gradient-success">Online</span>
+                                        @else
+                                        <span class="badge badge-sm bg-gradient-secondary">Offline</span>
+                                        @endif
                                     </div>
                                 </td>
-                                <td>
-                                    <p class="text-xs font-weight-bold mb-0">Programator</p>
-                                    <p class="text-xs text-secondary mb-0">Developer</p>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                                </td>
                                 <td class="align-middle text-center">
-                                    <span class="text-secondary text-xs font-weight-bold">11/01/19</span>
+                                    <span
+                                        class="text-secondary text-xs font-weight-bold">{{$items->created_at->format('d/m/Y')}}</span>
                                 </td>
                                 <td class="align-middle">
-                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                        data-toggle="tooltip" data-original-title="Edit user">
+                                    <a href="{{url('/edit-user/'.$items->id)}}"
+                                        class="btn btn-sm btn-warning font-weight-bold text-xs" data-toggle="tooltip"
+                                        data-original-title="Edit user">
                                         Edit
+                                    </a>
+                                    <a href="#" data-toggle="modal" data-target="#detail-user-modal-{{$items->id}}"
+                                        class="btn btn-sm btn-info font-weight-bold text-xs">
+                                        Detail
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex px-2 py-1">
-                                        <div>
-                                            <img src="../assets/img/team-4.jpg"
-                                                class="avatar avatar-sm me-3 border-radius-lg" alt="user3">
+                            @endforeach
+
+
+                            @foreach($user as $items)
+                            <div class="modal fade" id="detail-user-modal-{{$items->id}}" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-capitalize" id="exampleModalLabel">Detail
+                                                {{$items->name}}</h5>
                                         </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">Laurent Perrier</h6>
-                                            <p class="text-xs text-secondary mb-0">laurent@creative-tim.com</p>
+                                        <div class="modal-body row">
+                                            <div class="col-md-6">username : {{$items->username}}</div>
+                                            <div class="col-md-6">password : {{$items->view_pass}}</div>
+                                            <div class="col-md-6">Level : {{$items->level}}</div>
+                                            <div class="col-md-6">Email : {{$items->email}}</div>
+                                            <div class="col-md-6">Nomor HP : {{$items->phone_number}}</div>
                                         </div>
                                     </div>
-                                </td>
-                                <td>
-                                    <p class="text-xs font-weight-bold mb-0">Executive</p>
-                                    <p class="text-xs text-secondary mb-0">Projects</p>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-success">Online</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-xs font-weight-bold">19/09/17</span>
-                                </td>
-                                <td class="align-middle">
-                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                        data-toggle="tooltip" data-original-title="Edit user">
-                                        Edit
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex px-2 py-1">
-                                        <div>
-                                            <img src="../assets/img/team-3.jpg"
-                                                class="avatar avatar-sm me-3 border-radius-lg" alt="user4">
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">Michael Levi</h6>
-                                            <p class="text-xs text-secondary mb-0">michael@creative-tim.com</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <p class="text-xs font-weight-bold mb-0">Programator</p>
-                                    <p class="text-xs text-secondary mb-0">Developer</p>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-success">Online</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-xs font-weight-bold">24/12/08</span>
-                                </td>
-                                <td class="align-middle">
-                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                        data-toggle="tooltip" data-original-title="Edit user">
-                                        Edit
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex px-2 py-1">
-                                        <div>
-                                            <img src="../assets/img/team-2.jpg"
-                                                class="avatar avatar-sm me-3 border-radius-lg" alt="user5">
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">Richard Gran</h6>
-                                            <p class="text-xs text-secondary mb-0">richard@creative-tim.com</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                    <p class="text-xs text-secondary mb-0">Executive</p>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-xs font-weight-bold">04/10/21</span>
-                                </td>
-                                <td class="align-middle">
-                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                        data-toggle="tooltip" data-original-title="Edit user">
-                                        Edit
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex px-2 py-1">
-                                        <div>
-                                            <img src="../assets/img/team-4.jpg"
-                                                class="avatar avatar-sm me-3 border-radius-lg" alt="user6">
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">Miriam Eric</h6>
-                                            <p class="text-xs text-secondary mb-0">miriam@creative-tim.com</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <p class="text-xs font-weight-bold mb-0">Programator</p>
-                                    <p class="text-xs text-secondary mb-0">Developer</p>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-xs font-weight-bold">14/09/20</span>
-                                </td>
-                                <td class="align-middle">
-                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                        data-toggle="tooltip" data-original-title="Edit user">
-                                        Edit
-                                    </a>
-                                </td>
-                            </tr>
+                                </div>
+                            </div>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -219,8 +107,6 @@
         </div>
     </div>
 </div>
-
-
 <script>
 $(document).ready(function() {
     $('#userTable').DataTable({
@@ -229,6 +115,10 @@ $(document).ready(function() {
         "lengthChange": false,
         "pageLength": 6,
         "searching": true
+    });
+    $('[data-toggle="modal"]').click(function() {
+        var targetModal = $(this).data('target');
+        $(targetModal).modal('show');
     });
 });
 </script>

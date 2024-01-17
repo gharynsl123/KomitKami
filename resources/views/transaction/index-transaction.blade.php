@@ -5,7 +5,7 @@
         <div class="col-12">
             <div class="row px-4">
                 <div class="col-6 d-flex align-items-center">
-                    <h5 class="mb-0">Our Products</h5>
+                    <h5 class="mb-0">Transaction</h5>
                 </div>
                 <div class="col-6 text-end">
                     <a class="btn bg-gradient-dark mb-0" href="javascript:;"><i

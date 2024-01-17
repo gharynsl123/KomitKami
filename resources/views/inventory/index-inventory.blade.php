@@ -47,14 +47,6 @@
                                 <span class="ms-1">Kemasan</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="javascript:;" role="tab"
-                                aria-selected="false">
-                                <i class="material-icons text-lg position-relative">check_circle</i>
-                                <span class="ms-1">Barang Jadi</span>
-                            </a>
-                        </li>
-
                     </ul>
                 </div>
 
@@ -274,8 +266,6 @@
                 </div>
                 <div class="card-body px-0 pb-2 tab-pane fade" id="table-kemasan" role="tabpanel">
                     @include('inventory.section.table-kemasan')
-                </div>
-                <div class="card-body px-0 pb-2 tab-pane fade" id="products" role="tabpanel">
                 </div>
             </div>
         </div>

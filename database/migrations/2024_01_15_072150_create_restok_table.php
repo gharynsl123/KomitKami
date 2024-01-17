@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePembelianTable extends Migration
+class CreateRestokTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,16 @@ class CreatePembelianTable extends Migration
      */
     public function up()
     {
-        Schema::create('pembelian', function (Blueprint $table) {
+        Schema::create('restok', function (Blueprint $table) {
             $table->id();
-            $table->string('Nomor_PO');
-            $table->string('quantity');
+            $table->string('nomor_po');
+            $table->enum('jenis', ['kering', 'cair', 'kemasan']);
+            $table->enum('satuan', ['liter', 'kilogram', 'gram']);
+            $table->string('jumlah');
             $table->string('catatan');
-            $table->enum('type', ['cair', 'kering', 'kemasan']);
-            $table->enum('satuan', ['liter', 'kilo gram', 'pieces']);
 
             $table->unsignedBigInteger('brand_id')->unsigned();
             $table->foreign('brand_id')->references('id')->on('brand')->onDelete('cascade');
-
-            $table->unsignedBigInteger('instansi_id')->unsigned();
-            $table->foreign('instansi_id')->references('id')->on('instansi')->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -38,6 +35,6 @@ class CreatePembelianTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pembelian');
+        Schema::dropIfExists('restok');
     }
 }

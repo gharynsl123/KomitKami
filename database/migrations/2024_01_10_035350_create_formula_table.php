@@ -19,8 +19,7 @@ class CreateFormulaTable extends Migration
             $table->unsignedBigInteger('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('product')->onDelete('cascade');
 
-            $table->unsignedBigInteger('ingredients_id')->unsigned();
-            $table->foreign('ingredients_id')->references('id')->on('ingredients')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

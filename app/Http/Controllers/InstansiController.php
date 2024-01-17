@@ -16,4 +16,19 @@ class InstansiController extends Controller
         $instansi = Instansi::all();
         return view('costumer.index-costumer', compact('instansi'));
     }
+    function create() {
+        $instansi = Instansi::all();
+        return view('costumer.create-costumer', compact('instansi'));
+    }
+
+    function store(Request $request) {
+        $dataStore = $request->all();
+        
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('public/instansi_images');
+            $dataStore['photo'] = basename($photoPath);
+        }
+        Instansi::create($dataStore);
+        return redirect('/costumer')->with('success', 'Costumer berhasil Di tambahkan');
+    }
 }

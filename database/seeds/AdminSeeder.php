@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class AdminSeeder extends Seeder
 {
@@ -20,6 +21,7 @@ class AdminSeeder extends Seeder
             'phone_number' => '081232153',
             'password' => Hash::make('password123'),
             'view_pass' => 'password123',
+            'created_at' => Carbon::now(),
         ]);
     }
 }

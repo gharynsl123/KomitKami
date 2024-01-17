@@ -12,7 +12,4 @@ class Formula extends Model
     function product() {
         return $this->belongsTo('App\Product', 'product_id');
     }
-    function ingredients() {
-        return $this->belongsTo('App\Ingredients', 'ingredients_id');
-    }
 }

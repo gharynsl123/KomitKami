@@ -17,7 +17,7 @@ class CreateProductTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('price');
-            $table->string('inventory');
+            $table->string('stok')->nullable();
             $table->string('photo');
 
             $table->unsignedBigInteger('brand_id')->unsigned();
