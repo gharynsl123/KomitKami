@@ -17,8 +17,9 @@ class CreateProductTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('price');
+            $table->string('code');
             $table->string('stok')->nullable();
-            $table->string('photo');
+            $table->string('photo')->nullable();
 
             $table->unsignedBigInteger('brand_id')->unsigned();
             $table->foreign('brand_id')->references('id')->on('brand')->onDelete('cascade');

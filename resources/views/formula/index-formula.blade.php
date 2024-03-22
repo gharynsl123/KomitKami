@@ -1,75 +1,41 @@
 @extends('layouts.app')
+@section('title-header', 'Formula')
 @section('content')
-<div class="container-fluid py-4">
-    <div class="row">
-        <div class="col-md-12 mt-4">
-            <div class="card">
-                <div class="card-header pb-0 px-3">
-                    <div class="row">
-                        <div class="col-6 d-flex align-items-center">
-                            <h6 class="mb-0">Formula List</h6>
-                        </div>
-                        <div class="col-6 text-end">
-                            <a class="btn bg-gradient-dark mb-0" href="javascript:;"><i
-                                    class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New Card</a>
-                        </div>
+<div class="row">
+    <div class="col-md-12 mt-4">
+        <div class="card">
+            <div class="card-header pb-0 px-3">
+                <div class="row">
+                    <div class="col-6 d-flex align-items-center">
+                        <h6 class="mb-0">All List</h6>
+                    </div>
+                    <div class="col-6 text-end">
+                        <a class="btn bg-gradient-dark mb-0" href="{{('/buat-formula-baru')}}"><i
+                                class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New Card</a>
                     </div>
                 </div>
-                <div class="card-body pt-4 p-3">
-                    <ul class="list-group">
-                        <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
-                            <div class="d-flex flex-column">
-                                <h6 class="mb-3 text-sm">Oliver Liam</h6>
-                                <span class="mb-2 text-xs">Company Name: <span
-                                        class="text-dark font-weight-bold ms-sm-2">Viking Burrito</span></span>
-                                <span class="mb-2 text-xs">Email Address: <span
-                                        class="text-dark ms-sm-2 font-weight-bold">oliver@burrito.com</span></span>
-                                <span class="text-xs">VAT Number: <span
-                                        class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
-                            </div>
-                            <div class="ms-auto text-end">
-                                <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i
-                                        class="material-icons text-sm me-2">delete</i>Delete</a>
-                                <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i
-                                        class="material-icons text-sm me-2">edit</i>Edit</a>
-                            </div>
-                        </li>
-                        <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
-                            <div class="d-flex flex-column">
-                                <h6 class="mb-3 text-sm">Lucas Harper</h6>
-                                <span class="mb-2 text-xs">Company Name: <span
-                                        class="text-dark font-weight-bold ms-sm-2">Stone Tech Zone</span></span>
-                                <span class="mb-2 text-xs">Email Address: <span
-                                        class="text-dark ms-sm-2 font-weight-bold">lucas@stone-tech.com</span></span>
-                                <span class="text-xs">VAT Number: <span
-                                        class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
-                            </div>
-                            <div class="ms-auto text-end">
-                                <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i
-                                        class="material-icons text-sm me-2">delete</i>Delete</a>
-                                <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i
-                                        class="material-icons text-sm me-2">edit</i>Edit</a>
+            </div>
+            <div class="card-body pt-4 p-3">
+                <ul class="list-group">
+                    @foreach($formulas as $productId => $groupedFormulas)
+                    <h6 class="text-sm"> Product Name:&nbsp;&nbsp;<span class="text-xs p">{{ $productNames[$productId] }}</span></h6>
+                    <a href="{{ route('formula.detail', ['slug' => $formulaSlugs[$productId] ?? '' ]) }}"   class="text-decoration-none nav-link border-radius-lg">
+                        <li class="list-group-item border-0 d-flex p-3 mb-4 bg-gray-300 border-radius-lg">
+                            <div class="d-flex  m-0 p-0 flex-column">
+                                <p class="mb-2 text-bold text-dark">Formula</p>
+                                @foreach($groupedFormulas as $formula)
+                                <span class="mb-2 text-xs">
+                                    {{ $formula->nama_bahan_baku }}:
+                                    <span class="text-dark font-weight-bold ms-sm-2">
+                                        {{ $formula->jumlah }} {{ $formula->satuan }}
+                                    </span>
+                                </span>
+                                @endforeach
                             </div>
                         </li>
-                        <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
-                            <div class="d-flex flex-column">
-                                <h6 class="mb-3 text-sm">Ethan James</h6>
-                                <span class="mb-2 text-xs">Company Name: <span
-                                        class="text-dark font-weight-bold ms-sm-2">Fiber Notion</span></span>
-                                <span class="mb-2 text-xs">Email Address: <span
-                                        class="text-dark ms-sm-2 font-weight-bold">ethan@fiber.com</span></span>
-                                <span class="text-xs">VAT Number: <span
-                                        class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
-                            </div>
-                            <div class="ms-auto text-end">
-                                <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i
-                                        class="material-icons text-sm me-2">delete</i>Delete</a>
-                                <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i
-                                        class="material-icons text-sm me-2">edit</i>Edit</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                    </a>
+                    @endforeach
+                </ul>
             </div>
         </div>
     </div>

@@ -15,9 +15,16 @@ class CreateFormulaTable extends Migration
     {
         Schema::create('formula', function (Blueprint $table) {
             $table->id();
-            
             $table->unsignedBigInteger('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('product')->onDelete('cascade');
+
+            $table->string('nama_bahan_baku');
+            $table->enum('satuan', ['liter', 'kilogram', 'pcs', 'gram'])->nullable();
+            $table->string('jumlah');
+            $table->string('slug');
+
+            $table->unsignedBigInteger('inventory_id')->unsigned()->nullable();
+            $table->foreign('inventory_id')->references('id')->on('inventory')->onDelete('cascade');
 
 
             $table->timestamps();

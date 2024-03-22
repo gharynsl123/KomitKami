@@ -15,12 +15,11 @@ class CreateOrderTable extends Migration
     {
         Schema::create('order', function (Blueprint $table) {
             $table->id();
-            $table->string('nomor_invoice');
             $table->string('quantity');
             $table->string('total_harga');
-            $table->string('catatan');
-            $table->enum('status', ['pending', 'reject', 'accept', 'process', 'done'])->default('pending');
-
+            $table->string('catatan')->nullable();
+            $table->enum('status', ['pending', 'reject', 'revisi', 'accept', 'process', 'packaging', 'On The Way','an-paid', 'paid', 'done'])->default('pending');
+            
             $table->unsignedBigInteger('id_instansi')->unsigned();
             $table->foreign('id_instansi')->references('id')->on('instansi')->onDelete('cascade');
 
@@ -29,6 +28,9 @@ class CreateOrderTable extends Migration
 
             $table->unsignedBigInteger('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('product')->onDelete('cascade');
+
+            $table->unsignedBigInteger('invoice_id')->unsigned();
+            $table->foreign('invoice_id')->references('id')->on('invoice')->onDelete('cascade');
             
             $table->timestamps();
         });

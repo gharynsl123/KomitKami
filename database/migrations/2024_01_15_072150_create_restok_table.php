@@ -19,6 +19,8 @@ class CreateRestokTable extends Migration
             $table->enum('jenis', ['kering', 'cair', 'kemasan']);
             $table->enum('satuan', ['liter', 'kilogram', 'gram']);
             $table->string('jumlah');
+            $table->string('batch_number');
+            $table->string('slug')->uniq();
             $table->string('catatan');
 
             $table->unsignedBigInteger('brand_id')->unsigned();

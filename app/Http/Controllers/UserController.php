@@ -66,4 +66,9 @@ class UserController extends Controller
 
         return redirect('/user-configuration')->with('success', "$user->name Berhasil Di Update");
     }
+
+    function editProfile($id) {
+        $user = User::find($id);
+        return view('user.edit-profile', compact('user'));
+    }
 }

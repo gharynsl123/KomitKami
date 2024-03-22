@@ -41,9 +41,8 @@
             </div>
         </div>
     </div>
-    <main class="main-content  mt-0">
+    <main class="main-content mt-0">
         <div class="page-header align-items-start min-vh-100">
-            <span class="mask bg-gradient-dark opacity-6"></span>
             <div class="container my-auto">
                 <div class="row">
                     <div class="col-lg-4 col-md-8 col-12 mx-auto">
@@ -69,7 +68,8 @@
                                     </div>
                                     <div class="input-group input-group-outline mb-3">
                                         <label class="form-label">Password</label>
-                                        <input type="password" name="password" required class="@error('password') is-invalid @enderror form-control">
+                                        <input type="password" name="password" required
+                                            class="@error('password') is-invalid @enderror form-control">
 
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">

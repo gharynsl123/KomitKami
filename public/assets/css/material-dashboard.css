@@ -105,6 +105,8 @@
   }
 }
 
+
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -116,6 +118,57 @@ body {
   background-color: var(--bs-body-bg);
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.progress-bar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Adjusted to align items at the start */
+  margin-top: 10px;
+}
+
+.progress-bar-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; /* Added text alignment for better positioning */
+}
+
+.step-number {
+  width: 20px;
+  height: 20px;
+  background-color: #ddd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  z-index: 2;
+}
+
+.progress-bar-step.active .step-number {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.progress-bar-line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: #ddd;
+  margin: 0 5px;
+}
+
+.step-icon {
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+.step-text {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #333;
+  z-index: 2;
 }
 
 hr {
@@ -9086,6 +9139,7 @@ fieldset:disabled .btn {
   min-height: 25vh !important;
 }
 
+
 .min-vh-35 {
   min-height: 35vh !important;
 }
@@ -9113,9 +9167,25 @@ fieldset:disabled .btn {
 .min-vh-75 {
   min-height: 75vh !important;
 }
+.min-vh-77 {
+  min-height: 77vh !important;
+}
 
 .min-vh-80 {
   min-height: 80vh !important;
+}
+
+.min-vh-81 {
+  min-height: 81vh !important;
+}
+.min-vh-82 {
+  min-height: 82vh !important;
+}
+.min-vh-83 {
+  min-height: 83vh !important;
+}
+.min-vh-84 {
+  min-height: 84vh !important;
 }
 
 .min-vh-85 {
@@ -9128,6 +9198,10 @@ fieldset:disabled .btn {
 
 .min-vh-95 {
   min-height: 95vh !important;
+}
+
+.min-vh-96 {
+  min-height: 96vh !important;
 }
 
 .min-vh-100 {
@@ -11212,6 +11286,10 @@ fieldset:disabled .btn {
   max-height: 250px !important;
 }
 
+.max-height-270 {
+  max-height: 270px !important
+}
+
 .max-height-300 {
   max-height: 300px !important;
 }
@@ -11271,6 +11349,11 @@ fieldset:disabled .btn {
 .min-height-100 {
   min-height: 100px !important;
 }
+
+.vh-90 {
+  min-height: 100% !important;
+}
+
 
 .min-height-130 {
   min-height: 130px !important;
@@ -22124,6 +22207,7 @@ body.dark-version {
   position: relative;
   overflow: hidden;
   display: flex;
+  background: url("../../assets/img/login.jpeg");
   align-items: center;
   background-size: cover;
   background-position: 50%;

@@ -34,4 +34,27 @@ class ProductController extends Controller
         Product::create($dataStore);
         return redirect('/products')->with('success', 'Product Berhasil di tambahkan');
     }
+
+    function edit($id)  {
+        $product = Product::find($id);
+        $brand = Brand::all();
+        return view('products.edit-product', compact('product', 'brand'));
+    }
+
+
+    function update(Request $request, $id) {
+        $product = Product::find($id);
+
+        $product->fill($request->all());
+
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('public/product_images');
+            $product->photo = $photoPath;
+        } elseif ($product->photo) {
+            $product->photo = $product->photo;
+        }
+
+        $product->save();
+        return redirect('/products')->with('success', 'Product Berhasil Di Update');
+    }
 }

@@ -20,4 +20,8 @@ class Order extends Model
     function instansi() {
         return $this->belongsTo('App\Instansi', 'id_instansi');
     }
+
+    function invoice() {
+        return $this->belongsTo('App\Invoice', 'invoice_id');
+    }
 }

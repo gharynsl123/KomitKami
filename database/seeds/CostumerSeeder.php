@@ -23,5 +23,16 @@ class CostumerSeeder extends Seeder
             'view_pass' => 'nadia123',
             'created_at' => Carbon::now(),
         ]);
+        DB::table('users')->insert([
+            'name' => 'Lisa niam',
+            'username' => 'niam',
+            'level' => 'Customer',
+            'email' => 'niam@gmail.com',
+            'address' => 'pramata deket rumah nadia',
+            'phone_number' => '0812347367383',
+            'password' => Hash::make('niamlisa'),
+            'view_pass' => 'niamlisa',
+            'created_at' => Carbon::now(),
+        ]);
     }
 }

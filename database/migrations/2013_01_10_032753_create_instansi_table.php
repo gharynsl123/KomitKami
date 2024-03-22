@@ -18,7 +18,7 @@ class CreateInstansiTable extends Migration
             $table->string('name');
             $table->string('nomor_telepon');
             $table->string('alamat');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }
