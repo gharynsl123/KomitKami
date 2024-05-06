@@ -3,7 +3,8 @@
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 
-class MerekSeeder extends Seeder
+
+class BrandSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,18 +14,18 @@ class MerekSeeder extends Seeder
     public function run()
     {
         DB::table('brand')->insert([
-            'name' => 'ataru',
-            'id_instansi' => 2,
+            'name' => 'Alkessi',
+            'id_instansi' => '1',
             'created_at' => Carbon::now(),
         ]);
         DB::table('brand')->insert([
-            'name' => 'medetic',
-            'id_instansi' => 1,
+            'name' => 'Chrona Care            ',
+            'id_instansi' => '2',
             'created_at' => Carbon::now(),
         ]);
         DB::table('brand')->insert([
-            'name' => 'indah kencana',
-            'id_instansi' => 1,
+            'name' => 'Medizsisma',
+            'id_instansi' => '3',
             'created_at' => Carbon::now(),
         ]);
     }

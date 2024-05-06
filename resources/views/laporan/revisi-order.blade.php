@@ -14,7 +14,7 @@
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <h6 class="mb-1">Ordering Information</h6>
-                                        <p class="text-sm">Nomor Invoice: {{$invoice->nomor_invoice}}</p>
+                                        <p class="text-sm">Nomor PO: {{$invoice->nomor_invoice}}</p>
                                     </div>
 
                                     <div class="text-end">

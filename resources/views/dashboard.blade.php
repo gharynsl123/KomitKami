@@ -14,15 +14,15 @@
 @section('title-header', 'Dashboar Admin')
 @section('content')
 <div class="row mt-4">
-    <div class="col-md-9 mb-3">
+    <div class="col-md-12 mb-3">
         <div class="card">
             <div class="card-header pb-0 px-3">
                 <div class="row">
                     <div class="col-6 d-flex align-items-center">
-                        <h6 class="mb-0">Ordering Information</h6>
+                        <h6 class="mb-0">Informasi Pemesanan</h6>
                     </div>
                     <div class="col-6 text-end">
-                        <a href="{{('/view-order')}}" class="btn btn-outline-primary btn-sm mb-0">View All</a>
+                        <a href="{{('/view-order')}}" class="btn btn-outline-primary btn-sm mb-0">Lihat Semua</a>
                     </div>
                 </div>
             </div>
@@ -31,86 +31,8 @@
                     @forelse($groupedOrders->where('status' , 'pending')->reverse() as $items)                    
                     @include('widget.list-group')
                     @empty
-                    <p class="text-center">no orders waiting for requests</p>
+                    <p class="text-center">Tidak ada pesanan menunggu permintaan</p>
                     @endforelse
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card h-100">
-            <div class="card-header pb-0 p-3">
-                <div class="row">
-                    <div class="col-6 d-flex align-items-center">
-                        <h6 class="mb-0">No Bacth</h6>
-                    </div>
-                    <div class="col-6 text-end">
-                        <a href="{{url('/transaction')}}" class="btn btn-outline-primary btn-sm mb-0">View All</a>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body p-3 pb-0">
-                <ul class="list-group">
-                    <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                        <div class="d-flex flex-column">
-                            <h6 class="mb-1 text-dark font-weight-bold text-sm">March, 01, 2020</h6>
-                            <span class="text-xs">#MS-415646</span>
-                        </div>
-                        <div class="d-flex align-items-center text-sm">
-                            $180
-                            <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i
-                                    class="material-icons text-lg position-relative me-1">picture_as_pdf</i>
-                                PDF</button>
-                        </div>
-                    </li>
-                    <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                        <div class="d-flex flex-column">
-                            <h6 class="text-dark mb-1 font-weight-bold text-sm">February, 10, 2021</h6>
-                            <span class="text-xs">#RV-126749</span>
-                        </div>
-                        <div class="d-flex align-items-center text-sm">
-                            $250
-                            <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i
-                                    class="material-icons text-lg position-relative me-1">picture_as_pdf</i>
-                                PDF</button>
-                        </div>
-                    </li>
-                    <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                        <div class="d-flex flex-column">
-                            <h6 class="text-dark mb-1 font-weight-bold text-sm">April, 05, 2020</h6>
-                            <span class="text-xs">#FB-212562</span>
-                        </div>
-                        <div class="d-flex align-items-center text-sm">
-                            $560
-                            <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i
-                                    class="material-icons text-lg position-relative me-1">picture_as_pdf</i>
-                                PDF</button>
-                        </div>
-                    </li>
-                    <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                        <div class="d-flex flex-column">
-                            <h6 class="text-dark mb-1 font-weight-bold text-sm">June, 25, 2019</h6>
-                            <span class="text-xs">#QW-103578</span>
-                        </div>
-                        <div class="d-flex align-items-center text-sm">
-                            $120
-                            <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i
-                                    class="material-icons text-lg position-relative me-1">picture_as_pdf</i>
-                                PDF</button>
-                        </div>
-                    </li>
-                    <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
-                        <div class="d-flex flex-column">
-                            <h6 class="text-dark mb-1 font-weight-bold text-sm">March, 01, 2019</h6>
-                            <span class="text-xs">#AR-803481</span>
-                        </div>
-                        <div class="d-flex align-items-center text-sm">
-                            $300
-                            <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i
-                                    class="material-icons text-lg position-relative me-1">picture_as_pdf</i>
-                                PDF</button>
-                        </div>
-                    </li>
                 </ul>
             </div>
         </div>

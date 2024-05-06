@@ -1,34 +1,34 @@
 @extends('layouts.app')
-@section('title-header', 'Transaksi Page')
+@section('title-header', 'Transaksi')
 @section('content')
 <div class="row">
     <div class="col-12">
         <div class="row px-4">
             <div class="col-6 d-flex align-items-center">
-                <h5 class="mb-0">Transaction</h5>
+                <h5 class="mb-0">Transaksi</h5>
             </div>
             <div class="col-6 text-end">
                 <a class="btn bg-gradient-dark mb-0" href="{{url('/buat-pesanan-restok')}}"><i
-                        class="material-icons text-sm">add</i>&nbsp;&nbsp;Get More Stok</a>
+                        class="material-icons text-sm">add</i>&nbsp;&nbsp;Dapatkan Stok Tambahan</a>
             </div>
         </div>
         <div class="card mt-4 px-4">
             <div class="card-body px-0 pb-2">
                 <div class="table-responsive p-0">
                     <table class="table table-borderless table-hover border border-0 align-items-center mb-0"
-                        id="TransactionTable">
+                        id="dataTableDefault">
                         <thead>
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Author</th>
+                                Penulis</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                    Function</th>
+                                    Fungsi</th>
                                 <th
                                     class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                     Status</th>
                                 <th
                                     class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Employed</th>
+                                    Dipakai</th>
                                 <th class="text-secondary opacity-7"></th>
                             </tr>
                         </thead>
@@ -220,18 +220,6 @@
         </div>
     </div>
 </div>
-
-<script>
-$(document).ready(function() {
-    $('#TransactionTable').DataTable({
-        "info": true,
-        "ordering": false,
-        "lengthChange": false,
-        "pageLength": 6,
-        "searching": true
-    });
-});
-</script>
 @endsection
 @push('custom-scripts')
 @endpush

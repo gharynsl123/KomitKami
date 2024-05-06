@@ -29,6 +29,6 @@ class InstansiController extends Controller
             $dataStore['photo'] = basename($photoPath);
         }
         Instansi::create($dataStore);
-        return redirect('/costumer')->with('success', 'Costumer berhasil Di tambahkan');
+        return redirect('/customer')->with('success', 'Costumer berhasil Di tambahkan');
     }
 }

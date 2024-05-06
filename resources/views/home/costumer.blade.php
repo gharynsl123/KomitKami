@@ -108,14 +108,13 @@
 document.addEventListener('DOMContentLoaded', function() {
     const ctx = document.getElementById('chart-bars').getContext('2d');
 
-
     const labels = {!! json_encode($months) !!};
     const datasets = {!! json_encode($monthlyPurchases) !!};
 
-    const allProducts = Array.from(new Set(Object.values(datasets).flatMap(Object.keys)));
+    const allProducts = Array.from(new Set(Object.keys(datasets).flatMap(month => Object.keys(datasets[month]))));
     const numProducts = allProducts.length;
 
-    new Chart(ctx, {
+    const chart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: labels,
@@ -123,15 +122,42 @@ document.addEventListener('DOMContentLoaded', function() {
                 label: productName,
                 data: labels.map(month => datasets[month][productName] ? datasets[month][productName] : 0),
                 backgroundColor: getRandomColor(),
-                borderRadius: 8,
-                barPercentage: 1.5 / numProducts,
+                borderRadius: 100,
+                barPercentage: 0.8,
                 categoryPercentage: 0.9,
             })),
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            onClick: function(event, elements) {
+                const pointer = this.getElementsAtEventForMode(event, 'nearest', { intersect: true }, false);
+                if (pointer.length > 0) {
+                    const firstPoint = pointer[0];
+                    const datasetIndex = firstPoint.datasetIndex; // Mengambil datasetIndex dari pointer
+                    const index = firstPoint.index; // Mengambil index dari pointer
+                    const dataset = this.data.datasets[datasetIndex];
+                    if (dataset) {
+                        const month = this.data.labels[index];
+                        const product = dataset.label;
+                        window.location.href = '/detail-charts?month=' + encodeURIComponent(month) + '&product=' + encodeURIComponent(product);
+                    }
+                }
+            },
             plugins: {
+                tooltip: {
+                    mode: 'nearest', 
+                    callbacks: {
+                        label: function(context) {
+                            var label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += context.parsed.y;
+                            return label;
+                        }
+                    }
+                },
                 legend: {
                     display: false,
                 }
@@ -170,7 +196,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-
 
     // Fungsi untuk menghasilkan warna acak
     function getRandomColor() {

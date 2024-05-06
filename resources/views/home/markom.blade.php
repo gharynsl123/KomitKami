@@ -19,7 +19,7 @@
                     @forelse($groupedOrders as $items)
                     <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
                         <div class="d-flex flex-column">
-                            <h6 class="mb-3 text-sm">Nomor Invoice : {{$items->invoice->nomor_invoice}}</h6>
+                            <h6 class="mb-3 text-sm">Nomor PO : {{$items->invoice->nomor_invoice}}</h6>
                             <span class="mb-2 text-xs">Company Name:
                                 <span class="text-dark font-weight-bold ms-sm-2">
                                     {{$items->instansi->name}}

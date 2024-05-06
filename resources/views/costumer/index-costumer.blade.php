@@ -4,26 +4,26 @@
 <div class="col-md-12 mb-lg-0">
     <div class="row px-4">
         <div class="col-6 d-flex align-items-center">
-            <h5 class="mb-0">Our Costumer</h5>
+            <h5 class="mb-0">Pelanggan Kita</h5>
         </div>
         <div class="col-6 text-end">
             <a class="btn bg-gradient-dark mb-0" href="{{url('/create-customer')}}"><i
-                    class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New Costumer</a>
+                    class="material-icons text-sm">add</i>&nbsp;&nbsp;Tambah Pelanggan Baru</a>
         </div>
     </div>
     <div class="card mt-3">
         <div class="card-body p-3">
             <div class="table-responsive p-0">
                 <table class="table table-borderless table-hover border border-0 align-items-center mb-0"
-                    id="CostumerTable">
+                    id="dataTableDefault">
                     <thead>
                         <tr>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Instansi</th>
+                                Nama Perusahaan</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                Phone Number</th>
+                                Nomor Telepon</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                address</th>
+                                Alamat</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 Terdaftar Pada</th>
                             <th class="text-secondary opacity-7"></th>
@@ -48,7 +48,7 @@
                             <td>
                                 <p class="text-xs font-weight-bold mb-0">{{$items->nomor_telepon}}</p>
                             </td>
-                            <td class="align-middle text-center">
+                            <td class="align-middle">
                                 <span class="text-secondary text-xs font-weight-bold">{{$items->alamat}}</span>
                             </td>
                             <td class="align-middle text-center">
@@ -69,18 +69,6 @@
         </div>
     </div>
 </div>
-
-<script>
-$(document).ready(function() {
-    $('#CostumerTable').DataTable({
-        "info": true,
-        "ordering": false,
-        "lengthChange": false,
-        "pageLength": 6,
-        "searching": true
-    });
-});
-</script>
 @endsection
 @push('custom-scripts')
 @endpush

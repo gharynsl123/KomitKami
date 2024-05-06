@@ -1,140 +1,6 @@
 @extends('layouts.app')
 @section('title-header', 'Detail Order')
 @section('content')
-<style>
-.tag {
-    display: inline-block;
-    padding: 0.2rem 0.5rem;
-    margin: 0.2rem;
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #0d6efd;
-    background-color: #d1e7ff;
-    border: 1px solid #0d6efd;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.tag:hover {
-    background-color: #bee1ff;
-}
-
-.tag input[type="radio"] {
-    display: none;
-}
-
-/* progress style */
-.progress-list {
-    display: flex;
-}
-
-.progress-list li {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.progress-list li .icon {
-    font-size: 35px;
-    color: #ff4732;
-    margin: 0 60px;
-}
-
-.progress-list li .text {
-    font-size: 14px;
-    font-weight: 600;
-    color: #ff4732;
-}
-
-.progress-list li .progress {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: rgba(68, 68, 68, 0.781);
-    margin: 14px 0;
-    display: grid;
-    place-items: center;
-    color: #fff;
-    position: relative;
-    cursor: pointer;
-}
-
-.progress::after {
-    content: " ";
-    position: absolute;
-    width: 125px;
-    height: 5px;
-    background-color: rgba(68, 68, 68, 0.781);
-    right: 30px;
-}
-
-.one::after {
-    width: 0;
-    height: 0;
-}
-
-.progress-list li .progress .fas {
-    display: none;
-}
-
-.progress-list li .progress p {
-    font-size: 13px;
-}
-
-.progress-list li.active .progress {
-    background-color: #ff4732;
-    display: grid;
-    place-items: center;
-}
-
-.progress-list li.active .progress::after {
-    background-color: #ff4732;
-}
-
-.progress-list li.active .progress p {
-    display: none;
-}
-
-.progress-list li.active .progress .fas {
-    font-size: 20px;
-    display: flex;
-}
-
-@media (max-width: 980px) {
-    .progress-list {
-        flex-direction: column;
-    }
-
-    .progress-list li {
-        flex-direction: row;
-    }
-
-    .progress-list li .progress {
-        margin: 0 30px;
-    }
-
-    .progress::after {
-        width: 5px;
-        height: 55px;
-        bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: -1;
-    }
-
-    .one::after {
-        height: 0;
-    }
-
-    .progress-list li .icon {
-        margin: 15px 0;
-    }
-}
-</style>
-
 <img src="{{asset('images/logo.png')}}" alt="" style="width:15rem; margin-bottom:1rem;">
 <div class="row">
     <div class="col-md-12 ">
@@ -146,8 +12,8 @@
                             <div class="row">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <h6 class="mb-1">Ordering Information</h6>
-                                        <p class="text-sm">Nomor Invoice : {{$invoice->nomor_invoice}}</p>
+                                        <h6 class="mb-1">Informasi Pemesanan</h6>
+                                        <p class="text-sm">Nomor PO : {{$invoice->nomor_invoice}}</p>
                                     </div>
 
                                     <div class="text-end">
@@ -158,7 +24,7 @@
                                                 </span>
                                             </span>
                                         </div>
-                                        <span class="text-xs text-dark mb-2">Estimate Arrive:
+                                        <span class="text-xs text-dark mb-2">Estimasi Kedatangan:
                                             <span class="text-dark ms-sm-2 font-weight-bold">
                                                 {{ $orderInformation->invoice->estimate_arrive ? \Carbon\Carbon::parse($orderInformation->invoice->estimate_arrive)->format('d-F-Y') : '*Belum Ditentukan' }}
                                             </span>
@@ -167,7 +33,7 @@
                                 </div>
                                 <hr class="horizontal dark mt-0 mb-2">
                                 <div class="col-4">
-                                    <span class="mb-2 text-xs">Company Name:
+                                    <span class="mb-2 text-xs">Nama Perusahaan:
                                         <span class="text-dark font-weight-bold ms-sm-2">
                                             {{$orderInformation->instansi->name}}
                                         </span>
@@ -181,14 +47,14 @@
                                     </span>
                                 </div>
                                 <div class="col-4">
-                                    <span class="mb-2 text-xs">Total Barang Yang Di pesan:
+                                    <span class="mb-2 text-xs">Total Barang yang Dipesan:
                                         <span class="text-dark ms-sm-2 font-weight-bold">
                                             {{$orders->count()}}
                                         </span>
                                     </span>
                                 </div>
                                 <div class="mt-5">
-                                    <h6 class="mb-1">Items Information</h6>
+                                    <h6 class="mb-1">Informasi Barang</h6>
                                 </div>
 
                                 <div class="table-responsive">
@@ -197,22 +63,22 @@
                                             <tr>
                                                 <th
                                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    No</th>
+                                                    Nomor</th>
                                                 <th
                                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                     Kode</th>
                                                 <th
                                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                    Nama Product</th>
+                                                    Nama Produk</th>
                                                 <th
                                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                     status</th>
                                                 <th
                                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                    QTY</th>
+                                                    Jumlah</th>
                                                 <th
                                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                    Harga satuan</th>
+                                                    Harga Satuan</th>
                                                 <th
                                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                     Total Harga</th>
@@ -249,7 +115,7 @@
                                                 <td class="align-middle text-center">
                                                     <div class="d-flex align-items-center">
                                                         <span
-                                                            class="me-2 text-xs">@currency($order->product->price)</span>
+                                                            class="me-2 text-xs">@currency(floatval($order->product->price))</span>
                                                     </div>
                                                 </td>
                                                 <td class="align-middle text-center">
@@ -358,7 +224,7 @@
                                 </div>
                             </div>
                             <div class="input-group row input-group-static my-3">
-                                <label>Date</label>
+                                <label>Tanggal</label>
                                 <div class="col-md-6">
                                     <input id="estimate" name="estimate_arrive" type="date" class="form-control">
                                 </div>
@@ -367,7 +233,7 @@
 
                         <a href="/view-order" class="btn btn-outline-warning text-warning text-gradient px-3 mb-0">
                             <i class="material-icons text-sm me-2">arrow_back</i>
-                            Back
+                            Kembali
                         </a>
                         <a href="#" modal="true" class="btn btn-outline-warning text-warning text-gradient px-3 mb-0"
                             data-bs-toggle="modal" data-bs-target="#modal-for-revisi">
@@ -376,7 +242,7 @@
                         </a>
                         <button type="submit" disabled id="acc-btn"
                             class="btn btn-outline-success text-success text-gradient px-3 mb-0">
-                            <i class="material-icons text-sm me-2">check</i>Done
+                            <i class="material-icons text-sm me-2">check</i>Selesai
                         </button>
                     </form>
                 </div>
@@ -384,7 +250,7 @@
                 @if(Auth::user()->level == 'Customer')
                 <a href="/view-order" class="btn mt-2 btn-outline-warning text-warning text-gradient px-3 mb-0">
                     <i class="material-icons text-sm me-2">arrow_back</i>
-                    Back
+                    Kembali
                 </a>
 
                 @if($invoice->status == 'pending')
@@ -402,6 +268,12 @@
                     class="btn mt-2  btn-outline-success text-success text-gradient px-3 mb-0">
                     <i class="material-icons text-sm me-2">task</i>
                     Liat Laporan
+                </a>
+
+                <a href="{{route('po.print', $order->invoice->slug)}}"
+                    class="btn mt-2  btn-outline-secondary text-dark text-gradient px-3 mb-0">
+                    <i class="material-icons text-sm me-2">task</i>
+                    Cetak PO
                 </a>
 
                 @endif
@@ -506,6 +378,11 @@
                         Liat Laporan
                     </a>
                     @endif
+                    <a href="{{route('po.print', $order->invoice->slug)}}"
+                        class="btn btn-outline-secondary text-dark text-gradient px-3 mb-0">
+                        <i class="material-icons text-sm me-2">task</i>
+                        Cetak PO
+                    </a>
 
                 </div>
 

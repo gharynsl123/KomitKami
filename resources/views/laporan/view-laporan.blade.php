@@ -12,7 +12,7 @@
                             <div class="row">
                                 <div>
                                     <h6 class="mb-1">Ordering Information</h6>
-                                    <p class="text-sm">Nomor Invoice : {{$invoice->nomor_invoice}}</p>
+                                    <p class="text-sm">Nomor PO : {{$invoice->nomor_invoice}}</p>
                                 </div>
                                 <hr class="horizontal dark mt-0 mb-2">
                                 <div class="col-4">

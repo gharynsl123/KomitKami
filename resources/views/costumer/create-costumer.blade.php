@@ -15,7 +15,7 @@
         <div class="col-md-6">
             <div class="input-group input-group-outline mb-3">
                 <label class="form-label">Phone Number</label>
-                <input name="nomor_telepon" type="number" class="form-control">
+                <input name="nomor_telepon" type="text" class="form-control">
             </div>
         </div>
         <div class="col-md-12">

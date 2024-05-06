@@ -50,10 +50,17 @@ Route::get('/local-inventory', 'InventoryController@index');
 Route::get('/buat-bahan-baku', 'InventoryController@create');
 Route::post('/store-bahanbaku', 'InventoryController@store');
 
+// printRoute
+route::get('/view-print-po/{slug}', 'PrintController@preorder')->name('po.print');
+Route::get('/print-rekap-po', 'PrintController@rekaporder')->name('rekap.print');
+Route::get('/print-unpaid-po', 'PrintController@unpaid')->name('unpaid.print');
+
 
 // PO
 Route::get('/catatan-po', 'OrderController@rekapPO')->name('rekap.po');
+Route::get('/detail-rekap-po', 'OrderController@detailRekap')->name('rekap.detail');
 Route::get('/payment-pre-order', 'OrderController@unpaid');
+Route::get('/detail-charts', 'OrderController@detailCharts')->name('detailCharts');
 
 // Produksi Route
 Route::get('/ruang-produksi', 'ProduksiController@index');

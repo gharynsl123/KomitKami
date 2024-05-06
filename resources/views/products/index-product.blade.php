@@ -1,30 +1,30 @@
 @extends('layouts.app')
-@section('title-header', 'Products')
+@section('title-header', 'Produk')
 @section('content')
 <div class="row">
     <div class="col-12">
         <div class="row px-4">
             <div class="col-6 d-flex align-items-center">
-                <h5 class="mb-0">Our Products</h5>
+                <h5 class="mb-0">Produk Kita</h5>
             </div>
             <div class="col-6 text-end">
                 <a class="btn bg-gradient-dark mb-0" href="{{('/create-products')}}"><i
-                        class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New Products</a>
+                        class="material-icons text-sm">add</i>&nbsp;&nbsp;Tambah Produk Baru</a>
             </div>
         </div>
         <div class="card my-4 px-4">
             <div class="card-body px-0 pb-2">
                 <div class="table-responsive p-0">
                     <table class="table table-borderless table-hover border border-0 align-items-center mb-0"
-                        id="productTable">
+                        id="dataTableDefault">
                         <thead>
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                     Kode</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Prodoct</th>
+                                    Produk</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                    dimiliki oleh</th>
+                                    Dimiliki oleh</th>
                                 <th
                                     class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                     Stok</th>

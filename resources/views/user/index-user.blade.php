@@ -1,14 +1,14 @@
 @extends('layouts.app')
-@section('title-header', 'User Configuration')
+@section('title-header', 'Konfigurasi Pengguna')
 @section('content')
 <div class="col-md-12 mb-lg-0 mb-4">
     <div class="row px-4">
         <div class="col-6 d-flex align-items-center">
-            <h5 class="mb-0">User List</h5>
+            <h5 class="mb-0">Daftar Pengguna</h5>
         </div>
         <div class="col-6 text-end">
             <a class="btn bg-gradient-dark mb-0" href="{{url('/create-user')}}"><i
-                    class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New User</a>
+                    class="material-icons text-sm">add</i>&nbsp;&nbsp;Tambah Pengguna Baru</a>
         </div>
     </div>
     <div class="card mt-3">
@@ -19,16 +19,16 @@
                     <thead>
                         <tr>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                People
+                                Nama
                             </th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                Posistion
+                                Posisi
                             </th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 Status
                             </th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Employed
+                                Status Aktif
                             </th>
                             <th class="text-secondary opacity-7"></th>
                         </tr>
@@ -67,7 +67,7 @@
                                 <a href="{{url('/edit-user/'.$items->id)}}"
                                     class="btn btn-sm btn-warning font-weight-bold text-xs" data-toggle="tooltip"
                                     data-original-title="Edit user">
-                                    Edit
+                                    Ubah
                                 </a>
                                 <a href="#" data-toggle="modal" data-target="#detail-user-modal-{{$items->id}}"
                                     class="btn btn-sm btn-info font-weight-bold text-xs">
@@ -88,11 +88,11 @@
                                             {{$items->name}}</h5>
                                     </div>
                                     <div class="modal-body row">
-                                        <div class="col-md-6">username : {{$items->username}}</div>
-                                        <div class="col-md-6">password : {{$items->view_pass}}</div>
-                                        <div class="col-md-6">Level : {{$items->level}}</div>
+                                        <div class="col-md-6">Username : {{$items->username}}</div>
+                                        <div class="col-md-6">Kata Sandi : {{$items->view_pass}}</div>
+                                        <div class="col-md-6">Tingkat : {{$items->level}}</div>
                                         <div class="col-md-6">Email : {{$items->email}}</div>
-                                        <div class="col-md-6">Nomor HP : {{$items->phone_number}}</div>
+                                        <div class="col-md-6">Nomor Telepon : {{$items->phone_number}}</div>
                                     </div>
                                 </div>
                             </div>

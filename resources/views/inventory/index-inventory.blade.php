@@ -8,7 +8,7 @@
             <div class="card-body px-0 pb-2 tab-pane fade show active" id="general" role="tabpanel">
                 <div class="table-responsive p-0">
                     <table class="table table-borderless table-hover border border-0 align-items-center mb-0"
-                        id="productTable">
+                        id="dataTableDefault">
                         <thead>
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -60,13 +60,6 @@
 </div>
 <script>
 $(document).ready(function() {
-    $('#productTable').DataTable({
-        "info": true,
-        "ordering": false,
-        "lengthChange": false,
-        "pageLength": 6,
-        "searching": true
-    });
 
     const tabs = document.querySelectorAll('.nav-link');
 
@@ -75,7 +68,7 @@ $(document).ready(function() {
             const jenis = this.getAttribute('data-jenis');
 
             // Semua baris di-hide
-            const rows = document.querySelectorAll('#productTable tbody tr');
+            const rows = document.querySelectorAll('#dataTableDefault tbody tr');
             rows.forEach(row => {
                 row.style.display = 'none';
             });

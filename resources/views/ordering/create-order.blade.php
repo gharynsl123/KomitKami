@@ -43,7 +43,7 @@
 
         <div class="col-md-6">
             <div class="input-group input-group-outline">
-                <input type="text" class="form-control" id="price" disabled readonly>
+                <input type="text" class="form-control" id="price"  >
             </div>
             <p class="small">Price (auto dari DB product)</p>
         </div>
@@ -285,7 +285,7 @@ function formatCurrency(amount) {
     return new Intl.NumberFormat('us-us', {
         style: 'currency',
         currency: 'IDR',
-        minimumFractionDigits: 0
+        minimumFractionDigits: 2
     }).format(amount);
 }
 </script>

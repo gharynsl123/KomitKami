@@ -17,7 +17,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
                     </div>
-                    <span class="nav-link-text ms-1">Dashboard</span>
+                    <span class="nav-link-text ms-1">Dasbor</span>
                 </a>
             </li>
             
@@ -27,7 +27,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">content_paste</i>
                     </div>
-                    <span class="nav-link-text ms-1">Rekap PO</span>
+                    <span class="nav-link-text ms-1">Rangkuman Pembelian</span>
                 </a>
             </li>
 
@@ -37,7 +37,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">receipt_long</i>
                     </div>
-                    <span class="nav-link-text ms-1">Purchase Order</span>
+                    <span class="nav-link-text ms-1">Pesanan Pembelian</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -46,7 +46,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">attach_money</i>
                     </div>
-                    <span class="nav-link-text ms-1">Outstanding PO Payments</span>
+                    <span class="nav-link-text ms-1">Pembayaran Belum Lunas</span>
                 </a>
             </li>
 
@@ -57,7 +57,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">compare_arrows</i>
                     </div>
-                    <span class="nav-link-text ms-1">Transaction</span>
+                    <span class="nav-link-text ms-1">Transaksi</span>
                 </a>
             </li>
 
@@ -67,7 +67,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">business</i>
                     </div>
-                    <span class="nav-link-text ms-1">Customer</span>
+                    <span class="nav-link-text ms-1">Pelanggan</span>
                 </a>
             </li>
             @endif
@@ -80,7 +80,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">settings</i>
                     </div>
-                    <span class="nav-link-text ms-1">User Configuration</span>
+                    <span class="nav-link-text ms-1">Konfigurasi Pengguna</span>
                 </a>
             </li>
             @endif
@@ -90,7 +90,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">archive</i>
                     </div>
-                    <span class="nav-link-text ms-1">Archive</span>
+                    <span class="nav-link-text ms-1">Arsip</span>
                 </a>
             </li>
             <!-- Internal -->
@@ -113,7 +113,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">shopping_bag</i>
                     </div>
-                    <span class="nav-link-text ms-1">Products</span>
+                    <span class="nav-link-text ms-1">Produk</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -140,7 +140,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">store</i>
                     </div>
-                    <span class="nav-link-text ms-1">Inventory</span>
+                    <span class="nav-link-text ms-1">Inventaris</span>
                 </a>
             </li>
             @endif
@@ -152,7 +152,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">forum</i>
                     </div>
-                    <span class="nav-link-text ms-1">Message</span>
+                    <span class="nav-link-text ms-1">Pesan</span>
                 </a>
             </li>
         </ul>

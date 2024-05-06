@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title-header', 'Purchase Order')
+@section('title-header', 'Pesanan Pembelian')
 @section('content')
 <div class="row">
     <div class="col-md-12 mb-3">
@@ -7,7 +7,7 @@
             <div class="card-header pb-0 px-3">
                 <div class="row">
                     <div class="col-6 d-flex align-items-center">
-                        <h6 class="mb-0">Ordering Information</h6>
+                        <h6 class="mb-0">Informasi Pemesanan</h6>
                     </div>
                     @if(Auth::user()->level == "Customer")
                     <div class="col-6 text-end">
