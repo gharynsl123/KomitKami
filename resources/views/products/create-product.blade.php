@@ -10,7 +10,6 @@
             <div class="input-group input-group-outline mb-3">
                 <label class="form-label">Name</label>
                 <input name="name" type="text" class="form-control">
-
             </div>
             <div class="input-group input-group-outline mb-3">
                 <select name="brand_id" class="form-control" id="exampleFormControlSelect1">
@@ -37,6 +36,10 @@
                 <input name="price" type="number" class="form-control">
             </div>
             <div class="input-group input-group-outline mb-3">
+                <label class="form-label">Deskripsi</label>
+                <input name="description" type="text" class="form-control">
+            </div>
+            <div class="input-group input-group-outline mb-3">
                 <input name="photo" type="file" class="form-control">
             </div>
         </div>
@@ -49,5 +52,3 @@
     </form>
 </div>
 @endsection
-@push('custom-scripts')
-@endpush

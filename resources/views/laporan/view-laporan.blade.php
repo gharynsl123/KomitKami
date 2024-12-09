@@ -18,7 +18,7 @@
                                 <div class="col-4">
                                     <span class="mb-2 text-xs">Company Name:
                                         <span class="text-dark font-weight-bold ms-sm-2">
-                                            {{$orderInformation->instansi->name}}
+                                            {{$orderInformation->user->name}}
                                         </span>
                                     </span>
                                 </div>
@@ -39,7 +39,7 @@
                                 <div class="col-4">
                                     <span class="mb-2 text-xs">Nomor Telepon:
                                         <span class="text-dark ms-sm-2 font-weight-bold">
-                                            {{$orderInformation->instansi->nomor_telepon}}
+                                            {{$orderInformation->user->nomor_telepon}}
                                         </span>
                                     </span>
                                 </div>
@@ -78,7 +78,8 @@
                                                     </form>
                                                 </div>
                                                 @else
-                                                <a href="{{ url('/confirm-revisi/order/'.$item->invoice->slug) }}" class="p-0 m-0 btn">Confirmed</a>
+                                                <a href="{{ url('/confirm-revisi/order/'.$item->invoice->slug) }}"
+                                                    class="p-0 m-0 btn">Confirmed</a>
                                                 @endif
                                             </td>
                                         </tr>
@@ -94,13 +95,13 @@
                     <a href="{{url('/order-details/'.$invoice->slug)}}"
                         class="btn text-danger btn-outline-danger text-gradient px-3 mb-0">
                         <i class="material-icons text-sm me-2">arrow_back</i>
-                        Back
+                        Kembali
                     </a>
                 </div>
             </div>
         </div>
 
-<!-- history table kalau  -->
+        <!-- history table kalau  -->
         <h4 class="mt-5">History</h4>
         <div class="card ">
             <div class="table-responsive">
@@ -108,129 +109,31 @@
                     <thead>
                         <tr>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Project</th>
+                                pesan</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                Budget</th>
+                                jenis laporan</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                 Status</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                Completion</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-
+                        @foreach($history as $items)
                         <tr>
                             <td>
                                 <div class="d-flex px-2">
-                                    <div>
-                                        <img src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/logos/small-logos/logo-slack.svg"
-                                            class="avatar avatar-sm rounded-circle me-2">
-                                    </div>
-                                    <div class="my-auto">
-                                        <h6 class="mb-0 text-xs">Slack</h6>
-                                    </div>
+                                    <h6 class="mb-0">{{$items->isi_laporan}}</h6>
                                 </div>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-normal mb-0">$1,000</p>
+                                <span class="text-dark fw-bolder">{{$items->type}}</span>
                             </td>
                             <td>
                                 <span class="badge badge-dot me-4">
-                                    <i class="bg-danger"></i>
-                                    <span class="text-dark text-xs">canceled</span>
+                                    <span class="text-dark text-xs">{{$items->status}}</span>
                                 </span>
                             </td>
-                            <td class="align-middle text-center">
-                                <div class="d-flex align-items-center">
-                                    <span class="me-2 text-xs">0%</span>
-                                </div>
-                            </td>
-
-                            <td class="align-middle">
-                                <button class="btn btn-link text-secondary mb-0" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    <span class="material-icons">
-                                        more_vert
-                                    </span>
-                                </button>
-                            </td>
                         </tr>
-
-                        <tr>
-                            <td>
-                                <div class="d-flex px-2">
-                                    <div>
-                                        <img src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/logos/small-logos/logo-webdev.svg"
-                                            class="avatar avatar-sm rounded-circle me-2">
-                                    </div>
-                                    <div class="my-auto">
-                                        <h6 class="mb-0 text-xs">Webdev</h6>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="text-xs font-weight-normal mb-0">$14,000</p>
-                            </td>
-                            <td>
-                                <span class="badge badge-dot me-4">
-                                    <i class="bg-info"></i>
-                                    <span class="text-dark text-xs">working</span>
-                                </span>
-                            </td>
-                            <td class="align-middle text-center">
-                                <div class="d-flex align-items-center">
-                                    <span class="me-2 text-xs">80%</span>
-                                </div>
-                            </td>
-
-                            <td class="align-middle">
-                                <button class="btn btn-link text-secondary mb-0" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    <span class="material-icons">
-                                        more_vert
-                                    </span>
-                                </button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="d-flex px-2">
-                                    <div>
-                                        <img src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/logos/small-logos/logo-xd.svg"
-                                            class="avatar avatar-sm rounded-circle me-2">
-                                    </div>
-                                    <div class="my-auto">
-                                        <h6 class="mb-0 text-xs">Adobe XD</h6>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="text-xs font-weight-normal mb-0">$2,300</p>
-                            </td>
-                            <td>
-                                <span class="badge badge-dot me-4">
-                                    <i class="bg-success"></i>
-                                    <span class="text-dark text-xs">done</span>
-                                </span>
-                            </td>
-                            <td class="align-middle text-center">
-                                <div class="d-flex align-items-center">
-                                    <span class="me-2 text-xs">100%</span>
-                                </div>
-                            </td>
-
-                            <td class="align-middle">
-                                <button class="btn btn-link text-secondary mb-0" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    <span class="material-icons">
-                                        more_vert
-                                    </span>
-                                </button>
-                            </td>
-                        </tr>
-
+                        @endforeach
                     </tbody>
                 </table>
             </div>

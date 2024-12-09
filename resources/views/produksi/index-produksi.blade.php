@@ -1,43 +1,74 @@
 @extends('layouts.app')
 @section('content')
-<div class="row">
-    <div class="col-md-12 mb-3">
-        <div class="card">
-            <div class="card-header pb-0 px-3">
-                <div class="row">
-                    <div class="col-6 d-flex align-items-center">
-                        <h6 class="mb-0">List Ordering</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body pt-4 p-3">
-                <ul class="list-group">
-                    @foreach($order as $items)
-                    <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
-                        <div class="d-flex flex-column">
-                            <h6 class="mb-3 text-sm">Nomor PO : {{$items->nomor_invoice}}</h6>
-                            <span class="mb-2 text-xs">Company Name: <span
-                                    class="text-dark font-weight-bold ms-sm-2">{{$items->instansi->name}}</span></span>
-                            <span class="mb-2 text-xs">Nomor Telepon: <span
-                                    class="text-dark ms-sm-2 font-weight-bold">{{$items->instansi->nomor_telepon}}</span></span>
-                            <span class="text-xs mb-2">Catatan Pesanan: <span
-                                    class="text-dark ms-sm-2 font-weight-bold">{{$items->catatan}}</span></span>
-                        </div>
-                        <div class="ms-auto text-end">
-                            <span class="text-xs ms-auto text-end">status: <span
-                                    class="ms-sm-2 badge bg-gradient-secondary font-weight-bold">pending</span></span>
-                            @if(Auth::user()->level != 'Customer')
-                            <a class="btn btn-link text-danger text-gradient px-3 mb-0" href=""><i
-                                    class="material-icons text-sm me-2">delete</i>rejected</a>
-                            <a class="btn btn-link text-success text-gradient px-3 mb-0" href=""><i
-                                    class="material-icons text-sm me-2">check</i>approve</a>
-                            @endif
-                        </div>
-                    </li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
+<style>
+#calendar {
+    max-height: 32rem;
+}
+</style>
+@if(Auth::user()->level == 'production manager')
+<div class="pb-0">
+    <div class="d-flex justify-content-end align-items-center ">
+        <a href="{{url('/buat-tikect-produksi')}}" class="btn m-0 btn-primary">Buat tikect</a>
     </div>
 </div>
+@endif
+<div class="mt-4 card p-3">
+    <div id='calendar'></div>
+</div>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        events: [
+            @foreach($tikets as $tiket)
+            {
+                title: '{{ $tiket->batch_number }}',
+                start: '{{ $tiket->tanggal_produksi }}',
+                description: '{{ $tiket->product->name }}',
+                batch_size: '{{ $tiket->batch_size }}'
+            },
+            @endforeach
+        ],
+        dateClick: function(info) {
+            var selectedDate = info.dateStr; 
+            window.location.href = `/detail-tiket/${selectedDate}`;
+        },
+        eventClick: function(info) {
+            alert('Nomor Batch: ' + info.event.title + '\nnama Porduk: ' + info.event.extendedProps.description + '\nbatch size: ' + info.event.extendedProps.batch_size);
+        }
+    });
+    calendar.render();
+
+    const produksi = @json($tikets);
+    setInterval(() => {
+        produksi.forEach(item => {
+            const DueDate = new Date(item.tanggal_produksi).toISOString().split('T')[0]; // Ubah ke format 'Y-m-d'
+            const currentDay = new Date().toISOString().split('T')[0]; // Tanggal hari ini di format 'Y-m-d'
+
+            if (item.status === 'pending'){
+                if (DueDate <= currentDay || DueDate === currentDay) {
+                    item.status = 'open'; 
+
+                    // Update status di server
+                    fetch(`/update-status-produksi/${item.id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}', // Jika menggunakan Laravel
+                        },
+                        body: JSON.stringify({ status: 'open' }), // Update status di server
+                    })
+                    .then(response => response.json())
+                    .then(data => console.log('Update Successful:', data))
+                    .catch(error => console.error('Error:', error));
+                }
+            } else {
+                console.log(`produksi ${item.batch_number} sudah di buka`)
+            }
+        });
+    }, 1 * 60 * 5) // Panggil setiap 5 menit/
+});
+</script>
 @endsection

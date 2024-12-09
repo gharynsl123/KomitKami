@@ -19,7 +19,7 @@ class CreateInvoiceTable extends Migration
             $table->string('total_harga');
             
             $table->string('estimate_arrive')->nullable();
-            $table->enum('status', ['pending', 'reject', 'settled', 'revisi', 'accept', 'process', 'packaging', 'On The Way', 'done'])->default('pending');
+            $table->enum('status', ['pending', 'reject', 'settled', 'revisi', 'accept', 'process', 'packaging', 'On The Way', 'arrived', 'done'])->default('pending');
             
             $table->string('slug')->uniq();
 

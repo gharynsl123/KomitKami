@@ -8,30 +8,18 @@
         @csrf
         <div class="col-md-6">
             <div class="input-group input-group-outline mb-3">
-                <label class="form-label">Name</label>
-                <input name="name" type="text" class="form-control">
+                <input name="name" type="text" class="form-control" placeholder="Nama">
             </div>
             <div class="input-group input-group-outline mb-3">
-                <label class="form-label">Phone Number</label>
-                <input name="phone_number" type="number" class="form-control">
+                <input name="phone_number" type="number" class="form-control" placeholder="Nomor Telpone">
             </div>
             <div class="input-group input-group-outline mb-3">
-                <label class="form-label">E-mail</label>
-                <input name="email" type="email" class="form-control">
-            </div>
-            <div class="input-group input-group-outline mb-3">
-                <select name="id_instansi" class="form-control" id="exampleFormControlSelect1">
-                    <option value="">-- Pilih Instansi --</option>
-                    @foreach($instansi as $row)
-                    <option value="{{$row->id}}">{{$row->name}}</option>
-                    @endforeach
-                </select>
+                <input name="email" type="email" class="form-control" placeholder="e-mail">
             </div>
         </div>
         <div class="col-md-6">
             <div class="input-group input-group-outline mb-3">
-                <label class="form-label">User Name</label>
-                <input name="username" type="text" class="form-control">
+                <input name="username" type="text" class="form-control" placeholder="UserName">
             </div>
             <div class="input-group input-group-outline mb-3">
                 <select name="level" class="form-control" id="exampleFormControlSelect1">
@@ -41,13 +29,13 @@
                     <option value="Production QC">Production QC</option>
                     <option value="Marketing Communication">Marketing Communication</option>
                     <option value="Production SPV">Production SPV</option>
+                    <option value="inventory manager">Inventory Manager</option>
                     <option value="Employe">Employe</option>
                     <option value="Admin">Admin</option>
                 </select>
             </div>
             <div class="input-group input-group-outline mb-3">
-                <label class="form-label">Password</label>
-                <input name="password" type="password" class="form-control">
+                <input name="password" type="password" class="form-control" placeholder="password">
             </div>
         </div>
         <div class="col-md-12">

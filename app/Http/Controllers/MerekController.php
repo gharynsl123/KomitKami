@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Brand;
-use App\Instansi;
+use App\User;
 
 class MerekController extends Controller
 {
@@ -15,8 +15,8 @@ class MerekController extends Controller
 
     function index() {
         $brand = Brand::all();
-        $instansi = Instansi::all();
-        return view('brands.index-brand', compact('instansi', 'brand'));
+        $user = User::where('level' , 'customer')->get()->all();
+        return view('brands.index-brand', compact('brand', 'user'));
     }
 
     function store(Request $request) {
@@ -27,8 +27,8 @@ class MerekController extends Controller
 
     public function edit($id) {
         $brand = Brand::findOrFail($id);
-        $instansi = Instansi::all(); // Gantilah sesuai model dan field yang sesuai
-        return view('brands.edit-brand', compact('brand', 'instansi'));
+        $user = User::all();
+        return view('brands.edit-brand', compact('brand', 'user'));
     }
 
     function update(Request $request, $id) {

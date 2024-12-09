@@ -15,9 +15,9 @@
         </div>
         <div class="col-md-6">
             <div class="input-group input-group-outline mb-3">
-                <select name="id_instansi" class="form-control" id="exampleFormControlSelect1">
+                <select name="id_user" class="form-control" id="exampleFormControlSelect1">
                     <option value="" >-- Pilih Instansi --</option>
-                    @foreach($instansi as $row)
+                    @foreach($user as $row)
                     <option value="{{$row->id}}">{{$row->name}}</option>
                     @endforeach
                 </select>
@@ -66,7 +66,7 @@
                                 </td>
                                 <td class="align-middle">
                                     <span
-                                        class="text-secondary text-xs font-weight-bold">{{$items->instansi->name}}</span>
+                                        class="text-secondary text-xs font-weight-bold">{{$items->users->name}}</span>
                                 </td>
                                 <td class="align-middle">
                                     <span
@@ -88,5 +88,3 @@
     </div>
 </div>
 @endsection
-@push('custom-scripts')
-@endpush

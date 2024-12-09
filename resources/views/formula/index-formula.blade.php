@@ -15,12 +15,12 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body pt-4 p-3">
+            <div class="card-body p-3">
                 <ul class="list-group">
                     @foreach($formulas as $productId => $groupedFormulas)
                     <h6 class="text-sm"> Product Name:&nbsp;&nbsp;<span class="text-xs p">{{ $productNames[$productId] }}</span></h6>
-                    <a href="{{ route('formula.detail', ['slug' => $formulaSlugs[$productId] ?? '' ]) }}"   class="text-decoration-none nav-link border-radius-lg">
-                        <li class="list-group-item border-0 d-flex p-3 mb-4 bg-gray-300 border-radius-lg">
+                    <a href="{{ route('formula.detail', ['slug' => $formulaSlugs[$productId] ?? '' ]) }}"   class="mb-4 text-decoration-none nav-link border-radius-lg">
+                        <li class="list-group-item border-0 d-flex p-3 bg-gray-300 border-radius-lg">
                             <div class="d-flex  m-0 p-0 flex-column">
                                 <p class="mb-2 text-bold text-dark">Formula</p>
                                 @foreach($groupedFormulas as $formula)
@@ -41,5 +41,3 @@
     </div>
 </div>
 @endsection
-@push('custom-scripts')
-@endpush

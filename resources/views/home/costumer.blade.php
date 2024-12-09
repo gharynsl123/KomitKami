@@ -1,3 +1,4 @@
+@section('title-header', 'Halaman Customer')
 @section('content')
 <div class="row mt-4">
     <div class="col-lg-12 mt-4 mb-4">
@@ -11,18 +12,21 @@
             </div>
             <div class="card-body">
                 <h6 class="mb-0 ">Pembelian Product</h6>
-                <div class="row">
-                    <div class="col-md-3">
-                        <select id="timeRange" class="form-select border-0">
-                            <option value="last_month">Last Year</option>
-                            <option value="3_months_ago">2 year ago</option>
-                        </select>
+                <div class="d-flex justify-content-between">
+                    <div class="w-50">
+                        <div class="row">
+                            <div class="col-md-6 ">
+                                <select id="timeRange" class="form-select border-0">
+                                    @foreach($years as $year)
+                                    <option value="{{ $year }}">{{ $year }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <hr class="dark horizontal">
-                <div class="d-flex">
-                    <i class="material-icons text-sm my-auto me-1">schedule</i>
-                    <p class="mb-0 text-sm"> campaign sent 2 days ago </p>
+                    <a href="{{url('preview-data/charts')}}" class="btn btn-primary">
+                        Preview
+                    </a>
                 </div>
             </div>
         </div>
@@ -33,7 +37,7 @@
                 <div class="col-6 d-flex align-items-center">
                     <div>
                         <h6 class="mb-1">Riwayat Pembelian</h6>
-                        <p class="text-sm">{{ Auth::user()->instansi->name ?? 'anda belum masuk instansi manapun' }}</p>
+                        <p class="text-sm">{{ Auth::user()->name}}</p>
                     </div>
                 </div>
                 <div class="col-6 text-end">
@@ -60,7 +64,7 @@
                     </thead>
                     <!-- Table Body -->
                     <tbody>
-                        @foreach($groupedOrders->whereNotIn('status', ['reject', 'done']) as $items)
+                        @foreach($groupedOrders->whereNotIn('status', ['reject']) as $items)
                         <tr>
                             <!-- Order Information -->
                             <td class="d-none">
@@ -109,12 +113,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const ctx = document.getElementById('chart-bars').getContext('2d');
 
     const labels = {!! json_encode($months) !!};
-    const datasets = {!! json_encode($monthlyPurchases) !!};
+    let datasets = {!! json_encode($monthlyPurchases) !!};
 
     const allProducts = Array.from(new Set(Object.keys(datasets).flatMap(month => Object.keys(datasets[month]))));
-    const numProducts = allProducts.length;
 
-    const chart = new Chart(ctx, {
+    let chart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: labels,
@@ -122,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 label: productName,
                 data: labels.map(month => datasets[month][productName] ? datasets[month][productName] : 0),
                 backgroundColor: getRandomColor(),
-                borderRadius: 100,
+                borderRadius: 5,
                 barPercentage: 0.8,
                 categoryPercentage: 0.9,
             })),
@@ -134,8 +137,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 const pointer = this.getElementsAtEventForMode(event, 'nearest', { intersect: true }, false);
                 if (pointer.length > 0) {
                     const firstPoint = pointer[0];
-                    const datasetIndex = firstPoint.datasetIndex; // Mengambil datasetIndex dari pointer
-                    const index = firstPoint.index; // Mengambil index dari pointer
+                    const datasetIndex = firstPoint.datasetIndex;
+                    const index = firstPoint.index;
                     const dataset = this.data.datasets[datasetIndex];
                     if (dataset) {
                         const month = this.data.labels[index];
@@ -146,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             plugins: {
                 tooltip: {
-                    mode: 'nearest', 
+                    mode: 'nearest',
                     callbacks: {
                         label: function(context) {
                             var label = context.dataset.label || '';
@@ -165,9 +168,8 @@ document.addEventListener('DOMContentLoaded', function() {
             scales: {
                 y: {
                     beginAtZero: true,
-                    max: 4, 
                     ticks: {
-                        stepSize: 2,
+                        stepSize: 500,
                         color: 'white',
                     },
                     grid: {
@@ -197,19 +199,43 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Fungsi untuk menghasilkan warna acak
-    function getRandomColor() {
-        const minBrightness = 150; // Nilai minimal kecerahan untuk setiap komponen warna (0-255)
-        let color = 'rgb(';
-        for (let i = 0; i < 3; i++) {
-            color += Math.floor(Math.random() * (255 - minBrightness) + minBrightness); // Memastikan nilai kecerahan berada di atas nilai minimal
-            color += ',';
-        }
-        color = color.slice(0, -1) + ')'; // Menghapus koma terakhir dan menambahkan tanda kurung tutup
-        return color;
+    document.getElementById('timeRange').addEventListener('change', function() {
+        const selectedYear = this.value;
+        fetch(`/fetch-purchases-by-year?year=${selectedYear}`)
+            .then(response => response.json())
+            .then(data => {
+                datasets = data;
+                updateChart();
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+    function updateChart() {
+        const newAllProducts = Array.from(new Set(Object.keys(datasets).flatMap(month => Object.keys(datasets[month]))));
+
+        chart.data.datasets = newAllProducts.map(productName => ({
+            label: productName,
+            data: labels.map(month => datasets[month][productName] ? datasets[month][productName] : 0),
+            backgroundColor: getRandomColor(),
+            borderRadius: 5,
+            barPercentage: 0.8,
+            categoryPercentage: 0.9,
+        }));
+
+        chart.update();
     }
 
+    // Fungsi untuk menghasilkan warna acak
+    function getRandomColor() {
+        const minBrightness = 150;
+        let color = 'rgb(';
+        for (let i = 0; i < 3; i++) {
+            color += Math.floor(Math.random() * (255 - minBrightness) + minBrightness);
+            color += ',';
+        }
+        color = color.slice(0, -1) + ')';
+        return color;
+    }
 });
 </script>
-
 @endsection

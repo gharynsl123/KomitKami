@@ -15,17 +15,17 @@ class BrandSeeder extends Seeder
     {
         DB::table('brand')->insert([
             'name' => 'Alkessi',
-            'id_instansi' => '1',
+            'id_user' => '1',
             'created_at' => Carbon::now(),
         ]);
         DB::table('brand')->insert([
             'name' => 'Chrona Care            ',
-            'id_instansi' => '2',
+            'id_user' => '2',
             'created_at' => Carbon::now(),
         ]);
         DB::table('brand')->insert([
             'name' => 'Medizsisma',
-            'id_instansi' => '3',
+            'id_user' => '3',
             'created_at' => Carbon::now(),
         ]);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -26,7 +27,22 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected function redirectTo()
+    {
+        // Ambil user yang sedang login
+        $user = Auth::user();
+
+        // Cek apakah level user adalah 'production spv'
+        if ($user->level == 'production spv') {
+            return '/ruang-produksi';
+        }
+        if ($user->level == 'inventory manager') {
+            return '/transaction/in';
+        }
+
+        // Default redirect untuk user lain
+        return '/dashboard';
+    }
 
     public function username()
     {

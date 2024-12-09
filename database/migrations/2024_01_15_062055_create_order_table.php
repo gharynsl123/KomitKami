@@ -17,11 +17,12 @@ class CreateOrderTable extends Migration
             $table->id();
             $table->string('quantity');
             $table->string('total_harga');
+            $table->string('discaount')->nullable();
             $table->string('catatan')->nullable();
-            $table->enum('status', ['pending', 'reject', 'revisi', 'accept', 'process', 'packaging', 'On The Way','an-paid', 'paid', 'done'])->default('pending');
+            $table->enum('status', ['pending', 'reject', 'revisi', 'accept', 'process', 'packaging', 'On The Way', 'arrived', 'an-paid', 'paid', 'done'])->default('pending');
             
-            $table->unsignedBigInteger('id_instansi')->unsigned();
-            $table->foreign('id_instansi')->references('id')->on('instansi')->onDelete('cascade');
+            $table->unsignedBigInteger('id_user')->unsigned();
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
 
             $table->unsignedBigInteger('brand_id')->unsigned();
             $table->foreign('brand_id')->references('id')->on('brand')->onDelete('cascade');

@@ -70,5 +70,3 @@
     </div>
 </div>
 @endsection
-@push('custom-scripts')
-@endpush

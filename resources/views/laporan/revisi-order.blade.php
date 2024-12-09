@@ -35,13 +35,13 @@
                                 <div class="col-4">
                                     <span class="mb-2 text-xs">Company Name:
                                         <span
-                                            class="text-dark font-weight-bold ms-sm-2">{{$orderInformation->instansi->name}}</span>
+                                            class="text-dark font-weight-bold ms-sm-2">{{$orderInformation->user->name}}</span>
                                     </span>
                                 </div>
                                 <div class="col-4">
                                     <span class="mb-2 text-xs">Nomor Telepon:
                                         <span
-                                            class="text-dark ms-sm-2 font-weight-bold">{{$orderInformation->instansi->nomor_telepon}}</span>
+                                            class="text-dark ms-sm-2 font-weight-bold">{{$orderInformation->user->nomor_telepon}}</span>
                                     </span>
                                 </div>
                                 <div class="col-4">
@@ -101,12 +101,12 @@
                                                 <td class="align-middle text-center">
                                                     <div class="d-flex align-items-center">
                                                         <span
-                                                            class="me-2 text-xs">@currency($order->product->price)</span>
+                                                            class="me-2 text-xs">{{$order->product->price}}</span>
                                                     </div>
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <div class="d-flex align-items-center">
-                                                        <span class="me-2 text-xs">@currency($order->total_harga)</span>
+                                                        <span class="me-2 text-xs">{{$order->total_harga}}</span>
                                                     </div>
                                                 </td>
 

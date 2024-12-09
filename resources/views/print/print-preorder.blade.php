@@ -78,11 +78,13 @@
     <table class="table mt-4">
         <tr>
             <td class="width-50">
-                <p class="fw-bold">{{$orderInformation->instansi->name}}</p>
-                <p class="text-small small-width">{{$orderInformation->instansi->alamat}}</p>
+                <p class="fw-bold">{{$orderInformation->user->name}}</p>
+                <p class="text-small small-width">{{$orderInformation->user->alamat}}</p>
             </td>
             <td class="text-end">
-                <p class="fw-bold text-capitalize"> jakarta, 21 maret 2024 </p>
+
+                <p class="fw-bold text-capitalize"> {{$orderInformation->created_at->format('d F Y')}} </p>
+
                 <p class="text-small"> PT. KOMITKAMI INTINUSA GEMILANG</p>
             </td>
         </tr>
@@ -110,8 +112,8 @@
                 <td>{{$order->product->name}}</td>
                 <td>{{$order->status}}</td>
                 <td>{{$order->quantity}}</td>
-                <td>@currency(floatval($order->product->price))</td>
-                <td>@currency($order->total_harga)</td>
+                <td>{{$order->product->price}}</td>
+                <td>{{$order->total_harga}}</td>
                 <td>{{$order->catatan ?? 'tidak Ada'}}</td>
             </tr>
             @endforeach

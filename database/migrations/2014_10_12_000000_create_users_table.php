@@ -17,18 +17,16 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('username')->unique();
-            $table->string('phone_number')->unique();
-            $table->string('address');
-            $table->enum('level', ['Customer', 'Production Manager', 'Production QC', 'Marketing Communication', 'Production SPV', 'Employe', 'Admin'])->default('Employe');
+            $table->string('photo')->nullable();
+            $table->string('phone_number')->unique()->nullable();
+            $table->string('address')->nullable();
+            $table->enum('level', ['customer', 'production manager', 'production qc', 'inventory manager', 'marketing communication', 'production spv', 'employe', 'admin'])->default('Employe');
             $table->string('email')->unique();
             $table->string('last_seen')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('view_pass');
-
-            $table->unsignedBigInteger('id_instansi')->unsigned()->nullable();
-            $table->foreign('id_instansi')->references('id')->on('instansi')->onDelete('cascade');
-
+            
             $table->rememberToken();
             $table->timestamps();
         });

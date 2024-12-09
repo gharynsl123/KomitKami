@@ -22207,10 +22207,9 @@ body.dark-version {
   position: relative;
   overflow: hidden;
   display: flex;
-  background: url("../../assets/img/login.jpeg");
+  background: url("../../images/komitkami.jpeg");
   align-items: center;
   background-size: cover;
-  background-position: 50%;
 }
 
 .page-header .container {

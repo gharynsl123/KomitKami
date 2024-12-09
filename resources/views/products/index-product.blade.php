@@ -22,30 +22,32 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                     Kode</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    stok</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                     Produk</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                     Dimiliki oleh</th>
                                 <th
                                     class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Stok</th>
-                                <th
-                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Terdaftar Pada</th>
+                                    harga</th>
                                 <th class="text-secondary opacity-7"></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($products as $items)
-                            <tr>
+                            <tr data-href="{{ route('products.show', $items->id) }}" class="clickable-row">
                                 <td>
                                     <p class="text-xs font-weight-bold mb-0">{{$items->code}}</p>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">{{$items->stok ? $items->stok : '0'}}</p>
                                 </td>
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         @if($items->photo)
                                         <div>
                                             <img src="{{asset('storage/product_images/'.$items->photo)}}"
-                                                class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                                                class="avatar avatar-sm me-3 border-radius-lg" alt="product">
                                         </div>
                                         @endif
                                         <div class="d-flex flex-column justify-content-center">
@@ -55,18 +57,15 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <p class="text-xs font-weight-bold mb-0">{{$items->brand->instansi->name}}</p>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-success">{{$items->stok ?? '0'}}</span>
+                                    <p class="text-xs font-weight-bold mb-0">{{$items->brand->users->name}}</p>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <span
-                                        class="text-secondary text-xs font-weight-bold">{{$items->created_at->format('d/m/Y')}}</span>
+                                    <span class="text-secondary text-xs font-weight-bold">{{$items->price}}</span>
                                 </td>
                                 <td class="align-middle">
-                                    <a href="{{url('/edit-products', $items->id)}}" class="text-secondary font-weight-bold text-xs"
-                                        data-toggle="tooltip" data-original-title="Edit user">
+                                    <a href="{{url('/edit-products', $items->id)}}"
+                                        class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
+                                        data-original-title="Edit product">
                                         Edit
                                     </a>
                                 </td>
@@ -90,7 +89,13 @@ $(document).ready(function() {
         "searching": true
     });
 });
+document.addEventListener("DOMContentLoaded", function() {
+    var rows = document.querySelectorAll(".clickable-row");
+    rows.forEach(function(row) {
+        row.addEventListener("click", function() {
+            window.location.href = this.dataset.href;
+        });
+    });
+});
 </script>
 @endsection
-@push('custom-scripts')
-@endpush

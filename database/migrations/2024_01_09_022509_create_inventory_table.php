@@ -16,9 +16,9 @@ class CreateInventoryTable extends Migration
         Schema::create('inventory', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('stok');
-            $table->enum('satuan', ['liter', 'kilogram', 'pcs', 'gram'])->nullable();
-            $table->enum('jenis', ['cair', 'kering', 'kemasan']);
+            $table->string('code');
+            $table->string('slug')->unique();
+            $table->string('stok')->nullable();
             $table->timestamps();
         });
     }

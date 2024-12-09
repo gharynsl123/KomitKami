@@ -25,12 +25,12 @@ class OrderController extends Controller
 
     function index() {
         // Mengambil semua order yang tidak dalam status 'reject' atau 'done'
-        $orders = Order::whereNotIn('status', ['reject', 'done']);
+        $orders = Order::whereNotIn('status', ['reject']);
     
         // Jika pengguna adalah Customer, hanya menampilkan order yang terkait dengan instansinya
-        if (Auth::user()->level == 'Customer') {
-            $userInstansiId = Auth::user()->id_instansi;
-            $orders->where('id_instansi', $userInstansiId);
+        if (Auth::user()->level == 'customer') {
+            $userInstansiId = Auth::user()->id;
+            $orders->where('id_user', $userInstansiId);
         }
     
         // Mengelompokkan order berdasarkan invoice
@@ -46,9 +46,9 @@ class OrderController extends Controller
     
 
     function create() {
-        $brand = Brand::where('id_instansi', Auth::user()->id_instansi)->get()->all();
+        $brand = Brand::where('id_user', Auth::user()->id)->get()->all();
         $product = Product::join('brand', 'product.brand_id', '=', 'brand.id')
-        ->where('brand.id_instansi', Auth::user()->id_instansi)
+        ->where('brand.id_user', Auth::user()->id)
         ->select('product.*')
         ->get();
 
@@ -65,24 +65,10 @@ class OrderController extends Controller
         $now = Carbon::now();
         $nowDays = $now->format('dmY');
 
-        $lastOrder = Invoice::latest()->first();
-
-        $counter = 1;
-        
-        if ($lastOrder) {
-            $lastOrderYear = $lastOrder->created_at->year; // Menggunakan metode year() dari objek Carbon
-
-            if ($lastOrderYear != $now->year) {
-                $counter = 1;
-            } else {
-                $lastInvoiceNumber = explode('-', $lastOrder->nomor_invoice)[1];
-                $counter = intval($lastInvoiceNumber) + 1;
-            }
-        }
-
-        $dataInvoice['nomor_invoice'] = $nowDays . '-' . str_pad($counter, 4, '0', STR_PAD_LEFT);
-        $dataInvoice['slug'] = Str::slug($nowDays . '-' . str_pad($counter, 4, '0', STR_PAD_LEFT));
+        $dataInvoice['nomor_invoice'] = $request->nomor_po;
+        $dataInvoice['slug'] = Str::slug($request->nomor_po);
         $dataInvoice['total_harga'] = $request->input('datatotalsemuaharga') ;
+
 
         $invoice = Invoice::create($dataInvoice);
 
@@ -98,7 +84,7 @@ class OrderController extends Controller
         // Looping untuk menyusun data yang akan disimpan
         foreach ($id_instansi as $key => $id_instansi) {
             $data[] = [
-                'id_instansi' => $id_instansi,
+                'id_user' => $id_instansi,
                 'invoice_id' => $invoice->id,
                 'product_id' => $product_id[$key],
                 'brand_id' => $brand_id[$key],
@@ -107,8 +93,7 @@ class OrderController extends Controller
                 'catatan' => $catatan[$key],
                 'created_at' => Carbon::now(),
             ];
-        }
-    
+        }    
         Order::insert($data);
 
         return redirect('/view-order')->with('success', 'berhasil');
@@ -148,10 +133,10 @@ class OrderController extends Controller
         $toMonth = Carbon::parse($request->input('toMonth'))->format('Y-m-d');
 
 
-        if(Auth::user()->level == 'Customer'){
+        if(Auth::user()->level == 'customer'){
             $orders = Order::wheredate('created_at', '>=', $fromMonth)
                     ->wheredate('created_at', '<=', $toMonth)
-                    ->where('id_instansi', Auth::user()->id_instansi)
+                    ->where('id_user', Auth::user()->id)
                     ->get();
         }else{
             $orders = Order::wheredate('created_at', '>=', $fromMonth)
@@ -186,7 +171,7 @@ class OrderController extends Controller
                 // Perbarui jumlah barang terkirim dan dalam proses
                 if ($order->status == 'done') {
                     $uniqueProducts[$productName]['shipped'] += $quantity;
-                } else if($order->status == 'process'){
+                } else if($order->status == 'accept'){
                     $uniqueProducts[$productName]['inProcess'] += $quantity;
                 }
             } else {
@@ -197,7 +182,7 @@ class OrderController extends Controller
                     'price' => $productPrice,
                     'totalPrice' => $totalPrice,
                     'shipped' => $order->status == 'done' ? $quantity : 0, // Inisialisasi jumlah barang terkirim
-                    'inProcess' => $order->status == 'process' ? 0 : $quantity // Inisialisasi jumlah barang dalam proses
+                    'inProcess' => $order->status == 'accept' ? 0 : $quantity // Inisialisasi jumlah barang dalam proses
                 ];
             }
         }
@@ -211,10 +196,10 @@ class OrderController extends Controller
         $fromMonth = Carbon::parse($request->input('fromMonth'));
         $toMonth = Carbon::parse($request->input('toMonth'));
 
-        if(Auth::user()->level == 'Customer'){
+        if(Auth::user()->level == 'customer'){
             $orders = Order::wheredate('created_at', '>=', $fromMonth)
                     ->wheredate('created_at', '<=', $toMonth)
-                    ->where('id_instansi', Auth::user()->id_instansi)
+                    ->where('id_user', Auth::user()->id)
                     ->get();
         }else{
             $orders = Order::wheredate('created_at', '>=', $fromMonth)
@@ -265,29 +250,29 @@ class OrderController extends Controller
 
     public function unpaid(){ 
         $order = Order::query();
-        $instansiId = Auth::user()->id_instansi;
+        $instansiId = Auth::user()->id;
         
         $product = null;
         $orderData = null;
         
-        if (Auth::user()->level == 'Customer') {
+        if (Auth::user()->level == 'customer') {
             $order->whereHas('invoice', function ($query) use ($instansiId) {
-                $query->where('id_instansi', $instansiId);
+                $query->where('id_user', $instansiId);
             });
 
             $product = Product::join('brand', 'product.brand_id', '=', 'brand.id')
-            ->where('brand.id_instansi', auth()->user()->id_instansi)
+            ->where('brand.id_user', auth()->user()->id)
             ->select('product.*')
             ->get();  
             
-            $orderData = Order::where('id_instansi', $instansiId)
+            $orderData = Order::where('id_user', $instansiId)
             ->where(function($query) {
                 $query->where('status', '!=', 'paid')
                       ->orWhere('status', '!=', 'done');
             })
             ->get();
 
-            $byproduct = Order::where('id_instansi', $instansiId)
+            $byproduct = Order::where('id_user', $instansiId)
             ->where(function($query) {
                 $query->where('status', '!=', 'paid')
                       ->orWhere('status', '!=', 'done');
@@ -322,8 +307,8 @@ class OrderController extends Controller
 
         return redirect()->back()->with('success', 'Order has been accepted.');
     }
-    public function accept(Request $request, $id)
-    {
+    
+    public function accept(Request $request, $id){
         $invoice = Invoice::find($id);
         $dataAccept = $request->all();
         $dataAccept['status'] = 'accept';
@@ -339,6 +324,31 @@ class OrderController extends Controller
         return redirect('/view-order')->with('success', 'Order has been accepted.');
     }
 
+    public function updateStatus(Request $request, $id) {
+        $invoice = Invoice::find($id);
+    
+        // Update status invoice dari input
+        $invoice->status = $request->input('status');
+        $invoice->save();
+    
+        // Ambil semua order terkait invoice
+        $orders = Order::where('invoice_id', $invoice->id)->get();
+    
+        // Cek status invoice dan update status order
+        foreach ($orders as $order) {
+            if ($invoice->status == 'arrived') {
+                $order->update(['status' => 'arrived']);
+            } elseif ($invoice->status == 'done') {
+                $order->update(['status' => 'done']);
+            } else {
+                $order->update(['status' => 'process']);
+            }
+        }
+    
+        // Redirect dengan pesan sukses
+        return redirect()->back()->with('status', 'Status updated successfully');
+    }
+    
     public function kirimRevisi(Request $request)
     {
         // Validasi data yang diterima dari formulir

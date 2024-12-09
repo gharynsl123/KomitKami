@@ -9,7 +9,7 @@
                     <div class="col-6 d-flex align-items-center">
                         <h6 class="mb-0">Informasi Pemesanan</h6>
                     </div>
-                    @if(Auth::user()->level == "Customer")
+                    @if(Auth::user()->level == "customer")
                     <div class="col-6 text-end">
                         <a class="btn bg-gradient-dark btn-sm mb-0" href="{{url('/buat-order')}}"><i
                                 class="material-icons text-sm">add</i>&nbsp;&nbsp;order produk</a>
@@ -31,5 +31,3 @@
     </div>
 </div>
 @endsection
-@push('custom-scripts')
-@endpush

@@ -67,11 +67,17 @@
                                     <td><h6 class="mb-1 text-dark text-sm">{{$items->product->name}}</h6>
                                     <span class="text-xs">{{$items->created_at->format('d M Y, H:I A')}}</span></td>
                                     <td>
-                                        <span class="badge bg-info text-xxs">{{$items->status}}</span>
+                                        <span class="badge bg-info text-xxs">
+                                            @if($items->status == 'arrived')
+                                                an-paid
+                                            @else
+                                                {{$items->status}}
+                                            @endif
+                                        </span>
                                     </td>
                                     <td>{{$items->quantity}}</td>
                                     <td>{{$items->invoice->nomor_invoice}}</td>
-                                    <td>@currency($items->total_harga)</td>
+                                    <td>{{$items->total_harga}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -172,11 +178,10 @@ $(document).ready(function {
     });
 })
 </script>
-
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const filterSelect = document.getElementById('filter-products');
-    const productList = {!!json_encode($byproduct) !!}; // Ubah menjadi objek JavaScript
+    const productList = {!! json_encode($byproduct) !!}; // Ubah menjadi objek JavaScript
 
     filterSelect.addEventListener('change', function() {
         const selectedProduct = this.value;
@@ -192,16 +197,10 @@ document.addEventListener("DOMContentLoaded", function() {
         let totalHarga = 0;
 
         list.forEach(item => {
-
             const createdAt = new Date(item.created_at);
             const formattedDate =
                 `${createdAt.getDate()} ${monthNames[createdAt.getMonth()]} ${createdAt.getFullYear()}, ${createdAt.getHours()}:${createdAt.getMinutes()} ${createdAt.getHours() >= 12 ? 'PM' : 'AM'}`;
-            const formattedTotalHarga = new Intl.NumberFormat('id-ID', {
-                style: 'currency',
-                currency: 'IDR',
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0
-            }).format(item.total_harga);
+            const formattedTotalHarga = item.total_harga;
 
             const listItem = `
                 <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
@@ -228,11 +227,11 @@ document.addEventListener("DOMContentLoaded", function() {
                         ${formattedTotalHarga}
                     </div>
                 </li>
-                `;
+            `;
             listGroup.insertAdjacentHTML('beforeend', listItem);
 
             totalQuantity += parseInt(item.quantity);
-            totalHarga += parseInt(item.total_harga);
+            totalHarga += parseFloat(item.total_harga.replace(/[Rp\s]/g, '').replace(/\./g, '').replace(',', '.'));
         });
 
         document.getElementById('total-quantity').textContent = totalQuantity;
@@ -240,22 +239,18 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Array untuk menyimpan nama bulan
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-    ];
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
     function formatCurrency(amount) {
         return new Intl.NumberFormat('id-ID', {
             style: 'currency',
             currency: 'IDR',
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
         }).format(amount);
     }
-
 
     renderList(productList);
 });
 </script>
-
 @endsection

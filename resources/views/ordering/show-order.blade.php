@@ -35,14 +35,14 @@
                                 <div class="col-4">
                                     <span class="mb-2 text-xs">Nama Perusahaan:
                                         <span class="text-dark font-weight-bold ms-sm-2">
-                                            {{$orderInformation->instansi->name}}
+                                        {{$orderInformation->user->name}}
                                         </span>
                                     </span>
                                 </div>
                                 <div class="col-4">
                                     <span class="mb-2 text-xs">Nomor Telepon:
                                         <span class="text-dark ms-sm-2 font-weight-bold">
-                                            {{$orderInformation->instansi->nomor_telepon}}
+                                        {{$orderInformation->user->phone_number}}
                                         </span>
                                     </span>
                                 </div>
@@ -115,12 +115,12 @@
                                                 <td class="align-middle text-center">
                                                     <div class="d-flex align-items-center">
                                                         <span
-                                                            class="me-2 text-xs">@currency(floatval($order->product->price))</span>
+                                                            class="me-2 text-xs">{{$order->product->price}}</span>
                                                     </div>
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <div class="d-flex align-items-center">
-                                                        <span class="me-2 text-xs">@currency($order->total_harga)</span>
+                                                        <span class="me-2 text-xs">{{$order->total_harga}}</span>
                                                     </div>
                                                 </td>
 
@@ -210,7 +210,7 @@
 
 
                 @if($order->status == 'pending' )
-                @if(Auth::user()->level != 'Customer')
+                @if(Auth::user()->level != 'customer')
                 <div class="mt-4">
                     <form action="{{ url('/accept-order/' . $invoice->id) }}" style="display:inline;" method="post">
                         @csrf
@@ -231,7 +231,7 @@
                             </div>
                         </div>
 
-                        <a href="/view-order" class="btn btn-outline-warning text-warning text-gradient px-3 mb-0">
+                        <a href="{{url()->previous()}}" class="btn btn-outline-warning text-warning text-gradient px-3 mb-0">
                             <i class="material-icons text-sm me-2">arrow_back</i>
                             Kembali
                         </a>
@@ -247,8 +247,8 @@
                     </form>
                 </div>
                 @endif
-                @if(Auth::user()->level == 'Customer')
-                <a href="/view-order" class="btn mt-2 btn-outline-warning text-warning text-gradient px-3 mb-0">
+                @if(Auth::user()->level == 'customer')
+                <a href="{{url()->previous()}}" class="btn mt-2 btn-outline-warning text-warning text-gradient px-3 mb-0">
                     <i class="material-icons text-sm me-2">arrow_back</i>
                     Kembali
                 </a>
@@ -267,7 +267,7 @@
                 <a href="{{url('/laporan-pesanan/'. $order->invoice->slug)}}"
                     class="btn mt-2  btn-outline-success text-success text-gradient px-3 mb-0">
                     <i class="material-icons text-sm me-2">task</i>
-                    Liat Laporan
+                    Lihat Laporan
                 </a>
 
                 <a href="{{route('po.print', $order->invoice->slug)}}"
@@ -342,15 +342,22 @@
                                 </div>
                                 <p class="text">Order Arrived</p>
                             </li>
+                            <li id="step6">
+                                <i class="icon fas fa-money-bill-wave"></i>
+                                <div class="progress five">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <p class="text">Order Paid</p>
+                            </li>
                         </ul>
                     </div>
                 </div>
                 <div class="d-flex gap-3">
-                    <a href="/view-order" class="btn text-danger btn-outline-danger text-gradient px-3 mb-0">
+                    <a href="{{url()->previous()}}" class="btn text-danger btn-outline-danger text-gradient px-3 mb-0">
                         <i class="material-icons text-sm me-2">arrow_back</i>
-                        Back
+                        Kembali
                     </a>
-                    @if(Auth::user()->level != 'Customer')
+                    @if(Auth::user()->level != 'customer')
                     <form action="{{ url('/reject-order/' . $order->invoice->id) }}" style="display:inline;"
                         method="post">
                         @csrf
@@ -371,11 +378,11 @@
                         Berikan Laporan
                     </a>
                     @endif
-                    @if(Auth::user()->level == 'Customer')
+                    @if(Auth::user()->level == 'customer')
                     <a href="{{url('/laporan-pesanan/'. $order->invoice->slug)}}"
                         class="btn btn-outline-success text-success text-gradient px-3 mb-0">
                         <i class="material-icons text-sm me-2">task</i>
-                        Liat Laporan
+                        Lihat Laporan
                     </a>
                     @endif
                     <a href="{{route('po.print', $order->invoice->slug)}}"
@@ -392,9 +399,9 @@
                 @if($order->status == 'reject')
                 <h6 class="text-center my-5">Kamu Membatalkan Pesanan ini.
                     jika ingin kamu bisa memesann lagi</h6>
-                <a href="/archive" class="btn text-danger btn-outline-danger text-gradient px-3 mb-0">
+                <a href="{{url()->previous()}}" class="btn text-danger btn-outline-danger text-gradient px-3 mb-0">
                     <i class="material-icons text-sm me-2">arrow_back</i>
-                    Back
+                    Kembali
                 </a>
                 @endif
             </div>
@@ -417,9 +424,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const step3 = document.getElementById("step3");
     const step4 = document.getElementById("step4");
     const step5 = document.getElementById("step5");
+    const step6 = document.getElementById("step6");
     const estimateInput = document.getElementById('estimate');
     const accBtn = document.getElementById('acc-btn');
-    const order = @json($order);
+    const order = @json($invoice);
 
     if (order.status === "accept") {
         step1.classList.add("active");
@@ -427,30 +435,42 @@ document.addEventListener("DOMContentLoaded", function() {
         step3.classList.remove("active");
         step4.classList.remove("active");
         step5.classList.remove("active");
+        step6.classList.remove("active");
     } else if (order.status === "process") {
         step1.classList.add("active");
         step2.classList.add("active");
         step3.classList.remove("active");
         step4.classList.remove("active");
         step5.classList.remove("active");
+        step6.classList.remove("active");
     } else if (order.status === "packaging") {
         step1.classList.add("active");
         step2.classList.add("active");
         step3.classList.add("active");
         step4.classList.remove("active");
         step5.classList.remove("active");
+        step6.classList.remove("active");
     } else if (order.status === "On The Way") {
         step1.classList.add("active");
         step2.classList.add("active");
         step3.classList.add("active");
         step4.classList.add("active");
         step5.classList.remove("active");
+        step6.classList.remove("active");
+    } else if (order.status === "arrived") {
+        step1.classList.add("active");
+        step2.classList.add("active");
+        step3.classList.add("active");
+        step4.classList.add("active");
+        step5.classList.add("active");
+        step6.classList.remove("active");
     } else if (order.status === "done") {
         step1.classList.add("active");
         step2.classList.add("active");
         step3.classList.add("active");
         step4.classList.add("active");
         step5.classList.add("active");
+        step6.classList.add("active");
     };
 
     estimateInput.addEventListener('input', function() {

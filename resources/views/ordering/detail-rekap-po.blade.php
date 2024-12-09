@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<a href="{{ route('rekap.po', ['fromMonth' => request()->input('fromMonth'), 'toMonth' => request()->input('toMonth')]) }}" class="btn btn-outline-secondary text-dark text-gradient">Kemabli</a>
+<a href="{{ route('rekap.po', ['fromMonth' => request()->input('fromMonth'), 'toMonth' => request()->input('toMonth')]) }}" class="btn btn-outline-secondary text-dark text-gradient">Kembali</a>
 
 <div class="card p-3">
     <div class="table-responsive">

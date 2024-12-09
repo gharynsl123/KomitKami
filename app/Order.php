@@ -17,8 +17,8 @@ class Order extends Model
         return $this->belongsTo('App\Product', 'product_id');
     }
     
-    function instansi() {
-        return $this->belongsTo('App\Instansi', 'id_instansi');
+    function user() {
+        return $this->belongsTo('App\User', 'id_user');
     }
 
     function invoice() {

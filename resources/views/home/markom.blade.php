@@ -16,46 +16,8 @@
             </div>
             <div class="card-body pt-4 p-3">
                 <ul class="list-group">
-                    @forelse($groupedOrders as $items)
-                    <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
-                        <div class="d-flex flex-column">
-                            <h6 class="mb-3 text-sm">Nomor PO : {{$items->invoice->nomor_invoice}}</h6>
-                            <span class="mb-2 text-xs">Company Name:
-                                <span class="text-dark font-weight-bold ms-sm-2">
-                                    {{$items->instansi->name}}
-                                </span>
-                            </span>
-                            <span class="mb-2 text-xs">Nomor Telepon:
-                                <span class="text-dark ms-sm-2 font-weight-bold">
-                                    {{$items->instansi->nomor_telepon}}
-                                </span>
-                            </span>
-                            <span class="mb-2 text-xs">Arrive Estimation:
-                                <span class="text-dark ms-sm-2 font-weight-bold">
-                                    {{$items->estimate_arrive ?? '*Belum Di tentukan'}}
-                                </span>
-                            </span>
-                            <span class="text-xs mb-2">Catatan Pesanan:
-                                <span class="text-dark ms-sm-2 font-weight-bold">
-                                    {{$items->catatan ?? '*Tidak Ada Catatan'}}
-                                </span>
-                            </span>
-                        </div>
-                        <div class="ms-auto text-end">
-                            <span class="text-xs ms-auto text-end">status:
-                                <span
-                                    class="ms-sm-2 badge @if($items->status == 'pending') bg-gradient-secondary @else bg-gradient-success @endif font-weight-bold">
-                                    {{$items->status}}
-                                </span>
-                            </span>
-                            @if(Auth::user()->level != 'Customer' && $items->status == 'pending')
-                            <a href="{{ url('/order-details/' . $items->invoice->slug)}}"
-                                class="btn btn-link text-success text-gradient px-3 mb-0">
-                                <i class="material-icons text-sm me-2">check</i>approve
-                            </a>
-                            @endif
-                        </div>
-                    </li>
+                    @forelse($groupedOrders->where('status' , 'pending') as $items)
+                    @include('widget.list-group')
                     @empty
                     <p class="text-center">no orders waiting for requests</p>
                     @endforelse

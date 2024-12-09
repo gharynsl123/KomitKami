@@ -33,7 +33,7 @@
             </div>
             <div class="input-group input-group-static mb-3">
                 <label>Harga produk</label>
-                <input name="price" type="number" class="form-control" value="{{ $product->price }}">
+                <input name="price" type="text" class="form-control" value="{{ $product->price }}">
             </div>
             <label1>Harga produk</label1>
             <div class="input-group input-group-outline mb-3">

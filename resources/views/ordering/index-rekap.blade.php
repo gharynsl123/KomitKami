@@ -38,7 +38,7 @@ select {
                     <div class="mt-3 m-0">
                         <button class="btn btn-primary" id="btn-get" type="submit">Cari</button>
                         <a href="{{ route('rekap.print', ['fromMonth' => request()->input('fromMonth'), 'toMonth' => request()->input('toMonth')]) }}" target="_blank" class="btn btn-outline-secondary text-dark text-gradient">Cetak PDF</a>
-                        <a href="{{ route('rekap.detail', ['fromMonth' => request()->input('fromMonth'), 'toMonth' => request()->input('toMonth')]) }}" class="btn btn-outline-secondary text-dark text-gradient">Detail Data</a>
+                        <a href="{{ route('rekap.detail', ['fromMonth' => request()->input('fromMonth'), 'toMonth' => request()->input('toMonth')]) }}" class="btn btn-outline-secondary text-dark text-gradient">perincian data</a>
                     </div>
                 </div>
             </form>
@@ -66,7 +66,6 @@ select {
                             Total Kuantitas</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Total Harga</th>
-                        <th class="text-secondary opacity-7"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -79,11 +78,6 @@ select {
                         <td>{{ $product['inProcess'] ?? 0 }}/{{ $product['quantity'] }}</td>
                         <td>{{ $product['quantity'] }}X</td>
                         <td>@currency($product['totalPrice'])</td>
-                        <td>
-                            <a href="{{url('/order-details/'. $product['slug'])}}">
-                                view
-                            </a>
-                        </td>
                     </tr>
                     @endforeach
                 </tbody>

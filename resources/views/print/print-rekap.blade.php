@@ -83,7 +83,7 @@
             </td>
             <td class="text-end">
                 <p class="fw-bold text-capitalize"> jakarta, 21 maret 2024 </p>
-                <p class="text-small"> PT. KOMITKAMI INTINUSA GEMILANG</p>
+                <p class="text-small"> {{Auth::user()->name}}</p>
             </td>
         </tr>
     </table>
@@ -115,7 +115,7 @@
             @endforeach
         </tbody>
     </table>
-    <p class="text-extra-small mt-4">detailed data:</p>
+    <p class="text-extra-small mt-4">perincian data:</p>
     <table class="table-border font-family text-small">
         <thead>
             <tr class="text-uppercase fw-bold">

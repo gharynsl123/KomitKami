@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\User;
-use App\Instansi;
 
 class UserController extends Controller
 {
@@ -25,8 +24,7 @@ class UserController extends Controller
     }
     function create() {
         $user = User::all();
-        $instansi = Instansi::all();
-        return view('user.create-user', compact('user', 'instansi'));
+        return view('user.create-user', compact('user'));
     }
 
     function store(Request $req) {
@@ -42,10 +40,10 @@ class UserController extends Controller
         $user = User::find($id);
         return view('user.detail-user', compact('user'));
     }
+    
     function edit($id)  {
         $user = User::find($id);
-        $instansi = Instansi::all();
-        return view('user.edit-user', compact('user', 'instansi'));
+        return view('user.edit-user', compact('user'));
     }
 
     function update(Request $request, $id) {
@@ -70,5 +68,12 @@ class UserController extends Controller
     function editProfile($id) {
         $user = User::find($id);
         return view('user.edit-profile', compact('user'));
+    }
+    
+    function delete($id) {
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect('/user-configuration')->with('susccess', "$user->name berhasil di hapus");
     }
 }

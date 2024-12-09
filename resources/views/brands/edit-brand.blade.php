@@ -9,18 +9,20 @@
         @method('PUT') {{-- Gunakan method PUT untuk update --}}
         <div class="col-md-6">
             <div class="input-group input-group-static mb-3">
-                <label >Name</label>
+                <label>Name</label>
                 <input name="name" type="text" class="form-control" value="{{ $brand->name }}">
             </div>
         </div>
         <div class="col-md-6">
             <div class="input-group input-group-static mb-3">
-                <label >-- Pilih Instansi --</label>
-                <select name="id_instansi" class="form-control" id="exampleFormControlSelect1">
-                    @foreach($instansi as $row)
-                        <option value="{{ $row->id }}" {{ $row->id == $brand->id_instansi ? 'selected' : '' }}>{{ $row->name }}</option>
+                <label>-- Pilih Instansi --</label>
+                <select name="id_user" class="form-control" id="exampleFormControlSelect1">
+                    @foreach($user->where('level', 'customer') as $row)
+                    <option value="{{ $row->id }}" {{ $row->id == $brand->id_user ? 'selected' : '' }}>{{ $row->name }}
+                    </option>
                     @endforeach
                 </select>
+
             </div>
         </div>
 

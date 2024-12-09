@@ -18,17 +18,17 @@ class PrintController extends Controller
         $orderInformation = Order::where('invoice_id', $invoice->id)->first();
 
         $pdf = PDF::loadView('print.print-preorder', ['invoice' => $invoice,'orders' => $orders, 'orderInformation' => $orderInformation]);
-        return $pdf->stream('Pre Order Document');
+        return $pdf->stream('PreOrderDocument.pdf', ['Content-Type' => 'application/pdf']);
     }
 
     function rekaporder(Request $request) {
         $fromMonth = Carbon::parse($request->input('fromMonth'));
         $toMonth = Carbon::parse($request->input('toMonth'));
 
-        if(Auth::user()->level == 'Customer'){
+        if(Auth::user()->level == 'customer'){
             $orders = Order::wheredate('created_at', '>=', $fromMonth)
                     ->wheredate('created_at', '<=', $toMonth)
-                    ->where('id_instansi', Auth::user()->id_instansi)
+                    ->where('id_user', Auth::user()->id)
                     ->get();
         }else{
             $orders = Order::wheredate('created_at', '>=', $fromMonth)
@@ -109,22 +109,21 @@ class PrintController extends Controller
             }
         }
 
-
         $pdf = PDF::loadView('print.print-rekap', ['uniqueProducts' => $uniqueProducts, 'uniqueProductsWithPO' => $uniqueProductsWithPO, 'orders' => $orders,'fromMonth' => $fromMonth, 'toMonth' => $toMonth]);
-        return $pdf->stream('Rekap Order.pdf');
+        return $pdf->stream('Rekap Order.pdf' , ['Content-Type' => 'application/pdf']);
     }
 
     function unpaid() {
         $order = Order::query();
-        $instansiId = Auth::user()->id_instansi;
+        $instansiId = Auth::user()->id;
         $orderData = null;
         
-        if (Auth::user()->level == 'Customer') {
+        if (Auth::user()->level == 'customer') {
             $order->whereHas('invoice', function ($query) use ($instansiId) {
-                $query->where('id_instansi', $instansiId);
+                $query->where('id_user', $instansiId);
             });
             
-            $orderData = Order::where('id_instansi', $instansiId)
+            $orderData = Order::where('id_user', $instansiId)
             ->where(function($query) {
                 $query->where('status', '!=', 'paid')
                       ->orWhere('status', '!=', 'done');
@@ -135,8 +134,7 @@ class PrintController extends Controller
             $orderData = Order::all();
         }
 
-
         $pdf = PDF::loadView('print.print-unpaind', ['orderData' => $orderData]);
-        return $pdf->stream('Unpaid Order Document');
+        return $pdf->stream('Unpaid Order Document' , ['Content-Type' => 'application/pdf']);
     }
 }

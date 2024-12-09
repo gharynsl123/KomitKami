@@ -57,4 +57,18 @@ class ProductController extends Controller
         $product->save();
         return redirect('/products')->with('success', 'Product Berhasil Di Update');
     }
+
+    public function show($id)
+    {
+        $product = Product::with('brand', 'brand.users')->findOrFail($id);
+        return view('products.show-product', compact('product'));
+    }
+
+    public function delete($id) {
+        $product = Product::find($id);
+
+        $product->delete();
+        return redirect('/products')->with('success', 'Product berhasil di hapus');
+    }
+
 }

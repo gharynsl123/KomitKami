@@ -1,7 +1,5 @@
 input::placeholder {
     font-size: 12px;
-    /* Sesuaikan ukuran font sesuai kebutuhan */
-    /* Properti lainnya jika diperlukan */
 }
 
 .vw-50 {
@@ -15,6 +13,70 @@ input::placeholder {
 
 .hide-sidebar {
     display: none;
+}
+
+
+#WAButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25D366; /* WhatsApp green color */
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000;
+}
+#WAButton img {
+    width: 30px;
+    height: 30px;
+}
+
+.navbar {
+    background-color: #e3f2fd;
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.text-justify {
+    text-align: justify;
+}
+
+
+.div-hover {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.div-hover:hover {
+    transform: scale(1.10);
+}
+
+#slideButton {
+    position: fixed;
+    bottom: 20px;
+    right: 6rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transform: translateX(400%);
+    transition: transform 0.5s ease;
+    z-index: 1000;
+}
+
+#slideButton.visible {
+    transform: translateX(0);
 }
 
 @media (max-width: 767px) {

@@ -10,7 +10,7 @@ class Brand extends Model
     protected $guarded = [];
 
 
-    function instansi() {
-        return $this->belongsTo('App\Instansi', 'id_instansi');
+    function users() {
+        return $this->belongsTo('App\User', 'id_user');
     }
 }
