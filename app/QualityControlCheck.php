@@ -12,8 +12,7 @@ class QualityControlCheck extends Model
     public function produksi() {
         return $this->belongsTo('App\Produksi', 'produksi_id');
     }
-
-    public function quality() {
+    public function qualityControl() {
         return $this->belongsTo('App\QualityControl', 'quality_id');
     }
 }

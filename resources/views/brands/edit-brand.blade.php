@@ -17,7 +17,7 @@
             <div class="input-group input-group-static mb-3">
                 <label>-- Pilih Instansi --</label>
                 <select name="id_user" class="form-control" id="exampleFormControlSelect1">
-                    @foreach($user->where('level', 'customer') as $row)
+                    @foreach($user->where('level', 'Customer') as $row)
                     <option value="{{ $row->id }}" {{ $row->id == $brand->id_user ? 'selected' : '' }}>{{ $row->name }}
                     </option>
                     @endforeach

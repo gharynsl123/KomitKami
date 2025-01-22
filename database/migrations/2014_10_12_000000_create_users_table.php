@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('photo')->nullable();
             $table->string('phone_number')->unique()->nullable();
             $table->string('address')->nullable();
-            $table->enum('level', ['customer', 'production manager', 'production qc', 'inventory manager', 'marketing communication', 'production spv', 'employe', 'admin'])->default('Employe');
+            $table->enum('level', ['Customer', 'Production Manager', 'Inventory Manager', 'Seles', 'Supervisor', 'Producer', 'Admin'])->default('Producer');
             $table->string('email')->unique();
             $table->string('last_seen')->nullable();
             $table->timestamp('email_verified_at')->nullable();

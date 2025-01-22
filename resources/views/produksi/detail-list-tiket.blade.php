@@ -20,13 +20,26 @@
             </thead>
             <tbody>
                 @forelse($tikets as $tiket)
-                <tr class="">
+                <tr>
                     <td>{{ $tiket->product->name }}</td>
                     <td>{{ $tiket->batch_number }}</td>
                     <td>{{ $tiket->batch_size }}</td>
                     <td>{{ $tiket->status }}</td>
                     <td>
-                        <a href="{{ url('/detail-produksi', $tiket->batch_number) }}" class="btn m-0 btn-sm btn-outline-primary">View</a>
+                        @if(in_array($tiket->status, ['done']))
+                            <small>Input hasil produk jadi</small>
+                            <form action="{{ route('kirim-barang-jadi', $tiket->id) }}" method="post" class="d-flex flex-column">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="produksi_id" value="{{ $tiket->id }}">
+                                <input type="text" name="nilai_actual" class="form-control border px-2 py-1">
+                                <button type="submit" class="btn btn-primary btn-sm">Kirim</button>
+                            </form>
+                        @elseif(in_array($tiket->status, ['close']))
+                            <a href="{{url('/mulai-produksi', $tiket->batch_number)}}" class="btn btn-primary m-0 px-3 py-2">detail</a>
+                        @else
+                            <a href="{{ url('/detail-produksi', $tiket->batch_number) }}" class="btn m-0 btn-sm btn-outline-primary">View</a>
+                        @endif
                     </td>
                 </tr>
                 @empty

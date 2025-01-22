@@ -26,11 +26,10 @@
                     <option>-- Pilih Level --</option>
                     <option value="Customer">Customer</option>
                     <option value="Production Manager">Production Manager</option>
-                    <option value="Production QC">Production QC</option>
-                    <option value="Marketing Communication">Marketing Communication</option>
-                    <option value="Production SPV">Production SPV</option>
-                    <option value="inventory manager">Inventory Manager</option>
-                    <option value="Employe">Employe</option>
+                    <option value="Inventory Manager">Inventory Manager</option>
+                    <option value="Seles">Seles</option>
+                    <option value="Supervisor">Supervisor</option>
+                    <option value="Producer">producer</option>
                     <option value="Admin">Admin</option>
                 </select>
             </div>

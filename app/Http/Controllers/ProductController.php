@@ -26,11 +26,6 @@ class ProductController extends Controller
 
     function store(Request $request) {
         $dataStore = $request->all();
-        if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('public/product_images');
-            $dataStore['photo'] = basename($photoPath);
-        }
-
         Product::create($dataStore);
         return redirect('/products')->with('success', 'Product Berhasil di tambahkan');
     }
@@ -46,13 +41,6 @@ class ProductController extends Controller
         $product = Product::find($id);
 
         $product->fill($request->all());
-
-        if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('public/product_images');
-            $product->photo = $photoPath;
-        } elseif ($product->photo) {
-            $product->photo = $product->photo;
-        }
 
         $product->save();
         return redirect('/products')->with('success', 'Product Berhasil Di Update');

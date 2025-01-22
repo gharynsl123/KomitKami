@@ -11,7 +11,7 @@
             </small>
         </div>
         <div class="d-flex">
-            @if(Auth::user()->level == 'inventory manager')
+            @if(Auth::user()->level == 'Inventory Manager')
             <a href="{{url('/transaction/out')}}" class="text-info mx-2 text-decoration-underline">Proses</a>
             @endif
             <p class="fw-bolder badge badge-dot bg-info">

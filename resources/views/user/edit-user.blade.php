@@ -31,22 +31,15 @@
 
             <label class="form-label">Level</label>
             <div class="input-group input-group-outline mb-3">
-                <select name="level" class="form-control" id="exampleFormControlSelect1">
+                <select name="level" class="form-control">
                     <option>-- Pilih Level --</option>
-                    <option value="Customer" @if($user->level == 'customer') selected @endif>Customer</option>
-                    <option value="Production Manager" @if($user->level == 'production manager') selected
-                        @endif>Production Manager</option>
-                    <option value="Production QC" @if($user->level == 'production qc') selected @endif>Production QC
-                    </option>
-                    <option value="Marketing Communication" @if($user->level == 'marketing communication') selected
-                        @endif>Marketing Communication</option>
-                    <option value="Production SPV" @if($user->level == 'production spc') selected @endif>Production
-                        SPV</option>
-                    <option value="inventory manager" @if($user->level == 'inventory manager') selected @endif>Inventory
-                        Manager</option>
-
-                    <option value="Employe" @if($user->level == 'employe') selected @endif>Employe</option>
-                    <option value="Admin" @if($user->level == 'admin') selected @endif>Admin</option>
+                    <option value="Customer" @if($user->level == 'Customer') selected @endif>Customer</option>
+                    <option value="Production Manager" @if($user->level == 'Production Manager') selected @endif>Production Manager</option>
+                    <option value="Inventory Manager" @if($user->level == 'Inventory Manager') selected @endif>Inventory Manager</option>
+                    <option value="Seles" @if($user->level == 'Seles') selected @endif>Seles</option>
+                    <option value="Supervisor" @if($user->level == 'Supervisor') selected @endif>Supervisor</option>
+                    <option value="Producer" @if($user->level == 'Producer') selected @endif>Producer</option>
+                    <option value="Admin" @if($user->level == 'Admin') selected @endif>Admin</option>
                 </select>
             </div>
 

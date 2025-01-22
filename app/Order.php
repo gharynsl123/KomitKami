@@ -17,6 +17,11 @@ class Order extends Model
         return $this->belongsTo('App\Product', 'product_id');
     }
     
+    public function readyOrders()
+    {
+        return $this->hasMany(ReadyOrder::class, 'order_id');
+    }
+
     function user() {
         return $this->belongsTo('App\User', 'id_user');
     }

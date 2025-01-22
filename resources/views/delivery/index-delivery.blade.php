@@ -17,7 +17,7 @@
             <div class="col-6 d-flex align-items-center">
                 <h6 class="mb-0">Draft Pengiriman</h6>
             </div>
-            @if(Auth::user()->level != "customer")
+            @if(Auth::user()->level != "Customer")
             <div class="col-6 text-end">
                 <a class="btn bg-gradient-dark btn-sm mb-0" href="{{url('/buat-devilery')}}"><i
                         class="material-icons text-sm">add</i>&nbsp;&nbsp;tambahkan draft</a>
@@ -33,7 +33,7 @@
                     <div class="d-flex gap-4">
                         <p><strong>Nomor PO:</strong> {{ $delivery->first()->invoice->nomor_invoice }}</p>
                         <p><strong>Estimasi Sampai:</strong> {{ $delivery->first()->estimate }}</p>
-                        @if(Auth::user()->level != "customer")
+                        @if(Auth::user()->level != "Customer")
                         <p><strong>Nama User:</strong> {{ $delivery->first()->order->user->name }}</p>
                         @endif
                     </div>

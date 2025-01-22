@@ -1,24 +1,18 @@
 @extends('layouts.app')
-@if(Auth::user()->level == 'customer')
+@if(Auth::user()->level == 'Customer')
 
 @section('title-header', 'Dashboar Member King')
 @include('home.costumer')
 
-@elseif(Auth::user()->level == 'marketing communication')
+@elseif(Auth::user()->level == 'Seles')
 
 @section('title-header', 'Dashboar Merketinng Communication')
 @include('home.markom')
 
-@elseif(in_array(Auth::user()->level, ['production qc', 'production spv']))
-
-@include('produksi.index-produksi')
-
-@elseif(Auth::user()->level == 'inventory manager')
-
+@elseif(Auth::user()->level == 'Inventory Manager')
 @include('transaction.create-transaction')
 
-@elseif(Auth::user()->level == 'employe')
-
+@elseif(Auth::user()->level == 'Producer')
 @include('produksi.list-produksi')
 
 @else
@@ -43,7 +37,7 @@
             </div>
             <div id="orderCard" class="card-body pt-4 p-3">
                 <ul class="list-group">
-                    @if(Auth::user()->level != 'production manager')
+                    @if(Auth::user()->level != 'Production Manager')
                     @forelse($groupedOrders->where('status' , 'pending')->reverse() as $items)                    
                     @include('widget.list-group')
                     @empty

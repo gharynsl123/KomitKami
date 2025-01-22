@@ -118,34 +118,49 @@ Route::get('/detail-charts', 'OrderController@detailCharts')->name('detailCharts
 // Produksi Route
 Route::get('/ruang-produksi', 'ProduksiController@index');
 Route::get('/buat-tikect-produksi', 'ProduksiController@create');
-Route::get('/get-last-production-number', 'ProduksiController@getLastProductionNumber');
-Route::get('/get-po-items/{po_id}', 'ProduksiController@getPoItems');
-Route::post('/store-data-tiket', 'ProduksiController@store');
-Route::get('/detail-tiket/{date}',  'ProduksiController@show')->name('detail.tiket');
+Route::put('/update-event/{id}', 'ProduksiController@updateEvent');
+
+Route::get('/get-last-batch-number', 'ProduksiController@getLastProductionNumber');
 Route::get('/get-products/{invoice_id}', 'ProduksiController@getProducts');
+Route::post('/store-data-tiket', 'ProduksiController@store');
+Route::get('/get-po-items/{po_id}', 'ProduksiController@getPoItems');
+Route::get('/detail-tiket/{date}',  'ProduksiController@show')->name('detail.tiket');
 Route::get('/detail-produksi/{batch_number}', 'ProduksiController@detail');
 Route::put('/update-status-produksi/{id}', 'ProduksiController@updateSatusProduksi');
 Route::put('/confirm-produksi/{id}', 'ProduksiController@confirmProduksi');
 
-// mulai
+Route::get('/get-formulas/{invoiceId}', 'ProduksiController@getFormula');
+
+
+Route::post('/store-tahapan', 'ProsesProduksiController@storeTahapan');
+Route::delete('/delete/tahapan-proses/{id}', 'ProsesProduksiController@deleteTahapanProses')->name('tahapanProses.delete');
+Route::delete('/delete/quality-control/{id}', 'ProsesProduksiController@deleteQualityControl')->name('qualityControl.delete');
+Route::put('/update-proses/{id}', 'ProsesProduksiController@updateNamaProses');
+
 Route::get('/mulai-produksi/{batch_number}', 'RuangProduksiController@proses');
-Route::get('/riwayat-produksi', 'RuangProduksiController@riwayat');
+Route::get('/riwayat-produksi', 'RuangProduksiController@showRiwayatProduksi');
 Route::get('/atur-ruang-produksi', 'RuangProduksiController@index');
-Route::post('/store-periksaan-ruangan', 'RuangProduksiController@storeProduksi');
-// ruangan set
 Route::post('/store-nama-ruangan', 'RuangProduksiController@createRuangan');
-Route::post('/store-bagian', 'RuangProduksiController@storeItems');
 Route::put('/update-nama-ruangan/{id}', 'RuangProduksiController@update');
+Route::put('/update-status-done/{id}', 'ProduksiController@updateStatusDone');
+Route::put('/kirim-barang-jadi/{id}', 'ProduksiController@kirimBarangJadi')->name('kirim-barang-jadi');
 Route::delete('/delete-bagian/{id}', 'RuangProduksiController@deleteItem');
 
-// Formulir Permintaan bahan produksi
-Route::get('/form-permintaan-material-produksi/{batch_number}', 'RequestMaterialProduksi@create');
-Route::post('/permintaan-material/store', 'RequestMaterialProduksi@store')->name('permintaan_material.store');
-Route::get('/permintaan-material', 'RequestMaterialProduksi@index');
-Route::get('/show-all/permintaan' , 'RequestMaterialProduksi@showAll');
+Route::post('/store-bagian', 'ProsesProduksiController@storeItems');
+Route::post('/store-proses-produksi', 'ProsesProduksiController@storeProses');
+Route::post('/store-quality-control', 'ProsesProduksiController@storeQuality');
+Route::post('/store-acuan-produk-jadi', 'ProsesProduksiController@storeProdukJadi');
+Route::post('/store-penimbangan', 'ProsesProduksiController@storePenimbangan');
+Route::post('/store-periksaan-ruangan', 'ProsesProduksiController@storeProduksi');
+Route::post('/rekonsiliasa-bahan-kemas', 'ProsesProduksiController@storeRekonsiliasi');
+Route::post('/store-quality-control-check', 'ProsesProduksiController@storeCheckQuality');
+
+Route::get('/form-permintaan-material-produksi/{batch_number}', 'RequestMaterialController@create');
+Route::post('/permintaan-material/store', 'RequestMaterialController@store')->name('permintaan_material.store');
+Route::get('/permintaan-material', 'RequestMaterialController@index');
+Route::get('/show-all/permintaan' , 'RequestMaterialController@showAll');
 
 Route::get('/get-formulas-by-batch/{batch_number}', 'TransactionController@getFormulasByBatch');
-
 
 // ready develerry
 Route::get('/barang-siap-kirim', 'DeliveryController@index')->name('delivery.index');
@@ -164,7 +179,6 @@ Route::put('/update-product/{id}', 'ProductController@update');
 Route::delete('/delete-product/{id}', 'ProductController@delete')->name('products.delete');
 Route::get('/products/{id}', 'ProductController@show')->name('products.show');
 
-
 // Merek Route
 Route::get('/merek', 'MerekController@index');
 Route::post('/store-merek', 'MerekController@store');
@@ -174,7 +188,7 @@ Route::put('/update-merek/{id}', 'MerekController@update')->name('update-merek')
 // Formula
 Route::get('/formula', 'FormulaController@index');
 Route::get('/buat-formula-baru', 'FormulaController@create');
-Route::get('/detail-formula/{slug}', 'FormulaController@detail')->name('formula.detail');
+Route::get('/detail-formula/{id}', 'FormulaController@detail')->name('formula.detail');
 Route::post('/store-formula', 'FormulaController@store');
 
 // Archive

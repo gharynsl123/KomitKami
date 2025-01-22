@@ -16,7 +16,7 @@ class CreateLaporanTable extends Migration
         Schema::create('laporan', function (Blueprint $table) {
             $table->id();
             $table->text('isi_laporan');
-            $table->enum('status', ['pending', 'confirm', 'rejected'])->default('pending');
+            $table->enum('status', ['sended', 'seen'])->default('sended');
             $table->enum('type', ['ketersedian barang', 'proses', 'lainnya'])->nullable();
             
             $table->unsignedBigInteger('invoice_id')->unsigned();

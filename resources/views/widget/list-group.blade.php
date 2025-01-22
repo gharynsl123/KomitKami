@@ -53,7 +53,7 @@
         <div>
             <span class="text-xs">Status:
                 <br>
-                @if($items->invoice->status != 'pending' && in_array(Auth::user()->level, ['admin', 'marketing communication']))
+                @if($items->invoice->status != 'pending' && in_array(Auth::user()->level, ['admin', 'Seles']))
                 <form action="{{ route('update-status', $items->invoice->id) }}" method="POST">
                     @csrf
                     @method('PATCH')
@@ -65,7 +65,7 @@
                         <option value="done" @if($items->invoice->status == 'done') selected @endif>Paid (Lunas)</option>
                     </select>
                 </form>
-                @elseif (Auth::user()->level == 'customer')
+                @elseif (Auth::user()->level == 'Customer')
                 <span
                     class="badge bg-gradient-success font-weight-bold">
                     {{$items->invoice->status}}
@@ -78,7 +78,7 @@
                 @endif
             </span>
 
-            @if((Auth::user()->level == 'admin' || Auth::user()->level == 'marketing communication') && $items->status == 'pending')
+            @if((Auth::user()->level == 'admin' || Auth::user()->level == 'Seles') && $items->status == 'pending')
             <div>
                 <a href="{{ url('/order-details/' . $items->invoice->slug)}}"
                     class="text-xs btn p-0 text-success  mb-0">

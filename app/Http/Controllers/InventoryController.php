@@ -61,6 +61,7 @@ class InventoryController extends Controller
                 'name' => $item->name,
                 'code' => $item->code,
                 'slug' => $item->slug,
+                'type' => $item->type,
                 'stok_awal' => $stokAwal,
                 'stok_masuk' => $stokMasuk,
                 'stok_keluar' => $stokKeluar,

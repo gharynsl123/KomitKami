@@ -18,6 +18,7 @@ class CreateReadyorderTable extends Migration
             $table->string('estimate')->nullable();
             $table->string('quantity');
             $table->string('No_SJ');
+            $table->string('photo');
 
             $table->unsignedBigInteger('order_id')->unsigned();
             $table->foreign('order_id')->references('id')->on('order')->onDelete('cascade');

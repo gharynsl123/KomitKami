@@ -7,43 +7,34 @@
         @csrf
         @method('PUT')
         <div class="col-md-6">
-            <div class="input-group input-group-static mb-3">
-                <label>Name</label>
-                <input name="name" type="text" class="form-control" value="{{ $product->name }}">
+            <label class="m-0">Name</label>
+            <div class="input-group mb-3">
+                <input name="name" type="text" class="form-control border px-2 py-1" value="{{ $product->name }}">
             </div>
-            <div class="input-group input-group-static mb-3">
-                <label>Brand</label>
-                <select name="brand_id" class="form-control" id="exampleFormControlSelect1">
+            <label class="m-0">Brand</label>
+            <div class="input-group mb-3">
+                <select name="brand_id" class="form-control border px-2 py-1" id="exampleFormControlSelect1">
                     @foreach($brand as $row)
                     <option value="{{ $row->id }}" {{ $row->id == $product->brand_id ? 'selected' : '' }}>
                         {{ $row->name }}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="input-group input-group-static">
-                <label>Stok</label>
-                <input name="stok" type="text" class="form-control" value="{{ $product->stok }}">
+            <label class="m-0">Stok</label>
+            <div class="input-group">
+                <input name="stok" type="text" class="form-control border px-2 py-1" value="{{ $product->stok }}">
             </div>
             <p class="small">*jika belum ada. maka bisa di lewati dan diisi belakangan</p>
         </div>
         <div class="col-md-6">
-            <div class="input-group input-group-static mb-3">
-                <label>Code Product</label>
-                <input name="code" type="text" class="form-control" value="{{ $product->code }}">
+            <label class="m-0">Code Product</label>
+            <div class="input-group mb-3">
+                <input name="code" type="text" class="form-control border px-2 py-1" value="{{ $product->code }}">
             </div>
-            <div class="input-group input-group-static mb-3">
-                <label>Harga produk</label>
-                <input name="price" type="text" class="form-control" value="{{ $product->price }}">
+            <label class="m-0">Harga produk</label>
+            <div class="input-group mb-3">
+                <input name="price" type="text" class="form-control border px-2 py-1" value="{{ $product->price }}">
             </div>
-            <label1>Harga produk</label1>
-            <div class="input-group input-group-outline mb-3">
-                <input name="photo" type="file" class="form-control">
-            </div>
-            @if($product->photo)
-            <div class="mb-3">
-                <img src="{{asset('storage/product_images/'.$product->photo)}}" width="100">
-            </div>
-            @endif
         </div>
 
         <div class="col-md-12 mb-0">

@@ -58,10 +58,10 @@ select {
                             Kode Produk</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Harga Produk</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Dalam Proses</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Barang Terkirim</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Dalam Proses</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Total Kuantitas</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -74,8 +74,8 @@ select {
                         <td>{{ $productName }}</td>
                         <td>{{ $product['code'] }}</td>
                         <td>@currency($product['price'])</td>
-                        <td>{{ $product['shipped'] ?? 0 }}/{{ $product['quantity'] }}</td>
                         <td>{{ $product['inProcess'] ?? 0 }}/{{ $product['quantity'] }}</td>
+                        <td>{{ $product['shipped'] ?? 0 }}/{{ $product['quantity'] }}</td>
                         <td>{{ $product['quantity'] }}X</td>
                         <td>@currency($product['totalPrice'])</td>
                     </tr>

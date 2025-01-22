@@ -36,7 +36,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($tikets->where('status', 'confirm') as $item)
+                @forelse($tikets->where('status', 'confirm') as $item)
                 <tr>
                     <td>{{$item->batch_number}}</td>
                     <td>{{$item->product->name}}</td>
@@ -46,7 +46,11 @@
                         <a href="{{url('/mulai-produksi', $item->batch_number)}}" class="btn btn-primary m-0 px-3 py-2">Lanjutkan</a>
                     </td>
                 </tr>
-                @endforeach
+                @empty
+                <tr>
+                    <td colspan="5" class="text-center">Belum ada Produksi Yang Sedang Berlagsung</td>
+                </tr>
+                @endforelse
             </tbody>
         </table>
     </div>

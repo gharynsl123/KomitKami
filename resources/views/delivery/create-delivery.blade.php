@@ -69,12 +69,15 @@
                 @foreach($processOrders as $order)
                 <div class="d-flex justify-content-between align-items-center mb-2 order-item">
                     <div>
-                        Product: {{ $order->product->name }} | Quantity Ordered: {{ $order->quantity }}
+                        Product: {{ $order->product->name }} | Quantity Ordered: {{ $order->quantity }} | 
+                        Quantity Sent: {{ $order->readyOrders->sum('quantity') }} | 
+                        Remaining: {{ $order->remaining_quantity }}
                     </div>
                     <button type="button" class="btn btn-primary add-to-list" data-toggle="modal"
                         data-target="#addItemModal" data-order-id="{{ $order->id }}"
                         data-invoice-id="{{ $invoice->id }}" data-user-id="{{ $order->user->id }}"
-                        data-product-name="{{ $order->product->name }}" data-quantity-ordered="{{ $order->quantity }}">
+                        data-product-name="{{ $order->product->name }}" data-product-stok="{{ $order->product->stok }}" 
+                        data-quantity-ordered="{{ $order->remaining_quantity }}">
                         Add
                     </button>
                 </div>
@@ -87,7 +90,7 @@
         </div>
     </div>
 
-    <!-- Tambahkan Modal di sini -->
+    <!-- Modal input di sini -->
     <div class="modal fade" id="addItemModal" tabindex="-1" role="dialog" aria-labelledby="addItemModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -100,18 +103,22 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="add-item-form">
-                        <div class="form-group">
+                    <form id="add-item-form" class="row">
+                        <div class="form-group col-md-6">
                             <label for="product-name">Product</label>
-                            <input type="text" class="form-control" id="product-name" readonly>
+                            <input type="text" class="form-control border px-2 py-1" id="product-name" readonly>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-6">
+                            <label for="product-stok">Product Stok</label>
+                            <input type="text" class="form-control border px-2 py-1" id="product-stok" readonly>
+                        </div>
+                        <div class="form-group col-md-6">
                             <label for="quantity-ordered">Quantity Ordered</label>
-                            <input type="number" class="form-control" id="quantity-ordered" readonly>
+                            <input type="number" class="form-control border px-2 py-1" id="quantity-ordered" readonly>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-6">
                             <label for="quantity-ready">Quantity Ready to Deliver</label>
-                            <input type="number" class="form-control" id="quantity-ready" required>
+                            <input type="number" class="form-control border px-2 py-1" id="quantity-ready" required>
                         </div>
                     </form>
                 </div>
@@ -142,26 +149,29 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    let orderID, productName, quantityOrdered, invoiceID, userID;
+    let orderID, productName, productStok, quantityOrdered, invoiceID, userID;
 
     // Ketika tombol "Add" diklik, simpan data order
     document.querySelectorAll('.add-to-list').forEach(button => {
         button.addEventListener('click', function() {
             orderID = this.getAttribute('data-order-id');
             productName = this.getAttribute('data-product-name');
-            quantityOrdered = this.getAttribute('data-quantity-ordered');
+            productStok = this.getAttribute('data-product-stok');
+            quantityOrdered = this.getAttribute('data-quantity-ordered'); // Now it's remaining quantity
             invoiceID = this.getAttribute('data-invoice-id');
             userID = this.getAttribute('data-user-id');
             document.getElementById('product-name').value = productName;
             document.getElementById('quantity-ordered').value = quantityOrdered;
+            document.getElementById('product-stok').value = productStok;
         });
+
     });
 
     // Ketika tombol konfirmasi di modal diklik, tambahkan item ke daftar pengiriman
     document.getElementById('confirm-add-item').addEventListener('click', function() {
         const quantityReady = parseInt(document.getElementById('quantity-ready').value, 10);
 
-        if (quantityReady > 0 && quantityReady <= quantityOrdered) {
+        if (quantityReady > 0 && quantityReady <= quantityOrdered || quantityReady <= productStok) {
             const listItem = `
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     ${productName} | Quantity: ${quantityReady}

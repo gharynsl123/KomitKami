@@ -1,4 +1,3 @@
-@section('title-header', 'Halaman Customer')
 @section('content')
 <div class="row mt-4">
     <div class="col-lg-12 mt-4 mb-4">

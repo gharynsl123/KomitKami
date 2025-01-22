@@ -210,7 +210,7 @@
 
 
                 @if($order->status == 'pending' )
-                @if(Auth::user()->level != 'customer')
+                @if(Auth::user()->level != 'Customer')
                 <div class="mt-4">
                     <form action="{{ url('/accept-order/' . $invoice->id) }}" style="display:inline;" method="post">
                         @csrf
@@ -247,7 +247,7 @@
                     </form>
                 </div>
                 @endif
-                @if(Auth::user()->level == 'customer')
+                @if(Auth::user()->level == 'Customer')
                 <a href="{{url()->previous()}}" class="btn mt-2 btn-outline-warning text-warning text-gradient px-3 mb-0">
                     <i class="material-icons text-sm me-2">arrow_back</i>
                     Kembali
@@ -312,21 +312,21 @@
                                 <div class="progress one">
                                     <i class="fas fa-check"></i>
                                 </div>
-                                <p class="text">Approving & Estimate</p>
+                                <p class="text">Submited</p>
                             </li>
                             <li id="step2">
                                 <i class="icon fas fa-cog"></i>
                                 <div class="progress two">
                                     <i class="fas fa-check"></i>
                                 </div>
-                                <p class="text">Prosess</p>
+                                <p class="text">Approving & Estimate</p>
                             </li>
                             <li id="step3">
-                                <i class="icon fas fa-box"></i>
+                                <i class="icon fas fa-cog"></i>
                                 <div class="progress three">
                                     <i class="fas fa-check"></i>
                                 </div>
-                                <p class="text">Packaging</p>
+                                <p class="text">Prosess</p>
                             </li>
                             <li id="step4">
                                 <i class="icon fas fa-truck"></i>
@@ -340,7 +340,7 @@
                                 <div class="progress five">
                                     <i class="fas fa-check"></i>
                                 </div>
-                                <p class="text">Order Arrived</p>
+                                <p class= "text">Order Arrived</p>
                             </li>
                             <li id="step6">
                                 <i class="icon fas fa-money-bill-wave"></i>
@@ -357,7 +357,7 @@
                         <i class="material-icons text-sm me-2">arrow_back</i>
                         Kembali
                     </a>
-                    @if(Auth::user()->level != 'customer')
+                    @if(Auth::user()->level != 'Customer')
                     <form action="{{ url('/reject-order/' . $order->invoice->id) }}" style="display:inline;"
                         method="post">
                         @csrf
@@ -378,7 +378,7 @@
                         Berikan Laporan
                     </a>
                     @endif
-                    @if(Auth::user()->level == 'customer')
+                    @if(Auth::user()->level == 'Customer')
                     <a href="{{url('/laporan-pesanan/'. $order->invoice->slug)}}"
                         class="btn btn-outline-success text-success text-gradient px-3 mb-0">
                         <i class="material-icons text-sm me-2">task</i>
@@ -421,7 +421,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const step1 = document.getElementById("step1");
     const step2 = document.getElementById("step2");
-    const step3 = document.getElementById("step3");
     const step4 = document.getElementById("step4");
     const step5 = document.getElementById("step5");
     const step6 = document.getElementById("step6");
@@ -429,21 +428,21 @@ document.addEventListener("DOMContentLoaded", function() {
     const accBtn = document.getElementById('acc-btn');
     const order = @json($invoice);
 
-    if (order.status === "accept") {
+    if (order.status === "pending") {
         step1.classList.add("active");
         step2.classList.remove("active");
         step3.classList.remove("active");
         step4.classList.remove("active");
         step5.classList.remove("active");
         step6.classList.remove("active");
-    } else if (order.status === "process") {
+    } else if (order.status === "accept") {
         step1.classList.add("active");
         step2.classList.add("active");
-        step3.classList.remove("active");
+        step3.classList.add("active");
         step4.classList.remove("active");
         step5.classList.remove("active");
         step6.classList.remove("active");
-    } else if (order.status === "packaging") {
+    } else if (order.status === "process") {
         step1.classList.add("active");
         step2.classList.add("active");
         step3.classList.add("active");

@@ -6,16 +6,17 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>PT. Komitkami</title>
-    
+
     <!-- jQuery -->
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 
-    
+
     <!-- Plugin JS -->
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    
+
     <!-- Fonts and Icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
     <link href="../../assets/css/nucleo-icons.css" rel="stylesheet" />
     <link href="../../assets/css/nucleo-svg.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
@@ -40,13 +41,23 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                         <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-                                href="javascript:;">Halaman</a></li>
+                                href="javascript:;">Tingkatan</a></li>
                     </ol>
                     <h6 class="font-weight-bolder mb-0">
                         @if(Auth::user()->level == 'Customer')
-                        {{Auth::user()->name}}
-                        @else
-                        @yield('title-header')
+                        Halaman Customer
+                        @elseif(Auth::user()->level == 'Production Manager')
+                        Halaman Produksi Manager
+                        @elseif(Auth::user()->level == 'Inventory Manager')
+                        Halaman Inventory Manager
+                        @elseif(Auth::user()->level == 'Seles')
+                        Halaman Seles
+                        @elseif(Auth::user()->level == 'Supervisor')
+                        Halaman Supervisor
+                        @elseif(Auth::user()->level == 'Producer')
+                        Halaman Producer
+                        @elseif(Auth::user()->level == 'Admin')
+                        Halaman Admin
                         @endif
                     </h6>
                 </nav>
@@ -127,7 +138,7 @@
 
     <script src="{{ asset('js/select2.min.js') }}"></script>
 
-     <script>
+    <script>
     $(document).ready(function() {
         $('#dataTableDefault').DataTable({
             "language": {
@@ -145,4 +156,5 @@
     </script>
     <script src="/assets/js/material-dashboard.min.js?v=3.1.0"></script>
 </body>
+
 </html>

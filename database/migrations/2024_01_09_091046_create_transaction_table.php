@@ -20,6 +20,7 @@ class CreateTransactionTable extends Migration
             $table->string('no_bach')->nullable();
             $table->string('nomor_pengambilan')->nullable();
             $table->enum('jenis', ['in', 'out'])->nullable();
+            $table->string('keterangan')->nullable();
             $table->string('tanggal_transaksi')->nullable();
             $table->string('tanggal_ed')->nullable();
             $table->string('jumlah_barang');

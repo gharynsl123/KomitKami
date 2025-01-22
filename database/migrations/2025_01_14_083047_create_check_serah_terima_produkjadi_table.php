@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePemeriksaanKebersihanTable extends Migration
+class CreateCheckSerahTerimaProdukjadiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,15 @@ class CreatePemeriksaanKebersihanTable extends Migration
      */
     public function up()
     {
-        Schema::create('pemeriksaan_kebersihan', function (Blueprint $table) {
+        Schema::create('check_serah_terima_produkjadi', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('produksi_id');
-            $table->unsignedBigInteger('bagian_kebersihan_id');
-            $table->enum('hasil', ['Bersih', 'Kurang Bersih', 'Kotor']); 
-            $table->string('dibersihkan_oleh');
-            $table->string('diperiksa_oleh')->nullable();
             $table->foreign('produksi_id')->references('id')->on('produksi')->onDelete('cascade');
-            $table->foreign('bagian_kebersihan_id')->references('id')->on('bagian_kebersihan')->onDelete('cascade');
+            $table->unsignedBigInteger('serah_terima_id')->nullable();
+            $table->foreign('serah_terima_id')->references('id')->on('serah_terima_produkjadi')->onDelete('cascade');
+            $table->integer('nilai_actual');
+            $table->string('operator')->nullable();
             $table->timestamps();
-        
         });
     }
 
@@ -34,6 +32,6 @@ class CreatePemeriksaanKebersihanTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pemeriksaan_kebersihan');
+        Schema::dropIfExists('check_serah_terima_produkjadi');
     }
 }

@@ -15,7 +15,7 @@ class MerekController extends Controller
 
     function index() {
         $brand = Brand::all();
-        $user = User::where('level' , 'customer')->get()->all();
+        $user = User::where('level' , 'Customer')->get()->all();
         return view('brands.index-brand', compact('brand', 'user'));
     }
 

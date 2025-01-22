@@ -16,12 +16,13 @@ class CreatePenimbanganBahanBakuTable extends Migration
         Schema::create('penimbangan_bahan_baku', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('produksi_id');
+            $table->unsignedBigInteger('formula_id');
             $table->string('no_batch');
             $table->decimal('hasil_timbang');
-            $table->decimal('selisih')->nullable();
             $table->string('operator_penimbangan');
             $table->string('spv_produksi');
             $table->foreign('produksi_id')->references('id')->on('produksi')->onDelete('cascade');
+            $table->foreign('formula_id')->references('id')->on('formula')->onDelete('cascade');
             $table->timestamps();
         });
     }

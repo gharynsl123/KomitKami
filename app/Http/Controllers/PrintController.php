@@ -25,7 +25,7 @@ class PrintController extends Controller
         $fromMonth = Carbon::parse($request->input('fromMonth'));
         $toMonth = Carbon::parse($request->input('toMonth'));
 
-        if(Auth::user()->level == 'customer'){
+        if(Auth::user()->level == 'Customer'){
             $orders = Order::wheredate('created_at', '>=', $fromMonth)
                     ->wheredate('created_at', '<=', $toMonth)
                     ->where('id_user', Auth::user()->id)
@@ -118,7 +118,7 @@ class PrintController extends Controller
         $instansiId = Auth::user()->id;
         $orderData = null;
         
-        if (Auth::user()->level == 'customer') {
+        if (Auth::user()->level == 'Customer') {
             $order->whereHas('invoice', function ($query) use ($instansiId) {
                 $query->where('id_user', $instansiId);
             });

@@ -3,38 +3,92 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
+use App\RekonsiliasiBahanKemas;
 use App\PemeriksaanKebersihan;
+use App\PenimbanganBahanBaku;
+use App\QualityControlCheck;
+use App\CheckTahapanProses;
 use App\BagianKebersihan;
+use App\QualityControl;
 use App\RuangProduksi;
+use App\TahapanProses;
+use App\Transaction;
 use App\Produksi;
+use App\Product;
+use App\Formula;
 use App\User;
 
 class RuangProduksiController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index() {
         $rooms = RuangProduksi::with('items')->get();
 
         return view('produksi.atur-ruangan', compact('rooms'));
     }
+
     public function proses($batch_number) {
         // Query untuk mendapatkan data berdasarkan batch_number
 
         $produksiSaatini = Produksi::where('batch_number', $batch_number)->first();
 
-        $rooms = RuangProduksi::with('items')->get();
-        $pemeriksaanKebersihan  = PemeriksaanKebersihan::where('produksi_id', $produksiSaatini->id);
-        $users = User::all();
-    
-        // Kirim data ke view
-        return view('produksi.mulai-produksi', compact('rooms','users', 'pemeriksaanKebersihan', 'produksiSaatini'));
-    }
-    
+        // mengambil nomorbatch tepat sebelum prosukdi saat ini
+        $produksiSebelumIni = Produksi::where('batch_number', $produksiSaatini->batch_number - 1)->first();
 
-    function riwayat() {
-        return view('produksi.riwayat-produksi');
+        $penimbanganBahanBaku = Formula::where('product_id', $produksiSaatini->product->id)
+        ->whereHas('inventory', function ($query) {
+            $query->where('type', 'Bahan Baku');
+        })
+        ->with('inventory')
+        ->get();
+
+        $transaction = Transaction::with(['inventory' => function ($query) use ($produksiSaatini) {
+            $query->where('name', Formula::where('product_id', $produksiSaatini->product->id)->value('inventory_id'));
+        }])->get();
+        
+        $rooms = RuangProduksi::with('items')->get();
+
+        $pemeriksaanKebersihan = PemeriksaanKebersihan::with(['bagianKebersihan.ruangProduksi'])
+        ->where('produksi_id', $produksiSaatini->id)
+        ->get()
+        ->groupBy('bagianKebersihan.ruang_produksi_id');
+    
+        $pemeriksaanPenimbang = PenimbanganBahanBaku::with('formula')
+        ->where('produksi_id', $produksiSaatini->id)
+        ->get();
+
+        $pemeriksaanProsesProduksi = CheckTahapanProses::with('tapahanProses')
+        ->where('produksi_id', $produksiSaatini->id)
+        ->get();
+
+        $pemeriksaanQualityControl = QualityControlCheck::with('qualityControl')
+        ->where('produksi_id', $produksiSaatini->id)
+        ->get();
+
+        $rekonsiliasiBahanKemas = RekonsiliasiBahanKemas::with('formula')
+        ->where('produksi_id', $produksiSaatini->id)->get();
+
+        $rekonsiliasiBarang = Formula::where('product_id', $produksiSaatini->product->id)
+        ->whereHas('inventory', function ($query) {
+            $query->where('type', 'Bahan Kemas');
+        })
+        ->with('inventory')
+        ->get();
+
+
+        $users = User::all();
+
+        $quality = QualityControl::where('product_id', $produksiSaatini->product->id)->get();
+        $tahapan = TahapanProses::where('product_id', $produksiSaatini->product->id)->get();
+
+        // Kirim data ke view
+        return view('produksi.mulai-produksi', compact('rooms','produksiSebelumIni', 'users', 'rekonsiliasiBarang', 'rekonsiliasiBahanKemas', 'penimbanganBahanBaku','pemeriksaanQualityControl','pemeriksaanProsesProduksi','transaction', 'pemeriksaanPenimbang', 'quality', 'tahapan', 'pemeriksaanKebersihan', 'produksiSaatini'));
     }
 
     public function update(Request $request, $id) {
@@ -49,13 +103,19 @@ class RuangProduksiController extends Controller
         return response()->json(['success' => true]);
     
     }
-    
 
-    function storeItems(Request $request) {
-        $data = $request->all();
-        BagianKebersihan::create($data);
-        return redirect()->back()->with('success', 'Ruangan Berhasil Di Tambbhkan');
+    public function showRiwayatProduksi() {
+
+        $tikets = Produksi::all();
+        $pemeriksaanKebersihan = DB::table('pemeriksaan_kebersihan')->get();
+        $penimbanganBahanBaku = DB::table('penimbangan_bahan_baku')->get();
+        $penimbanganBahanBaku = DB::table('penimbangan_bahan_baku')->get();
+        $tahapanProses = DB::table('check_tahapan_proses')->get();
+        $rekonsiliasiBahanKemas = DB::table('rekonsiliasi_bahan_kemas')->get();
+
+        return view('produksi.riwayat-produksi', compact('pemeriksaanKebersihan', 'tikets','penimbanganBahanBaku', 'tahapanProses', 'rekonsiliasiBahanKemas'));
     }
+
 
     function createRuangan(Request $request) {
         $data = $request->all();
@@ -68,51 +128,4 @@ class RuangProduksiController extends Controller
         $item->delete();
         return redirect()->back();
     }
-
-    public function storeProduksi(Request $request) {
-        // Ambil data dari request
-        $bagianKebersihanIds = $request->input('bagian_kebersihan_id', []);
-        $hasil = $request->input('hasil', []);
-        $dibersihkanOleh = $request->input('dibersihkan_oleh', []);
-        $diperiksaOleh = $request->input('diperiksa_oleh', []);
-        $produksiId = $request->input('produksi_id');
-
-        // Validasi manual: Cek apakah jumlah elemen array sesuai
-        if (
-            count($bagianKebersihanIds) !== count($hasil) || 
-            count($hasil) !== count($dibersihkanOleh) || 
-            count($dibersihkanOleh) !== count($diperiksaOleh)
-        ) {
-            return back()->withErrors(['message' => 'Data input tidak konsisten!']);
-        }
-
-        // Persiapkan array untuk batch insert
-        $dataToInsert = [];
-        foreach ($bagianKebersihanIds as $index => $id) {
-            // Validasi manual: Pastikan id bagian_kebersihan dan produksi_id valid
-            if (!is_numeric($id) || !is_numeric($produksiId)) {
-                return back()->withErrors(['message' => 'ID bagian kebersihan atau produksi tidak valid!']);
-            }
-
-            $dataToInsert[] = [
-                'bagian_kebersihan_id' => $id,
-                'hasil' => $hasil[$index] ?? 'Tidak Diketahui', // Default jika hasil tidak ada
-                'dibersihkan_oleh' => $dibersihkanOleh[$index] ?? null,
-                'diperiksa_oleh' => $diperiksaOleh[$index] ?? null,
-                'produksi_id' => $produksiId,
-                'status' => 'diterima',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ];
-        }
-
-        // Insert data ke database menggunakan query builder
-        try {
-            DB::table('pemeriksaan_kebersihan')->insert($dataToInsert);
-            return back()->with('success', 'Data berhasil disimpan!');
-        } catch (\Exception $e) {
-            return back()->withErrors(['message' => 'Terjadi kesalahan saat menyimpan data: ' . $e->getMessage()]);
-        }
-    }
-
 }

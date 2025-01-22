@@ -28,7 +28,7 @@ class OrderController extends Controller
         $orders = Order::whereNotIn('status', ['reject']);
     
         // Jika pengguna adalah Customer, hanya menampilkan order yang terkait dengan instansinya
-        if (Auth::user()->level == 'customer') {
+        if (Auth::user()->level == 'Customer') {
             $userInstansiId = Auth::user()->id;
             $orders->where('id_user', $userInstansiId);
         }
@@ -133,7 +133,7 @@ class OrderController extends Controller
         $toMonth = Carbon::parse($request->input('toMonth'))->format('Y-m-d');
 
 
-        if(Auth::user()->level == 'customer'){
+        if(Auth::user()->level == 'Customer'){
             $orders = Order::wheredate('created_at', '>=', $fromMonth)
                     ->wheredate('created_at', '<=', $toMonth)
                     ->where('id_user', Auth::user()->id)
@@ -196,7 +196,7 @@ class OrderController extends Controller
         $fromMonth = Carbon::parse($request->input('fromMonth'));
         $toMonth = Carbon::parse($request->input('toMonth'));
 
-        if(Auth::user()->level == 'customer'){
+        if(Auth::user()->level == 'Customer'){
             $orders = Order::wheredate('created_at', '>=', $fromMonth)
                     ->wheredate('created_at', '<=', $toMonth)
                     ->where('id_user', Auth::user()->id)
@@ -255,7 +255,7 @@ class OrderController extends Controller
         $product = null;
         $orderData = null;
         
-        if (Auth::user()->level == 'customer') {
+        if (Auth::user()->level == 'Customer') {
             $order->whereHas('invoice', function ($query) use ($instansiId) {
                 $query->where('id_user', $instansiId);
             });

@@ -10,12 +10,6 @@
                 </div>
                 <div class="card-body">
                     <div class="d-flex flex-wrap">
-                        @if($product->photo)
-                        <div class="col-md-12 text-center mb-3">
-                            <img src="{{ asset('storage/product_images/'.$product->photo) }}" class="img-fluid"
-                                alt="product">
-                        </div>
-                        @endif
                         <div class="col-md-6 mb-3">
                             <p><strong>Code:</strong> {{ $product->code }}</p>
                         </div>
@@ -30,10 +24,6 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <p><strong>Price:</strong> {{$product->price}}</p>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <p><strong>Description:</strong>
-                                {{ $product->description ?? 'tidak ada description untuk product ini ' }}</p>
                         </div>
                     </div>
                     <div class="justify-content-center gap-2 d-flex mt-3">

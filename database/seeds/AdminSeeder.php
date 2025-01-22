@@ -14,32 +14,52 @@ class AdminSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => 'PT PRIMA ALKESINDO',
-            'username' => 'alkesi',
+            'username' => 'alkessi',
             'level' => 'Customer',
             'email' => 'prima@gmail.com',
             'address' => 'none',
-            'password' => Hash::make('prima1'),
-            'view_pass' => 'prima1',
+            'password' => Hash::make('prima'),
+            'view_pass' => 'prima',
             'created_at' => Carbon::now(),
         ]);
         DB::table('users')->insert([
             'name' => 'PT BUANA INTIPRIMA USAHA',
-            'username' => 'chrona',
+            'username' => 'chronacare',
             'level' => 'Customer',
             'email' => 'chrona@gmail.com',
             'address' => 'none',
-            'password' => Hash::make('buana1'),
-            'view_pass' => 'buana1',
+            'password' => Hash::make('buana'),
+            'view_pass' => 'buana',
             'created_at' => Carbon::now(),
         ]);
         DB::table('users')->insert([
             'name' => 'PT MEDIZA INSAN BATAVIA',
-            'username' => 'medisisma',
+            'username' => 'medizsisma',
             'level' => 'Customer',
             'email' => 'mediza@gmail.com',
             'address' => 'none',
-            'password' => Hash::make('mediza1'),
-            'view_pass' => 'mediza1',
+            'password' => Hash::make('mediza'),
+            'view_pass' => 'mediza',
+            'created_at' => Carbon::now(),
+        ]);
+        DB::table('users')->insert([
+            'name' => 'PT. FRISANSHA ANUGERAH ALKESINDO',
+            'username' => 'frisansha',
+            'level' => 'Customer',
+            'email' => 'frisansha@gmail.com',
+            'address' => 'none',
+            'password' => Hash::make('dochem'),
+            'view_pass' => 'dochem',
+            'created_at' => Carbon::now(),
+        ]);
+        DB::table('users')->insert([
+            'name' => 'PT Lami Indo Medika',
+            'username' => 'medika',
+            'level' => 'Customer',
+            'email' => 'medika@gmail.com',
+            'address' => 'none',
+            'password' => Hash::make('lamiindo'),
+            'view_pass' => 'lamiindo',
             'created_at' => Carbon::now(),
         ]);
         DB::table('users')->insert([
@@ -55,7 +75,7 @@ class AdminSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'ANANDA GHARYN',
             'username' => 'Admin',
-            'level' => 'admin',
+            'level' => 'Admin',
             'email' => 'persolna1243@gmail.com',
             'address' => 'none',
             'password' => Hash::make('password123'),
@@ -65,7 +85,7 @@ class AdminSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Employer',
             'username' => 'employe',
-            'level' => 'employe',
+            'level' => 'Producer',
             'email' => 'employe@gmail.com',
             'address' => 'none',
             'password' => Hash::make('employe123'),
@@ -73,9 +93,9 @@ class AdminSeeder extends Seeder
             'created_at' => Carbon::now(),
         ]);
         DB::table('users')->insert([
-            'name' => 'Yufus Qullah',
-            'username' => 'yusur',
-            'level' => 'Marketing Communication',
+            'name' => 'Pak Bagus',
+            'username' => 'bagus',
+            'level' => 'Seles',
             'email' => 'yufus.qullah@gharyn.com',
             'address' => 'none',
             'phone_number' => '0812897367453',
@@ -86,7 +106,7 @@ class AdminSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'nila sara',
             'username' => 'sara',
-            'level' => 'production manager',
+            'level' => 'Production Manager',
             'email' => 'okoklatinan@gmail.com',
             'address' => 'none',
             'phone_number' => '081289736934',
@@ -97,7 +117,7 @@ class AdminSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Yuda Nusiro',
             'username' => 'spvuser',
-            'level' => 'production spv',
+            'level' => 'Supervisor',
             'email' => 'spvuser@gmail.com',
             'address' => 'none',
             'phone_number' => '0812736934',
@@ -108,7 +128,7 @@ class AdminSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'adnan khairull',
             'username' => 'inventory',
-            'level' => 'inventory manager',
+            'level' => 'Inventory Manager',
             'email' => 'inventory@gmail.com',
             'address' => 'none',
             'phone_number' => '081232736934',

@@ -20,8 +20,6 @@ class CreateProductTable extends Migration
             $table->string('code');
             $table->enum('tipe', ['jerigen', 'botol'])->nullable();
             $table->string('stok')->nullable();
-            $table->string('photo')->nullable();
-            $table->string('description')->nullable();
 
             $table->unsignedBigInteger('brand_id')->unsigned();
             $table->foreign('brand_id')->references('id')->on('brand')->onDelete('cascade');

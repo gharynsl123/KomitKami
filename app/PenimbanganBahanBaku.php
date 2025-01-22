@@ -12,4 +12,8 @@ class PenimbanganBahanBaku extends Model
     public function produksi() {
         return $this->belongsTo('App\Produksi', 'produksi_id');
     }
+
+    public function formula() {
+        return $this->belongsTo('App\Formula', 'formula_id');
+    }
 }

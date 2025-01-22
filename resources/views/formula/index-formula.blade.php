@@ -1,43 +1,63 @@
 @extends('layouts.app')
 @section('title-header', 'Formula')
 @section('content')
-<div class="row">
-    <div class="col-md-12 mt-4">
-        <div class="card">
-            <div class="card-header pb-0 px-3">
-                <div class="row">
-                    <div class="col-6 d-flex align-items-center">
-                        <h6 class="mb-0">All List</h6>
-                    </div>
-                    <div class="col-6 text-end">
-                        <a class="btn bg-gradient-dark mb-0" href="{{('/buat-formula-baru')}}"><i
-                                class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New Card</a>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body p-3">
-                <ul class="list-group">
-                    @foreach($formulas as $productId => $groupedFormulas)
-                    <h6 class="text-sm"> Product Name:&nbsp;&nbsp;<span class="text-xs p">{{ $productNames[$productId] }}</span></h6>
-                    <a href="{{ route('formula.detail', ['slug' => $formulaSlugs[$productId] ?? '' ]) }}"   class="mb-4 text-decoration-none nav-link border-radius-lg">
-                        <li class="list-group-item border-0 d-flex p-3 bg-gray-300 border-radius-lg">
-                            <div class="d-flex  m-0 p-0 flex-column">
-                                <p class="mb-2 text-bold text-dark">Formula</p>
-                                @foreach($groupedFormulas as $formula)
-                                <span class="mb-2 text-xs">
-                                    {{ $formula->nama_bahan_baku }}:
-                                    <span class="text-dark font-weight-bold ms-sm-2">
-                                        {{ $formula->jumlah }} {{ $formula->satuan }}
-                                    </span>
-                                </span>
-                                @endforeach
-                            </div>
-                        </li>
-                    </a>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
+<style>
+    .table {
+        border: 1px solid black; /* Border untuk table */
+        border-collapse: collapse; /* Agar tidak ada gap di antaranya */
+        margin-bottom:0px;
+        border-radius: 10px
+    }
+    th, td {
+        padding:10px !important; 
+        border: 0.5px solid black !important; /* Border untuk tiap cell */
+    }
+</style>
+<h5 class="mb-2">Panduan Produksi All Item</h5>
+<div class="card p-3 shadow">
+    <div class="table-responsive">
+        <table class="table border-0 table-borderless table-hover" id="dataTableDefault">
+            <thead>
+                <tr>
+                    <th>Nama produk</th>
+                    <th>Formula</th>
+                    <th>Tahapan Proses Produksi</th>
+                    <th>Acuan quality produk</th>
+                    <th>Tindakan</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($product as $items)
+                <tr>
+                    <td>{{$items->name}}</td>
+                    <td>
+                        @if($items->formula->first())
+                        <spand class="badge rounded-pill bg-success">Sudah ada</spand>
+                        @else
+                        <spand class="badge rounded-pill bg-danger">Belum ada</spand>
+                        @endif
+                    </td>
+                    <td>
+                        @if($items->tahapanProses->first())
+                        <spand class="badge rounded-pill bg-success">Sudah ada</spand>
+                        @else
+                        <spand class="badge rounded-pill bg-danger">Belum ada</spand>
+                        @endif
+                    </td>
+                    <td>
+                        @if($items->qualityControl->first())
+                        <spand class="badge rounded-pill bg-success">Sudah ada</spand>
+                        @else
+                        <spand class="badge rounded-pill bg-danger">Belum ada</spand>
+                        @endif
+                    </td>
+                    <td>
+                        <a href="{{url('detail-formula', $items->id)}}" class="btn m-0 btn-primary btn-sm">Edit</a>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 </div>
 @endsection

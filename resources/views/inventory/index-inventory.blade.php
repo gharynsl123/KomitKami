@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('title-header', 'Persedian Bahan Baku / Inventory')
 @section('content')
-
-
 <div class="mt-4 d-flex align-items-center justify-content-between">
     <form id="filter-form" method="GET" action="{{ url('/local-inventory') }}">
         <div class="card py-2 px-3 border">
@@ -38,7 +36,8 @@
             Bahan Baku</a>
     </div>
 </div>
-<div class="card p-3 mt-4" id="form-create" style="display: none;">
+
+<div class="card p-3" id="form-create" style="display: none;">
     <h6 class="mb-4">Create Products</h6>
     <form action="{{url('/store-bahanbaku')}}" class="row" method="post">
         @csrf
@@ -56,6 +55,14 @@
         </div>
         <div class="col-md-4">
             <div class="input-group input-group-outline mb-3">
+                <select name="type" class="form-control border py-2">
+                    <option value="Bahan Baku">Bahan Baku</option>
+                    <option value="Bahan Kemas">Bahan Kemas</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="input-group input-group-outline mb-3">
                 <label for="stock" class="form-label">Stok Awal</label>
                 <input name="stok" id="stock" type="number" class="form-control">
             </div>
@@ -66,7 +73,18 @@
     </form>
 </div>
 
+
 <div class="table-div">
+
+    <div class="d-flex my-4 card p-2 w-40 justify-content-center">
+        <label for="selec-tipe" class="m-0">Filter Persediaan</label>
+        <select id="selec-tipe" class="form-control py-0 px-3 border">
+            <option value="general">General</option>
+            <option value="Bahan Baku">Bahan Baku</option>
+            <option value="Bahan Kemas">Bahan Kemas</option>
+        </select>
+    </div>
+
     <div class="card mt-4 px-4 tab-content" id="nav-tabContent">
         <div class="card-body px-0 pb-2 tab-pane fade show active" id="general" role="tabpanel">
             <div class="table-responsive p-0">
@@ -75,43 +93,44 @@
                     <thead>
                         <tr>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Tipe Bahan</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 Nama</th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 Kode Barang</th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 stok awal</th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 barang masuk</th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 barang keluar</th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 stok akhir</th>
                             <th class="text-secondary opacity-7"></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($inventoryData as $item)
-                        <tr>
-                            <td>
-                                <div class="d-flex px-2 py-1">
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm">{{ $item['name'] }}</h6>
-                                    </div>
-                                </div>
+                        <tr data-type="{{ $item['type'] }}" >
+                            <td class="align-middle">
+                                <h6 class="mb-0 text-sm">{{ $item['type'] }}</h6>
                             </td>
-                            <td class="align-middle text-center text-sm">
+                            <td class="align-middle">
+                                <h6 class="mb-0 text-sm">{{ $item['name'] }}</h6>
+                            </td>
+                            <td class="align-middle">
                                 <h6 class="mb-0 text-sm">{{ $item['code'] }}</h6>
                             </td>
-                            <td class="align-middle text-center">
+                            <td class="align-middle">
                                 <span class="text-secondary text-xs font-weight-bold">{{ $item['stok_awal'] }}</span>
                             </td>
-                            <td class="align-middle text-center">
+                            <td class="align-middle">
                                 <span class="text-secondary text-xs font-weight-bold">{{ $item['stok_masuk'] }}</span>
                             </td>
-                            <td class="align-middle text-center">
+                            <td class="align-middle">
                                 <span class="text-secondary text-xs font-weight-bold">{{ $item['stok_keluar'] }}</span>
                             </td>
-                            <td class="align-middle text-center">
+                            <td class="align-middle">
                                 <span class="text-secondary text-xs font-weight-bold">{{ $item['stok_akhir'] }}</span>
                             </td>
                             <td class="align-middle">
@@ -137,6 +156,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const filterForm = document.getElementById('filter-form');
     const divTable = document.querySelector('.table-div');
 
+    const filterDropdown = document.getElementById('selec-tipe');
+    const tableRows = document.querySelectorAll('#dataTableDefault tbody tr');
+    const table = document.getElementById('dataTableDefault');
+
     btnCreate.addEventListener('click', function() {
         if (formCreateItem.style.display === 'none') {
             btnCreate.textContent = "Tutup Form";
@@ -149,6 +172,26 @@ document.addEventListener('DOMContentLoaded', function() {
             divTable.style.display = 'block';
             filterForm.style.display = 'block';
         }
+    });
+
+
+    filterDropdown.addEventListener('change', function() {
+        const selectedType = this.value;
+
+        // Menyembunyikan dan menampilkan baris berdasarkan tipe yang dipilih
+        tableRows.forEach(row => {
+            const rowType = row.getAttribute('data-type');
+
+            if (rowType === selectedType) {
+                row.style.display = '';
+                $(table).DataTable().destroy();
+            } else if(selectedType === 'general') {
+                $(table).DataTable();
+            }
+            else {
+                row.style.display = 'none';
+            }
+        });
     });
 });
 </script>

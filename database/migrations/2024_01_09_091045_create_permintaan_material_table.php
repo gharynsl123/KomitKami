@@ -24,6 +24,9 @@ class CreatePermintaanMaterialTable extends Migration
             $table->unsignedBigInteger('formula_id')->unsigned();
             $table->foreign('formula_id')->references('id')->on('formula')->onDelete('cascade');
 
+            $table->unsignedBigInteger('formula_pcs_id')->unsigned();
+            $table->foreign('formula_pcs_id')->references('id')->on('formula_pcs')->onDelete('cascade');
+
             $table->unsignedBigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 

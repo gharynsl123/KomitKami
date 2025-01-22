@@ -27,20 +27,20 @@
         </div>
         <div class="col-md-6">
 
-        <div class="input-group input-group-outline mb-3">
+            <div class="input-group input-group-outline mb-3">
                 <label class="form-label">Code Product</label>
                 <input name="code" type="text" class="form-control">
             </div>
+            <div class="mb-3">
+                <select name="tipe" class="form-control border px-2" id="exampleFormControlSelect1">
+                    <option>-- Pilih Tipe --</option>
+                    <option value="jerigen">Jerigen</option>
+                    <option value="botol">Botol</option>
+                </select>
+            </div>
             <div class="input-group input-group-outline mb-3">
                 <label class="form-label">Harga produk</label>
-                <input name="price" type="number" class="form-control">
-            </div>
-            <div class="input-group input-group-outline mb-3">
-                <label class="form-label">Deskripsi</label>
-                <input name="description" type="text" class="form-control">
-            </div>
-            <div class="input-group input-group-outline mb-3">
-                <input name="photo" type="file" class="form-control">
+                <input name="price" type="text" class="form-control">
             </div>
         </div>
         <div class="col-md-12 mb-0">

@@ -29,7 +29,7 @@ class TransactionController extends Controller
     }
 
     public function out() {
-        $user = User::where('level', '!=', 'customer')->get();
+        $user = User::where('level', '!=', 'Customer')->get();
         $transaction = Transaction::where('jenis', 'out')->get();
     
         $batchNumber = Transaction::whereNull('nomor_pengambilan')

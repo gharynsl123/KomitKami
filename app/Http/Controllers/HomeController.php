@@ -41,7 +41,7 @@ class HomeController extends Controller
         $order = Order::query();
 
     
-        if (Auth::user()->level == 'customer') {
+        if (Auth::user()->level == 'Customer') {
             $order->whereHas('invoice', function ($query) use ($instansiId) {
                 $query->where('id_user', $instansiId);
             });

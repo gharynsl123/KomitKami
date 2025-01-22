@@ -43,11 +43,11 @@
                         @endif>Production Manager</option>
                     <option value="Production QC" @if($user->level == 'Production QC') selected @endif>Production QC
                     </option>
-                    <option value="Marketing Communication" @if($user->level == 'Marketing Communication') selected
+                    <option value="Seles" @if($user->level == 'Seles') selected
                         @endif>Marketing Communication</option>
                     <option value="Production SPV" @if($user->level == 'Production SPV') selected @endif>Production
                         SPV</option>
-                    <option value="Employe" @if($user->level == 'Employe') selected @endif>Employe</option>
+                    <option value="Producer" @if($user->level == 'Producer') selected @endif>Producer</option>
                     <option value="Admin" @if($user->level == 'Admin') selected @endif>Admin</option>
                 </select>
             </div>

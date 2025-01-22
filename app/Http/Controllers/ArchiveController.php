@@ -19,7 +19,7 @@ class ArchiveController extends Controller
         $userInstansiId = Auth::user()->id_instansi;
 
         $order = Order::whereIn('status', ['reject', 'done'])
-        ->when(Auth::user()->level == 'customer', function ($query) use ($userInstansiId) {
+        ->when(Auth::user()->level == 'Customer', function ($query) use ($userInstansiId) {
             return $query->where('id_instansi', $userInstansiId);
         })
         ->get();

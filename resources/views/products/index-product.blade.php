@@ -44,12 +44,6 @@
                                 </td>
                                 <td>
                                     <div class="d-flex px-2 py-1">
-                                        @if($items->photo)
-                                        <div>
-                                            <img src="{{asset('storage/product_images/'.$items->photo)}}"
-                                                class="avatar avatar-sm me-3 border-radius-lg" alt="product">
-                                        </div>
-                                        @endif
                                         <div class="d-flex flex-column justify-content-center">
                                             <h6 class="mb-0 text-sm">{{$items->name}}</h6>
                                             <p class="text-xs text-secondary mb-0">{{$items->brand->name}}</p>

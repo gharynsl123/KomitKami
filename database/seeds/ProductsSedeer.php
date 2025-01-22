@@ -19,7 +19,6 @@ class ProductsSedeer extends Seeder
             'code' => 'ALK-SCR-100-016',
             'stok' => '',
             'tipe' => 'botol',
-            'photo' => '',
             'brand_id' => '1',
             'created_at' => Carbon::now(),
         ]);
@@ -29,7 +28,6 @@ class ProductsSedeer extends Seeder
             'code' => 'ALK-SCR-500-011',
             'stok' => '',
             'tipe' => 'botol',
-            'photo' => '',
             'brand_id' => '1',
             'created_at' => Carbon::now(),
         ]);
@@ -39,7 +37,6 @@ class ProductsSedeer extends Seeder
             'code' => 'ALK-SCR-5000-304',
             'stok' => '',
             'tipe' => 'jerigen',
-            'photo' => '',
             'brand_id' => '1',
             'created_at' => Carbon::now(),
         ]);
@@ -51,7 +48,6 @@ class ProductsSedeer extends Seeder
             'code' => 'ALK-CLE-100-001',
             'stok' => '',
             'tipe' => 'botol',
-            'photo' => '',
             'brand_id' => '1',
             'created_at' => Carbon::now(),
         ]);
@@ -61,7 +57,6 @@ class ProductsSedeer extends Seeder
             'code' => 'ALK-CLE-5000-306',
             'stok' => '',
             'tipe' => 'jerigen',
-            'photo' => '',
             'brand_id' => '1',
             'created_at' => Carbon::now(),
         ]);
@@ -73,7 +68,6 @@ class ProductsSedeer extends Seeder
             'code' => 'ALK-DSCL-5000-307',
             'stok' => '',
             'tipe' => 'jerigen',
-            'photo' => '',
             'brand_id' => '1',
             'created_at' => Carbon::now(),
         ]);
@@ -85,7 +79,6 @@ class ProductsSedeer extends Seeder
             'code' => 'ALK-GLU-5000-309',
             'stok' => '',
             'tipe' => 'jerigen',
-            'photo' => '',
             'brand_id' => '1',
             'created_at' => Carbon::now(),
         ]);
@@ -97,7 +90,6 @@ class ProductsSedeer extends Seeder
             'code' => 'ALK-SUR-750-308',
             'stok' => '',
             'tipe' => 'botol',
-            'photo' => '',
             'brand_id' => '1',
             'created_at' => Carbon::now(),
         ]);
@@ -109,7 +101,6 @@ class ProductsSedeer extends Seeder
             'code' => 'ALK-DSUR-100-311',
             'stok' => '',
             'tipe' => 'botol',
-            'photo' => '',
             'brand_id' => '1',
             'created_at' => Carbon::now(),
         ]);
@@ -119,7 +110,6 @@ class ProductsSedeer extends Seeder
             'code' => 'ALK-DSUR-5000-310',
             'stok' => '',
             'tipe' => 'jerigen',
-            'photo' => '',
             'brand_id' => '1',
             'created_at' => Carbon::now(),
         ]);
@@ -131,7 +121,6 @@ class ProductsSedeer extends Seeder
             'code' => 'ALK-RUB-500-303',
             'stok' => '',
             'tipe' => 'botol',
-            'photo' => '',
             'brand_id' => '1',
             'created_at' => Carbon::now(),
         ]);
@@ -141,7 +130,6 @@ class ProductsSedeer extends Seeder
             'code' => 'ALK-RUB-5000-302',
             'stok' => '',
             'tipe' => 'jerigen',
-            'photo' => '',
             'brand_id' => '1',
             'created_at' => Carbon::now(),
         ]);
@@ -153,7 +141,6 @@ class ProductsSedeer extends Seeder
             'code' => 'ALK-RUB-5000-302',
             'stok' => '',
             'tipe' => 'jerigen',
-            'photo' => '',
             'brand_id' => '1',
             'created_at' => Carbon::now(),
         ]);
@@ -163,7 +150,6 @@ class ProductsSedeer extends Seeder
             'code' => 'ALK-RUB-5000-303',
             'stok' => '',
             'tipe' => 'jerigen',
-            'photo' => '',
             'brand_id' => '1',
             'created_at' => Carbon::now(),
         ]);
@@ -175,7 +161,6 @@ class ProductsSedeer extends Seeder
             'code' => 'ALK-RIN-5000-313',
             'stok' => '',
             'tipe' => 'botol',
-            'photo' => '',
             'brand_id' => '1',
             'created_at' => Carbon::now(),
         ]);
@@ -185,7 +170,6 @@ class ProductsSedeer extends Seeder
             'code' => 'ALK-RIN-5000-312',
             'stok' => '',
             'tipe' => 'jerigen',
-            'photo' => '',
             'brand_id' => '1',
             'created_at' => Carbon::now(),
         ]);
@@ -198,7 +182,6 @@ class ProductsSedeer extends Seeder
             'code' => 'CHR-RUB-500-102',
             'stok' => '',
             'tipe' => 'botol',
-            'photo' => '',
             'brand_id' => '2',
             'created_at' => Carbon::now(),
         ]);
@@ -208,7 +191,6 @@ class ProductsSedeer extends Seeder
             'code' => 'CHR-RUB-5000-102',
             'stok' => '',
             'tipe' => 'jerigen',
-            'photo' => '',
             'brand_id' => '2',
             'created_at' => Carbon::now(),
         ]);
@@ -220,7 +202,6 @@ class ProductsSedeer extends Seeder
             'code' => 'CHR-SCRB-500-104',
             'stok' => '',
             'tipe' => 'botol',
-            'photo' => '',
             'brand_id' => '2',
             'created_at' => Carbon::now(),
         ]);
@@ -230,7 +211,6 @@ class ProductsSedeer extends Seeder
             'code' => 'CHR-SCRB-5000-105',
             'stok' => '',
             'tipe' => 'jerigen',
-            'photo' => '',
             'brand_id' => '2',
             'created_at' => Carbon::now(),
         ]);
@@ -243,7 +223,6 @@ class ProductsSedeer extends Seeder
             'code' => 'MIB-SCRB-500-011',
             'stok' => '',
             'tipe' => 'botol',
-            'photo' => '',
             'brand_id' => '3',
             'created_at' => Carbon::now(),
         ]);
@@ -253,7 +232,6 @@ class ProductsSedeer extends Seeder
             'code' => 'MIB-SCRB-500-011',
             'stok' => '',
             'tipe' => 'botol',
-            'photo' => '',
             'brand_id' => '3',
             'created_at' => Carbon::now(),
         ]);
@@ -263,7 +241,6 @@ class ProductsSedeer extends Seeder
             'code' => 'MIB-SCRB-5000-012',
             'stok' => '',
             'tipe' => 'jerigen',
-            'photo' => '',
             'brand_id' => '3',
             'created_at' => Carbon::now(),
         ]);
@@ -275,7 +252,6 @@ class ProductsSedeer extends Seeder
             'code' => 'CHR-RUB-100-100',
             'stok' => '',
             'tipe' => 'botol',
-            'photo' => '',
             'brand_id' => '3',
             'created_at' => Carbon::now(),
         ]);
@@ -285,7 +261,6 @@ class ProductsSedeer extends Seeder
             'code' => 'CHR-RUB-100-100',
             'stok' => '',
             'tipe' => 'botol',
-            'photo' => '',
             'brand_id' => '3',
             'created_at' => Carbon::now(),
         ]);
@@ -295,7 +270,6 @@ class ProductsSedeer extends Seeder
             'code' => 'CHR-RUB-100-100',
             'stok' => '',
             'tipe' => 'jerigen',
-            'photo' => '',
             'brand_id' => '3',
             'created_at' => Carbon::now(),
         ]);
@@ -307,7 +281,6 @@ class ProductsSedeer extends Seeder
             'code' => 'MIB-RUBG-5000-008',
             'stok' => '',
             'tipe' => 'botol',
-            'photo' => '',
             'brand_id' => '3',
             'created_at' => Carbon::now(),
         ]);
@@ -317,7 +290,6 @@ class ProductsSedeer extends Seeder
             'code' => 'MIB-RUBG-500-007',
             'stok' => '',
             'tipe' => 'botol',
-            'photo' => '',
             'brand_id' => '3',
             'created_at' => Carbon::now(),
         ]);
@@ -327,7 +299,6 @@ class ProductsSedeer extends Seeder
             'code' => 'MIB-RUBG-5000-008',
             'stok' => '',
             'tipe' => 'jerigen',
-            'photo' => '',
             'brand_id' => '3',
             'created_at' => Carbon::now(),
         ]);

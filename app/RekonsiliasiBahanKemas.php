@@ -10,6 +10,10 @@ class RekonsiliasiBahanKemas extends Model
     protected $guarded = [];
 
     public function produksi() {
-        return $this->belongsTo('App/Produksi', 'produksi_id');
+        return $this->belongsTo('App\Produksi', 'produksi_id');
+    }
+
+    public function formula() {
+        return $this->belongsTo('App\Formula', 'formula_id');
     }
 }

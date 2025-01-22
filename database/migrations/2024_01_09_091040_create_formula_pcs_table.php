@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFormulaTable extends Migration
+class CreateFormulaPcsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,21 @@ class CreateFormulaTable extends Migration
      */
     public function up()
     {
-        Schema::create('formula', function (Blueprint $table) {
+        Schema::create('formula_pcs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id')->unsigned();
-            $table->unsignedBigInteger('inventory_id')->unsigned()->nullable();
             
+            $table->unsignedBigInteger('product_id')->unsigned();
+            $table->foreign('product_id')->references('id')->on('product')->onDelete('cascade');
+            
+            $table->unsignedBigInteger('inventory_id')->unsigned()->nullable();
+            $table->foreign('inventory_id')->references('id')->on('inventory')->onDelete('cascade');
+            
+            $table->unsignedBigInteger('formula_id')->unsigned()->nullable();
+            $table->foreign('formula_id')->references('id')->on('formula')->onDelete('cascade');
+
             $table->string('nama_bahan_baku');
             $table->enum('satuan', ['pcs', 'gram'])->nullable();
             $table->string('jumlah');
-            $table->string('slug');
-            
-            $table->foreign('product_id')->references('id')->on('product')->onDelete('cascade');
-            $table->foreign('inventory_id')->references('id')->on('inventory')->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -37,6 +40,6 @@ class CreateFormulaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('formulir');
+        Schema::dropIfExists('formula_pcs');
     }
 }

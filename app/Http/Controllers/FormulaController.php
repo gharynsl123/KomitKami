@@ -17,31 +17,15 @@ class FormulaController extends Controller
     }
 
     function index() {
-        $formulas = Formula::all()->groupBy('product_id');
-        $productIds = $formulas->keys();
+        $product = Product::with('formula', 'tahapanProses', 'qualityControl', 'produkjadi')->get();
 
-        $productNames = Product::whereIn('id', $productIds)->pluck('name', 'id');
-        $formulaSlugs = Formula::whereIn('product_id', $productIds)->pluck('slug', 'product_id');
-        return view('formula.index-formula', compact('formulas', 'productNames', 'formulaSlugs'));
+        return view('formula.index-formula', compact('product'));
     }
-
-    function create() {
-        $product = Product::all();
-        $inventory = Inventory::all();
-        return view('formula.create-formula', compact('product', 'inventory'));
-    }
-
+    
     public function store(Request $request)
     {
-        $request->validate([
-            'product_id' => 'required', 
-            'slug' => 'required', 
-            'nama_bahan_baku.*' => 'required',
-            'jumlah.*' => 'required|numeric',
-            'satuan.*' => 'required',
-        ]);
-
         $product_id = $request->input('product_id');
+        $inventory_id = $request->input('inventory_id');
         $nama_bahan_baku = $request->input('nama_bahan_baku');
         $jumlah = $request->input('jumlah');
         $satuan = $request->input('satuan');
@@ -54,6 +38,7 @@ class FormulaController extends Controller
             $data[] = [
                 'product_id' => $product_id,
                 'nama_bahan_baku' => $bahan_baku,
+                'inventory_id' => $inventory_id[$key],
                 'jumlah' => $jumlah[$key],
                 'satuan' => $satuan[$key],
                 'slug' => $slug,
@@ -64,16 +49,14 @@ class FormulaController extends Controller
         Formula::insert($data);
 
         // Redirect atau response sesuai kebutuhan
-        return redirect('/formula')->with('success', 'Data berhasil disimpan!');
+        return redirect()->back()->with('success', 'Data berhasil disimpan!');
     }
 
     
-    public function detail($slug) {
-        $formulas = Formula::where('slug', $slug)->get();
-
-        $firstFormula = Formula::where('slug', $slug)->first();
-        $productName = $firstFormula->product->name;
-
-        return view('formula.detail-formula', compact('productName','formulas'));
+    public function detail($id) {
+        $product = Product::where('id', $id)->with('formula', 'tahapanProses', 'qualityControl', 'produkjadi')->first();
+        $inventory = Inventory::all();
+        return view('formula.detail-formula', compact('product', 'inventory'));
     }
+    
 }

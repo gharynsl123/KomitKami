@@ -16,10 +16,12 @@ class CreateRekonsiliasiBahanKemasTable extends Migration
         Schema::create('rekonsiliasi_bahan_kemas', function (Blueprint $table) {
             $table->id();            
             $table->unsignedBigInteger('produksi_id');
+            $table->unsignedBigInteger('formula_id');
             $table->integer('terpakai');
             $table->string('keterangan');
             $table->string('operator');
             $table->foreign('produksi_id')->references('id')->on('produksi')->onDelete('cascade');
+            $table->foreign('formula_id')->references('id')->on('formula')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -12,7 +12,7 @@ class Formula extends Model
     function product() {
         return $this->belongsTo('App\Product', 'product_id');
     }
-    function inventor() {
-        return $this->belongsTo('App\Inventor', 'inventor_id');
+    function inventory() {
+        return $this->belongsTo('App\Inventory', 'inventory_id');
     }
 }

@@ -17,6 +17,7 @@ class CreateInventoryTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('code');
+            $table->enum('type', ['Bahan Baku', 'Bahan Kemas']);
             $table->string('slug')->unique();
             $table->string('stok')->nullable();
             $table->timestamps();

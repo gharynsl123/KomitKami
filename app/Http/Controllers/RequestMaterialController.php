@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Produksi;
 use App\Formula;
 use App\MaterialProduksi;
 
-class RequestMaterialProduksi extends Controller
+class RequestMaterialController extends Controller
 {
+    
     public function __construct()
     {
         $this->middleware('auth');

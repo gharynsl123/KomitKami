@@ -144,8 +144,8 @@ function saveItem(button) {
             if (data.success) {
                 h5Ruangan.textContent = updatedName;
                 h5Ruangan.classList.remove('d-none');
-                inputRuangan.classList.add('d-none');
                 editButton.classList.remove('d-none');
+                inputRuangan.classList.add('d-none');
                 saveButton.classList.add('d-none');
                 exitButton.classList.add('d-none');
             } else {

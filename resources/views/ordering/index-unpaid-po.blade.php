@@ -20,14 +20,6 @@
                     <span class="ms-1">Berdasarkan Faktur</span>
                 </a>
             </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link mb-0 px-0 py-1 " id="pills-profile-tab" data-bs-toggle="pill"
-                    data-bs-target="#product-filters" type="button" role="tab" aria-controls="pills-profile"
-                    aria-selected="false">
-                    <i class="material-icons text-lg position-relative">inbox</i>
-                    <span class="ms-1">Filter Produk</span>
-                </a>
-            </li>
         </ul>
     </div>
 </div>
@@ -94,74 +86,6 @@
                         <p class="text-center">No orders waiting for requests</p>
                         @endforelse
                     </ul>
-                </div>
-                <div class="tab-pane fade" id="product-filters" role="tabpanel" aria-labelledby="pills-profile-tab"
-                    tabindex="0">
-                    <div class="d-flex">
-                        <div class=" ms-auto">
-                            <select name="product" id="filter-products" class="form-select mb-3 border-1 px-2">
-                                <option value="">none</option>
-                                @foreach($product as $row)
-                                <option value="{{$row->name}}">{{$row->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-
-                    <ul class="list-group">
-                        <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                            <div class="d-flex align-items-center">
-                                <h6 class="mb-1 text-dark text-sm">action</h6>
-                                <div class="d-flex ms-1 flex-column">
-                                    <h6 class="mb-1 text-dark text-sm">Nama Product</h6>
-                                </div>
-                            </div>
-                            <h6 class="mb-1 text-dark text-sm">status</h6>
-                            <h6 class="mb-1 text-dark text-sm">QTY</h6>
-                            <div>
-                                <h6 class="mb-1 text-dark text-sm">invoice</h6>
-                            </div>
-                            <div class="d-flex align-items-center text-sm font-weight-bold">
-                                total harga
-                            </div>
-                        </li>
-                    </ul>
-                    <ul class="list-group" id="product-list">
-                        @foreach($byproduct as $items)
-                        <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                            <div class="d-flex align-items-center">
-                                <a href="{{url('/order-details/'. $items->invoice->slug)}}" class="btn btn-icon-only btn-rounded btn-outline-success 
-                                mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center">
-                                    <i class="material-icons text-lg"></i>
-                                </a>
-                                <div class="d-flex flex-column">
-                                    <h6 class="mb-1 text-dark text-sm">{{$items->product->name}}</h6>
-                                    <span class="text-xs">{{$items->created_at->format('d M Y, H:I A')}}</span>
-                                </div>
-                            </div>
-                        </li>
-                        @endforeach
-                    </ul>
-                    <ul class="list-group" id="footer-list">
-                        <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
-                            <div class="d-flex align-items-center">
-                                <h6 class="mb-1 text-dark text-sm"></h6>
-                                <div class="d-flex ms-1 flex-column">
-                                    <h6 class="mb-1 text-dark text-sm">Total QTY & Harga :</h6>
-                                </div>
-                            </div>
-                            <h6 class="mb-1 text-dark text-sm"></h6>
-                            <h6 class="mb-1 text-dark text-sm" id="total-quantity">0</h6>
-                            <div>
-                                <h6 class="mb-1 text-dark text-sm"></h6>
-                            </div>
-                            <div class="d-flex align-items-center text-sm font-weight-bold" id="total-harga">
-
-                            </div>
-                        </li>
-                    </ul>
-
                 </div>
             </div>
         </div>

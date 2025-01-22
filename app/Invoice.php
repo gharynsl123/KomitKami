@@ -10,6 +10,6 @@ class Invoice extends Model
     protected $guarded = [];
 
     public function orders() {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class, 'invoice_id', 'id');
     }
 }

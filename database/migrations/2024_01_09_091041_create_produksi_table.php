@@ -17,15 +17,11 @@ class CreateProduksiTable extends Migration
             $table->id();
             $table->string('batch_number');
             $table->string('batch_size');
-            $table->date('tanggal_produksi');
             $table->string('tanggal_expired');
-            $table->string('acuan_barang_jadi');
+            $table->date('tanggal_produksi')->nullable();
             $table->string('total_barang_jadi')->nullable();
 
-            $table->enum('status', ['pending', 'open', 'confirm', 'on-going', 'close', 'failed']);
-
-            $table->unsignedBigInteger('brand_id')->unsigned();
-            $table->foreign('brand_id')->references('id')->on('brand')->onDelete('cascade');
+            $table->enum('status', ['pending', 'confirm', 'on-going', 'done', 'close', 'failed']);
 
             $table->unsignedBigInteger('invoice_id')->nullable()->unsigned();
             $table->foreign('invoice_id')->references('id')->on('invoice')->onDelete('cascade');
@@ -35,6 +31,9 @@ class CreateProduksiTable extends Migration
 
             $table->unsignedBigInteger('formula_id')->unsigned();
             $table->foreign('formula_id')->references('id')->on('formula')->onDelete('cascade');
+
+            $table->unsignedBigInteger('formula_pcs_id')->unsigned();
+            $table->foreign('formula_pcs_id')->references('id')->on('formula_pcs')->onDelete('cascade');
 
             $table->timestamps();
         });

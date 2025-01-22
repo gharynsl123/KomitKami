@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTahapanProsesTable extends Migration
+class CreateSerahTerimaProdukjadiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateTahapanProsesTable extends Migration
      */
     public function up()
     {
-        Schema::create('tahapan_proses', function (Blueprint $table) {
+        Schema::create('serah_terima_produkjadi', function (Blueprint $table) {
             $table->id();
+            $table->integer('size_batch');
+            $table->integer('hasil_acuan');
             $table->unsignedBigInteger('product_id');
-            $table->text('nama_proses');
-            $table->string('acuan');
             $table->foreign('product_id')->references('id')->on('product')->onDelete('cascade');
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ class CreateTahapanProsesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tahapan_proses');
+        Schema::dropIfExists('serah_terima_produkjadi');
     }
 }

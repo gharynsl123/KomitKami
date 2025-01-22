@@ -28,11 +28,6 @@
 
         <div class="col-md-6">
             <div class="input-group input-group-outline mb-3">
-                <input type="text" name="no_invoice" class="form-control" placeholder="Nomor Invoice">
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="input-group input-group-outline mb-3">
                 <select name="inventory_id" class="form-control" id="select-Bahan-Baku">
                     <option value="">-- Pilih Bahan Baku --</option>
                     @foreach($inventory as $row)
@@ -41,36 +36,46 @@
                 </select>
             </div>
         </div>
+
+        <div class="col-md-6">
+            <div class="input-group input-group-outline mb-3">
+                <input type="text" name="no_invoice" class="form-control" placeholder="Nomor Surat Jalan">
+            </div>
+        </div>
+
         <div class="col-md-6">
             <div class="input-group input-group-outline mb-3">
                 <input disabled type="text" id="autopickbk" placeholder="Code Bahan Baku" class="form-control">
             </div>
         </div>
 
-        <div class="col-md-6">
-            <div class="input-group input-group-outline mb-3">
-                <input type="text" name="no_bach" class="form-control" placeholder="Nomor Bach">
+        <div class="col-md-6  mb-3">
+            <div class="input-group input-group-outline ">
+                <input type="text" name="no_bach" class="form-control" placeholder="Nomor Batch">
             </div>
+            <small class="text-danger">*Input Nomor Batch Optional</small>
         </div>
-        <div class="col-md-6">
-            <div class="input-group input-group-outline mb-3">
+
+        <div class="col-md-6 mb-3">
+            <div class="input-group input-group-outline ">
                 <input type="number" id="jumlahbarang" name="jumlah_barang" class="form-control"
                     placeholder="Jumlah Barang Masuk">
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 mb-3">
             <label class="small">Tanggal Transaksi</label>
-            <div class="input-group input-group-outline mb-3">
+            <div class="input-group input-group-outline ">
                 <input readonly name="tanggal_transaksi" type="date" id="date" class="form-control">
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 mb-3">
             <label class="small">Tanggal Expired</label>
-            <div class="input-group input-group-outline mb-3">
+            <div class="input-group input-group-outline ">
                 <input name="tanggal_ed" type="date" id="date" class="form-control">
             </div>
+            <small class="text-danger">*Input ED Optional</small>
         </div>
 
         <div class="col-md-12 mb-0">

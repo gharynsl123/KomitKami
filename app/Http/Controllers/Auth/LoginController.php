@@ -36,8 +36,11 @@ class LoginController extends Controller
         if ($user->level == 'production spv') {
             return '/ruang-produksi';
         }
-        if ($user->level == 'inventory manager') {
-            return '/transaction/in';
+        if ($user->level == 'Inventory Manager') {
+            return '/permintaan-material';
+        }
+        if ($user->level == 'Supervisor') {
+            return '/ruang-produksi';
         }
 
         // Default redirect untuk user lain

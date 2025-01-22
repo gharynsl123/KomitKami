@@ -54,7 +54,7 @@
             <div class="col-md-6 mb-3">
                 <small for="brand_id">Brand</small>
                 <div class="input-group-outline input-group">
-                    <input type="text" class="form-control" id="brand_id" value="{{ $produksi->brand->name }}" readonly>
+                    <input type="text" class="form-control" id="brand_id" value="{{ $produksi->product->brand->name }}" readonly>
                 </div>
             </div>
 
@@ -100,12 +100,9 @@
             </div>
         </div>
 
-        <!-- Tombol Confirm hanya untuk user dengan role 'production spv' dan status 'open' -->
-        @if($produksi['status'] == "open" && Auth::user()->level == "production spv")
+        @if($produksi['status'] != "confirm" && Auth::user()->level == "Supervisor")
         <button type="submit" class="btn btn-success">Confirm</button>
         @endif
     </form>
-    <!-- Form selesai di sini -->
-
 </div>
 @endsection
